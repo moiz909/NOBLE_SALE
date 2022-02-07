@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "gnD3r5NeYLCQT2s3kbrXA+BeMl0cSaozzuCP1RdQyYbs5dxiRHb/Q9Q04Pk9TGEa8CvuatAf9r5vxz8BmeQ5og==",
+  "dgSpecHash": "g5sZdDHn5jLo6BcVGezs/LY78oJAVWOYsAuOwy8qaShPDS5PZG0avKN1IzCJxvMTTGi7wAf7ka5ji8bbuRQUmQ==",
   "success": true,
-  "projectFilePath": "E:\\X\\NOBLE_SALE\\NOBLE_SALE\\NOBLE_SALE\\NOBLE_SALE.iOS\\NOBLE_SALE.iOS.csproj",
+  "projectFilePath": "C:\\Users\\dell\\Desktop\\NOBLE_SALE\\NOBLE_SALE\\NOBLE_SALE\\NOBLE_SALE.iOS\\NOBLE_SALE.iOS.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\ADMIN\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "C:\\Users\\dell\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\dell\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "C:\\Users\\dell\\.nuget\\packages\\xamarin.communitytoolkit\\1.1.0\\xamarin.communitytoolkit.1.1.0.nupkg.sha512",
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\xamarin.essentials\\1.6.1\\xamarin.essentials.1.6.1.nupkg.sha512",
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\xamarin.forms\\5.0.0.2012\\xamarin.forms.5.0.0.2012.nupkg.sha512"
   ],

@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:NOBLE_SALE.ViewModel"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             Visual="Material"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="White"
+             x:Class="NOBLE_SALE.View.IPConfiguration">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:InvertedBoolConverter x:Key="invertBoolConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <ContentPage.BindingContext>
+        <vm:IPConfigVM/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid HorizontalOptions="End">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+
+                <Frame BackgroundColor="White" HasShadow="False" Grid.Column="0">
+                    <Label Text="{Binding SelectedLanguage,Mode=TwoWay}" FontSize="Small" FontAttributes="Bold" 
+                           TextColor="Black" HorizontalOptions="Center"/>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding LanguageHandler,Mode=TwoWay}"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </Grid>
+
+            <Image Source="NOBLE.png" HeightRequest="60" HorizontalOptions="CenterAndExpand" Margin="0"/>
+
+            <Label Text="{xct:Translate POS-Retail}" TextColor="Black" FontSize="Small" HorizontalOptions="CenterAndExpand"
+                   Padding="0" Margin="0" FontAttributes="Bold"/>
+
+            <Label Text="{xct:Translate Server Settings}" TextColor="Black" FontSize="Caption" HorizontalOptions="CenterAndExpand"
+                   Padding="0" Margin="0"/>
+
+
+            <Frame HasShadow="True" BackgroundColor="{DynamicResource xBlue}" VerticalOptions="CenterAndExpand" Margin="20,0,20,0">
+                <StackLayout>
+                    <Entry Text="{Binding IP,Mode=TwoWay}" Placeholder="IP" Keyboard="Default" Margin="0,0,0,0" 
+                           BackgroundColor="{DynamicResource xBlue}" PlaceholderColor="Black" TextColor="Black"
+                           FontSize="Caption">
+                        <Entry.Behaviors>
+                            <xct:TextValidationBehavior IsNotValid="{Binding IPError,Mode=TwoWay}" 
+                                                        Flags="ValidateOnValueChanging" 
+                                                        RegexPattern="\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label Text="{xct:Translate Enter a valid IP address}" TextColor="Maroon" FontSize="Micro" 
+                           IsVisible="{Binding IPError,Mode=TwoWay}"/>
+
+                    <Entry Text="{Binding Port,Mode=TwoWay}" Placeholder="Port" Keyboard="Numeric" Margin="0,0,0,0"
+                           BackgroundColor="{DynamicResource xBlue}" PlaceholderColor="Black" TextColor="Black"
+                           FontSize="Caption">
+                        <Entry.Behaviors>
+                            <xct:TextValidationBehavior IsNotValid="{Binding PortError,Mode=TwoWay}" 
+                                                        Flags="ValidateOnValueChanging" 
+                                                        MinimumLength="4" MaximumLength="5"/>
+                        </Entry.Behaviors>
+
+                    </Entry>
+                    <Label Text="{xct:Translate Enter a valid port number}" TextColor="Maroon" FontSize="Micro" 
+                           IsVisible="{Binding PortError,Mode=TwoWay}"/>
+
+
+                    <Label TextColor="Black" FontSize="Caption" FontAttributes="Bold" HorizontalOptions="Center" Margin="5,0,5,0">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{xct:Translate Secondary}"/>
+                                <Span Text=" "/>
+                                <Span Text="{xct:Translate If Available}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Entry Text="{Binding IP2,Mode=TwoWay}" Placeholder="IP" Keyboard="Default" Margin="0,0,0,0" 
+                           BackgroundColor="{DynamicResource xBlue}" PlaceholderColor="Black" TextColor="Black"
+                           FontSize="Caption">
+                        <Entry.Behaviors>
+                            <xct:TextValidationBehavior IsNotValid="{Binding IPError2,Mode=TwoWay}" 
+                                                        Flags="ValidateOnValueChanging" 
+                                                        RegexPattern="\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b"/>
+                        </Entry.Behaviors>
+                    </Entry>
+
+                    <Label Text="{xct:Translate Enter a valid IP address}" TextColor="Maroon" FontSize="Micro" 
+                           IsVisible="{Binding IPError2,Mode=TwoWay}"/>
+
+                    <Entry Text="{Binding Port2,Mode=TwoWay}" Placeholder="Port" Keyboard="Numeric" Margin="0,0,0,0"
+                           BackgroundColor="{DynamicResource xBlue}" PlaceholderColor="Black" TextColor="Black"
+                           FontSize="Caption">
+                        <Entry.Behaviors>
+                            <xct:TextValidationBehavior IsNotValid="{Binding PortError2,Mode=TwoWay}" 
+                                                        Flags="ValidateOnValueChanging" 
+                                                        MinimumLength="4" MaximumLength="5"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label Text="{xct:Translate Enter a valid port number}" TextColor="Maroon" FontSize="Micro" 
+                           IsVisible="{Binding PortError2,Mode=TwoWay}"/>
+
+                    <Button Text="{xct:Translate Continue}" Margin="20,10,20,5" BackgroundColor="{DynamicResource xDarkNavy}"
+                            TextColor="White" Command="{Binding ContinueHandler,Mode=TwoWay}" FontSize="Caption"
+                            IsEnabled="{Binding IsBusy, Converter={StaticResource invertBoolConverter}}"/>
+                </StackLayout>
+            </Frame>
+
+
+            <Label Text="{xct:Translate Copyright1}" TextColor="Black"
+                   HorizontalOptions="Center" FontSize="Micro" Margin="0,10,0,0" VerticalOptions="EndAndExpand"/>
+            <Label HorizontalOptions="Center" Margin="0,0,0,10" VerticalOptions="End">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="ϟ by TechQode Pvt. Ltd.  " TextColor="Gray" FontSize="Micro"/>
+                        <Span Text="www.techqode.com" TextColor="{DynamicResource xDarkNavy}" FontSize="Micro" 
+                                  TextDecorations="Underline"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </StackLayout>
+    </ContentPage.Content>
+
+
+</ContentPage>
