@@ -12,6 +12,8 @@ namespace NOBLE_SALE.Helper
         public static bool TwoFactor { get; set; }
         public static InputModel _InputModel { get; set; }
         public static string SelectedLanguage { get; set; }
+        public static bool CurrencyandVat { get; set; }
+        public static bool CompanySetup { get; set; }
         public static List<ModuleRightLookUpModel> Permissions {get; set;}
 
         public static bool CheckConnectivity()

@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fontawesome="clr-namespace:NOBLE_SALE.Utils"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:local="clr-namespace:NOBLE_SALE.Helper"
+             xmlns:vm="clr-namespace:NOBLE_SALE.ViewModel"
+             x:Class="NOBLE_SALE.View.SetupPage">
+
+    <ContentPage.BindingContext>
+        <vm:SetupPageVM/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:InvertedBoolConverter x:Key="invertBoolConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame BackgroundColor="#2196F3" Padding="15"  CornerRadius="0">
+                <Label Text="Setup default Chart of Account,Company Info,Currency and VAT" HorizontalTextAlignment="Center" TextColor="White" FontSize="20"/>
+            </Frame>
+            <ScrollView>
+                <StackLayout>
+                    <!--<Label Text="{x:Static fontawesome:FontAwesomeIcons.ChartBar}"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Maroon" 
+                           FontSize="Large" 
+                           HorizontalTextAlignment="Center"/>
+                    <Label HorizontalOptions="Center" >
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Setup Chart of Account"
+                                      FontAttributes="Bold"
+                                      TextColor="{DynamicResource ThemeColor}"
+                                      TextDecorations="Underline">
+                                    <Span.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding ChartofAccountCommand,Mode=TwoWay}"/>
+                                    </Span.GestureRecognizers>
+                                </Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>-->
+
+                    <Label Text="{x:Static fontawesome:FontAwesomeIcons.IdCard}" IsVisible="{Binding Source={x:Static local:UserData.CompanySetup},Mode=TwoWay}"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Maroon"
+                          FontSize="Large" 
+                           HorizontalTextAlignment="Center"/>
+                    <Label HorizontalOptions="Center" IsVisible="{Binding Source={x:Static local:UserData.CompanySetup},Mode=TwoWay}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Setup Company Info"
+                                      FontAttributes="Bold"
+                                      TextColor="{DynamicResource ThemeColor}"
+                                      TextDecorations="Underline">
+                                    <Span.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding SetupCompanyCommand,Mode=TwoWay}"/>
+                                    </Span.GestureRecognizers>
+                                </Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+
+                    <Label Text="{x:Static fontawesome:FontAwesomeIcons.IdCard}" IsVisible="{Binding Source={x:Static local:UserData.CompanySetup},Converter={StaticResource invertBoolConverter},Mode=TwoWay}"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Green"
+                          FontSize="Large" 
+                           HorizontalTextAlignment="Center"/>
+                    <Label HorizontalOptions="Center" IsVisible="{Binding Source={x:Static local:UserData.CompanySetup},Converter={StaticResource invertBoolConverter},Mode=TwoWay}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Setup Company Info"
+                                      FontAttributes="Bold"
+                                      TextColor="{DynamicResource ThemeColor}"
+                                      TextDecorations="Underline">
+                                </Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Label Text="{x:Static fontawesome:FontAwesomeIcons.MoneyBill}" IsVisible="{Binding Source={x:Static local:UserData.CurrencyandVat},Converter={StaticResource invertBoolConverter},Mode=TwoWay}"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Green"
+                           FontSize="Large"  
+                           HorizontalTextAlignment="Center"/>
+                    <Label HorizontalOptions="Center" IsVisible="{Binding Source={x:Static local:UserData.CurrencyandVat},Converter={StaticResource invertBoolConverter},Mode=TwoWay}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Setup Default Currency And VAT"
+                                      FontAttributes="Bold"
+                                      TextColor="{DynamicResource ThemeColor}"
+                                      TextDecorations="Underline">
+                                </Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Label Text="{x:Static fontawesome:FontAwesomeIcons.MoneyBill}" IsVisible="{Binding Source={x:Static local:UserData.CurrencyandVat},Mode=TwoWay}"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Maroon"
+                           FontSize="Large"  
+                           HorizontalTextAlignment="Center"/>
+                    <Label HorizontalOptions="Center" IsVisible="{Binding Source={x:Static local:UserData.CurrencyandVat},Mode=TwoWay}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Setup Default Currency And VAT"
+                                      FontAttributes="Bold"
+                                      TextColor="{DynamicResource ThemeColor}"
+                                      TextDecorations="Underline">
+                                    <Span.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding SetupCurrencyCommand,Mode=TwoWay}"/>
+                                    </Span.GestureRecognizers>
+                                </Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <!--<Label Text="{x:Static fontawesome:FontAwesomeIcons.MoneyCheck}" IsVisible="{Binding Source={x:Static local:UserData.CurrencyandVat}}"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Maroon"
+                           FontSize="Large"  
+                           HorizontalTextAlignment="Center"/>
+                    <Label HorizontalOptions="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Setup Default VAT"
+                                      FontAttributes="Bold"
+                                      TextColor="{DynamicResource ThemeColor}"
+                                      TextDecorations="Underline">
+                                    <Span.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding SetupVatCommand,Mode=TwoWay}"/>
+                                    </Span.GestureRecognizers>
+                                </Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>-->
+
+                    <!--<Label Text="{x:Static fontawesome:FontAwesomeIcons.ChartLine}"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Maroon"
+                           FontSize="Large"  
+                           HorizontalTextAlignment="Center"/>
+                    <Label HorizontalOptions="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Setup Financial Year"
+                                      FontAttributes="Bold"
+                                      TextColor="{DynamicResource ThemeColor}"
+                                      TextDecorations="Underline">
+                                    <Span.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding SetupYearCommand,Mode=TwoWay}"/>
+                                    </Span.GestureRecognizers>
+                                </Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>-->
+
+                    
+                </StackLayout>
+            </ScrollView>
+            <Button Text="Save" Margin="30" Command="{Binding SaveCommand,Mode=TwoWay}"  BackgroundColor="#2196F3" CornerRadius="5"
+                            HorizontalOptions="Center" VerticalOptions="EndAndExpand"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

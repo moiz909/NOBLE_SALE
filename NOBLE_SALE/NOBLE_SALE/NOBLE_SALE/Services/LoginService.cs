@@ -96,7 +96,7 @@ namespace NOBLE_SALE.Services
         public async Task<bool> LogOutUser()
         {
             url = new WebAPI().URL;
-            url += "account/logout";
+            url += "company/logout";
             client = new WebAPI().client;
 
             try

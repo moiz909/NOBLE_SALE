@@ -1,4 +1,3 @@
-C:\Users\dell\Desktop\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\obj\Debug\netstandard2.0\NOBLE_SALE.csproj.AssemblyReference.cache
 C:\Users\dell\Desktop\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\obj\Debug\netstandard2.0\NOBLE_SALE.Resources.AppResources.resources
 C:\Users\dell\Desktop\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\obj\Debug\netstandard2.0\NOBLE_SALE.Resources.AppResources.ar.resources
 C:\Users\dell\Desktop\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\obj\Debug\netstandard2.0\NOBLE_SALE.csproj.GenerateResource.cache
@@ -20,3 +19,10 @@ C:\Users\dell\Desktop\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\bin\Debug\nets
 C:\Users\dell\Desktop\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\bin\Debug\netstandard2.0\ar\NOBLE_SALE.resources.dll
 C:\Users\dell\Desktop\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\obj\Debug\netstandard2.0\XamlC.stamp
 C:\Users\dell\Desktop\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\obj\Debug\netstandard2.0\ar\NOBLE_SALE.resources.dll
+C:\Users\dell\Desktop\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\obj\Debug\netstandard2.0\View\TermsAndConditionView.xaml.g.cs
+C:\Users\dell\Desktop\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\obj\Debug\netstandard2.0\NOBLE_SALE.csproj.AssemblyReference.cache
+C:\Users\dell\Desktop\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\obj\Debug\netstandard2.0\View\SetupPage.xaml.g.cs
+C:\Users\dell\Desktop\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\obj\Debug\netstandard2.0\View\SetupSteps\CoaTemplate.xaml.g.cs
+C:\Users\dell\Desktop\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\obj\Debug\netstandard2.0\View\SetupSteps\SetupCurrencyView.xaml.g.cs
+C:\Users\dell\Desktop\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\obj\Debug\netstandard2.0\View\SetupSteps\SetupCompanyView.xaml.g.cs
+C:\Users\dell\Desktop\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\NOBLE_SALE\obj\Debug\netstandard2.0\View\Dashboard.xaml.g.cs
