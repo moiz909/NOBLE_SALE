@@ -1,4 +1,7 @@
-﻿using System;
+﻿using NOBLE_SALE.Resources;
+using NOBLE_SALE.View;
+using System;
+using Xamarin.CommunityToolkit.Helpers;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,8 +12,8 @@ namespace NOBLE_SALE
         public App()
         {
             InitializeComponent();
-
-            MainPage = new MainPage();
+            LocalizationResourceManager.Current.Init(AppResources.ResourceManager);
+            MainPage = new RegisterLocation();
         }
 
         protected override void OnStart()

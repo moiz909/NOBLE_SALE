@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:vm="clr-namespace:NOBLE_SALE.ViewModel.Registration" xmlns:xct="http://xamarin.com/schemas/2020/toolkit" x:DataType="vm:RegisterLocationVM"
+             x:Class="NOBLE_SALE.View.RegisterLocation"
+             Visual="Material"
+             BackgroundColor="White">
+
+    <ContentPage.BindingContext>
+        <vm:RegisterLocationVM/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:InvertedBoolConverter x:Key="invertBoolConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView>
+                <StackLayout>
+                    <Label Text="Register Location / Branch" HorizontalOptions="Center" FontSize="18" TextColor="Black" Margin="0,20,0,20"
+                   FontAttributes="Bold"/>
+
+                    <Entry BackgroundColor="WhiteSmoke" Placeholder="Business Name*" PlaceholderColor="Black" Margin="5,0,5,0" FontSize="14"
+                   Text="{Binding Business.NameInEnglish,Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <xct:TextValidationBehavior  MinimumLength="1" Flags="ValidateOnValueChanging" IsValid="{Binding IsValidBuisnessName,Mode=TwoWay}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+
+                    <Label Text="Business Name Required" TextColor="Maroon" FontSize="Micro" Margin="5,0,5,0"
+                   IsVisible="{Binding IsValidBuisnessName, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
+
+                    <Entry BackgroundColor="WhiteSmoke" Placeholder="Registration #*" PlaceholderColor="Black" Margin="5,0,5,0"
+                       FontSize="14" Text="{Binding Business.CompanyRegNo,Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <xct:TextValidationBehavior  MinimumLength="1" Flags="ValidateOnValueChanging" IsValid="{Binding IsValidReg,Mode=TwoWay}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+
+                    <Label Text="*Registration Number Required" TextColor="Maroon" FontSize="Micro" Margin="5,0,5,0"
+                       IsVisible="{Binding IsValidReg, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
+
+                    <Entry BackgroundColor="WhiteSmoke" Placeholder="VAT/NTN/TAX NO*" PlaceholderColor="Black" Margin="5,0,5,0"
+                       FontSize="14" Grid.Row="0" Grid.Column="1" Text="{Binding Business.VatRegistrationNo,Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <xct:TextValidationBehavior  MinimumLength="1" Flags="ValidateOnValueChanging" IsValid="{Binding IsValidVat,Mode=TwoWay}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+
+                    <Label Text="*VAT Number Required" TextColor="Maroon" FontSize="Micro" Margin="5,0,5,0"
+                       IsVisible="{Binding IsValidVat, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
+
+
+                    <Entry BackgroundColor="WhiteSmoke" Placeholder="Location Email*" PlaceholderColor="Black" Margin="5,0,5,0" 
+                   FontSize="14" Text="{Binding Business.Email,Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <xct:EmailValidationBehavior IsValid="{Binding IsValidBuisnessEmail,Mode=TwoWay}" Flags="ValidateOnValueChanging"/>
+                        </Entry.Behaviors>
+                    </Entry>
+
+                    <Label Text="Invalid Email" TextColor="Maroon" FontSize="Micro" Margin="5,0,5,0"
+                   IsVisible="{Binding IsValidBuisnessEmail, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
+
+                    <Entry BackgroundColor="WhiteSmoke" Placeholder="Mobile Number*" PlaceholderColor="Black" Margin="5,0,5,0"
+                       FontSize="14" Text="{Binding Business.LandLine,Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <xct:TextValidationBehavior  MinimumLength="1" Flags="ValidateOnValueChanging" IsValid="{Binding IsValidNumber,Mode=TwoWay}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+
+                    <Label Text="Mobile Number Required" TextColor="Maroon" FontSize="Micro" Margin="5,0,5,0"
+                   IsVisible="{Binding IsValidNumber, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
+
+                    <Entry BackgroundColor="WhiteSmoke" Placeholder="Address*" PlaceholderColor="Black" Margin="5,0,5,0"
+                   FontSize="14" Text="{Binding Business.AddressInEnglish,Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <xct:TextValidationBehavior  MinimumLength="1" Flags="ValidateOnValueChanging" IsValid="{Binding IsValidAddress,Mode=TwoWay}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+
+                    <Label Text="Address Required" TextColor="Maroon" FontSize="Micro" Margin="5,0,5,0"
+                   IsVisible="{Binding IsValidAddress, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
+
+                    <Label Text="Admin Info" HorizontalOptions="Center" FontSize="18" TextColor="Black" Margin="0,20,0,20"
+                   FontAttributes="Bold"/>
+
+                    <Entry BackgroundColor="WhiteSmoke" Placeholder="Email*" PlaceholderColor="Black" Margin="5,0,5,0" FontSize="14"
+                       Text="{Binding Business.UserEmail,Mode=TwoWay}">
+
+                        <Entry.Behaviors>
+                            <xct:EmailValidationBehavior IsValid="{Binding IsValidEmail,Mode=TwoWay}" Flags="ValidateOnValueChanging"/>
+                        </Entry.Behaviors>
+                    </Entry>
+
+                    <Label Text="*Invalid Email" TextColor="Maroon" FontSize="Micro" Margin="5,0,5,0"
+                   IsVisible="{Binding IsValidEmail, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
+
+
+                    <Entry BackgroundColor="WhiteSmoke" Placeholder="Username*" PlaceholderColor="Black" Margin="5,0,5,0" FontSize="14"
+                       Grid.Column="1" Text="{Binding Business.FirstName,Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <xct:TextValidationBehavior IsValid="{Binding IsValidUsername,Mode=TwoWay}" Flags="ValidateOnValueChanging" MinimumLength="1"/>
+                        </Entry.Behaviors>
+                    </Entry>
+
+                    <Label Text="*Username Required" TextColor="Maroon" FontSize="Micro" Margin="5,0,5,0"
+                   IsVisible="{Binding IsValidUsername, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
+
+                    <Entry BackgroundColor="WhiteSmoke" Placeholder="Password*" PlaceholderColor="Black" Margin="5,0,5,0" FontSize="14"
+                   Text="{Binding Business.Password,Mode=TwoWay}">
+                        <Entry.Behaviors>
+                            <xct:TextValidationBehavior Flags="ValidateOnValueChanging" RegexPattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$" 
+                                                IsValid="{Binding IsValidPassword,Mode=TwoWay}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+
+                    <Label Text="Password must contain atleast one digit [0-9], one lowercase character[a-z], one uppercase character [A-Z], At least one special character and at least 8 characters in length." 
+                       TextColor="Maroon" FontSize="Micro" Margin="5,0,5,0" IsVisible="{Binding IsValidPassword, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
+
+                    <Entry BackgroundColor="WhiteSmoke" Placeholder="Confirm Password*" PlaceholderColor="Black" Margin="5,0,5,0"
+                   FontSize="14" Text="{Binding Business.ConfirmPassword,Mode=TwoWay}"/>
+
+
+                    <Label Text="*Password Donot Match" TextColor="Maroon" FontSize="Micro" Margin="5,0,5,0"
+                   IsVisible="{Binding IsValidConfirmPassword, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
+
+                    <Button Text="Sign Up" Margin="5" Command="{Binding SignUpHandler,Mode=TwoWay}"/>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+        
+    </ContentPage.Content>
+</ContentPage>
