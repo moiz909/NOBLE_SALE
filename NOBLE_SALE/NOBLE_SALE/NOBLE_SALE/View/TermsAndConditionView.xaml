@@ -1,26 +1,56 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:vm="clr-namespace:NOBLE_SALE.ViewModel"
              x:Class="NOBLE_SALE.View.TermsAndConditionView">
+    <ContentPage.BindingContext>
+        <vm:TermsAndConditionVM/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
-            <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-                <Label Text="Terms and Conditions" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+            <Frame BackgroundColor="#2196F3" Padding="15"  CornerRadius="0">
+                <Label Text="Terms and Conditions" HorizontalTextAlignment="Center" TextColor="White" FontSize="29"/>
             </Frame>
-
-            <Label Text="By using the Noble apps, these terms will
-                        automatically apply to you.you should make sure therefore
-                        that you read them carefully before using the application. You are
-                        not allowed to copy, or modify the application, any part of the application,
-                        or our trademarks in any way. You are not allowed to attempt
-                        to extract the source code of the application, and you also
-                        should not try to translate the application into other languages, or
-                        make derivative versions. The application itself, and all the trade
-                        marks, copyright, database rights and other intellectual
-                        property rights related to it, still belong to
-                        TechQode Pvt. Ltd." FontSize="Micro"
+            <ScrollView>
+                <StackLayout Padding="50">
+                    <Label Text="By using the Noble apps, these terms will automatically apply to you.you should make sure therefore that you read them carefully before using the application. You are not allowed to copy, or modify the application, any part of the application, or our trademarks in any way. You are not allowed to attempt to extract the source code of the application, and you also should not try to translate the application into other languages, or make derivative versions. The application itself, and all the trade marks, copyright, database rights and other intellectual property rights related to it, still belong to TechQode Pvt. Ltd." FontSize="Micro"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+                    <Label Text="TechQode Pvt. Ltd is committed to ensuring that the application is as useful and efficient as possible. For that reason, we reserve the right to make changes to the application or to charge for its services, at any time and for any reason. We will never charge you for the application or its services without making it very clear to you exactly what you are paying for." FontSize="Micro"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+
+                    <Label Text="The Noble apps stores and processes VAT, Employee data and shares this data with your parent company who has created your account. It is your responsibility to keep your username and password secure. Do not share your credentials with anyone. By accepting these terms and conditions, you also accept the use of required cookies. Our application may need to collect your IP Address, your browser information for security and fraud prevention." FontSize="Micro"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+
+                    <Label Text="You should be aware that there are certain things that TechQode Pvt. Ltd will not take responsibility for. To function, this application will require you to have an active internet connection. The connection can be Wi-Fi, or provided by your mobile network provider, but TechQode Pvt. Ltd cannot take responsibility for the application not working at full functionality if you do not have access to Wi-Fi, and you do not have any of your data allowance left." FontSize="Micro"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+
+                    <Label Text="With respect to TechQode Pvt. Ltd responsibility for your use of the application, when you are using the application, it is important to bear in mind that although we endeavour to ensure that it is updated and correct at all times, we do rely on third parties to provide information to us so that we can make it available to you. TechQode Pvt. Ltd accepts no liability for any loss, direct or indirect, you experience as a result of relying wholly on this functionality of the application." FontSize="Micro"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+
+                    <Label Text="From time to time, we will be updating the application with latest version to improve your experience. The application is currently available on Web  the requirements for system  may change, and you will be informed of any changes we will be making to the application. TechQode Pvt. Ltd does not promise that it will always update the application. However, you promise to always accept updates to the application when offered to you, We may also wish to stop providing the application, and may terminate use of it at any time without giving notice of termination to you. Unless we tell you otherwise, upon any termination, (a) the rights and licenses granted to you in these terms will end; (b) you must stop using the application." FontSize="Micro"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+
+                    <Label Text="We may update our Terms and Conditions from time to time. Whenever, we make a change, we will notify you of any changes by posting the new Terms and Conditions on this page. These changes are effective immediately after they are posted on this page." FontSize="Micro"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+
+                    <Label Text="If you have any questions or suggestions about our Terms and Conditions, do not hesitate to contact us at Connect@TechQode.com" FontSize="Micro"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+
+
+                    <Button Text="I Agree to these Term and Conditions" Command="{Binding AcceptTermsCommand,Mode=TwoWay}" BackgroundColor="#2196F3" CornerRadius="5"
+                            HorizontalOptions="Center"/>
+
+                </StackLayout>
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

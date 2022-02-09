@@ -163,10 +163,30 @@ namespace NOBLE_SALE.ViewModel
                 {
                     await Application.Current.MainPage.DisplayAlert("", "Please check Email/Password", "Ok");
                 }
-                else if(DataSet.TermsCondition == false || DataSet.Step1 == false || DataSet.Step2 == false
+                else if(DataSet.TermsCondition == false )
+                {
+                    UserData.CurrencyandVat = true;
+                    UserData.CompanySetup = true;
+
+                    await Application.Current.MainPage.Navigation.PushAsync(new TermsAndConditionView());
+                }
+                else if( DataSet.Step1 == false || DataSet.Step2 == false
                     || DataSet.Step3 == false || DataSet.Step4 == false || DataSet.Step5 == false)
                 {
-                    await Application.Current.MainPage.Navigation.PushAsync(new TermsAndConditionView());
+                    if(!DataSet.Step2)
+                    {
+                        UserData.CompanySetup = true;
+                    }
+                    else if(!DataSet.Step3)
+                    {
+                        UserData.CurrencyandVat = true;
+                    }
+                    else
+                    {
+                        UserData.CompanySetup = false;
+                        UserData.CurrencyandVat = false;
+                    }
+                    await Application.Current.MainPage.Navigation.PushAsync(new SetupPage());
                 }
                 else if (DataSet != null && DataSet.RoleName != null)
                 {
@@ -188,7 +208,7 @@ namespace NOBLE_SALE.ViewModel
                         }
                         else
                         {
-                            //await Application.Current.MainPage.Navigation.PushAsync(new LocationDashboard());
+                            await Application.Current.MainPage.Navigation.PushAsync(new Dashboard());
                         }
 
                     }

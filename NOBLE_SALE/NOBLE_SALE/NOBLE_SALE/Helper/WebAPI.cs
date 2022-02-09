@@ -11,7 +11,7 @@ namespace NOBLE_SALE.Helper
         public HttpClient client { get; set; }
         public WebAPI()
         {
-            URL = "http://" + WebApiSettings.IP + ":" + WebApiSettings.Port + "/api/";
+            URL = "https://" + WebApiSettings.IP + ":" + WebApiSettings.Port + "/api/";
 
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
