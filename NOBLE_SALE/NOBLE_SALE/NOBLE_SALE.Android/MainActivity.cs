@@ -4,6 +4,7 @@ using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
+using System.Net;
 
 namespace NOBLE_SALE.Droid
 {
@@ -14,8 +15,10 @@ namespace NOBLE_SALE.Droid
         {
             base.OnCreate(savedInstanceState);
 
+            ServicePointManager.ServerCertificateValidationCallback += (o, cert, chain, errors) => true;
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            global::Xamarin.Forms.FormsMaterial.Init(this, savedInstanceState);
             LoadApplication(new App());
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

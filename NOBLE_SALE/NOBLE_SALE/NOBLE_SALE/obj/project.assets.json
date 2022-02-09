@@ -86,24 +86,21 @@
           "lib/netstandard2.0/System.Threading.Tasks.Extensions.dll": {}
         }
       },
-      "Xamarin.CommunityToolkit/1.1.0": {
+      "Xamarin.CommunityToolkit/2.0.0": {
         "type": "package",
         "dependencies": {
           "System.Reflection.Emit.Lightweight": "4.7.0",
           "System.Threading.Tasks.Extensions": "4.5.4",
-          "Xamarin.Forms": "5.0.0.1874"
+          "Xamarin.Forms": "5.0.0.2291"
         },
         "compile": {
           "lib/netstandard2.0/Xamarin.CommunityToolkit.dll": {}
         },
         "runtime": {
           "lib/netstandard2.0/Xamarin.CommunityToolkit.dll": {}
-        },
-        "build": {
-          "build/Xamarin.CommunityToolkit.targets": {}
         }
       },
-      "Xamarin.Essentials/1.6.1": {
+      "Xamarin.Essentials/1.7.1": {
         "type": "package",
         "dependencies": {
           "System.Numerics.Vectors": "4.5.0"
@@ -115,7 +112,7 @@
           "lib/netstandard2.0/Xamarin.Essentials.dll": {}
         }
       },
-      "Xamarin.Forms/5.0.0.2012": {
+      "Xamarin.Forms/5.0.0.2337": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Xamarin.Forms.Core.dll": {},
@@ -130,6 +127,18 @@
         "build": {
           "buildTransitive/Xamarin.Forms.props": {},
           "buildTransitive/Xamarin.Forms.targets": {}
+        }
+      },
+      "Xamarin.Forms.Visual.Material/5.0.0.2337": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.Forms": "5.0.0.2337"
+        },
+        "compile": {
+          "lib/netstandard1.0/_._": {}
+        },
+        "runtime": {
+          "lib/netstandard1.0/_._": {}
         }
       }
     }
@@ -535,16 +544,15 @@
         "version.txt"
       ]
     },
-    "Xamarin.CommunityToolkit/1.1.0": {
-      "sha512": "GJiaXaPLrM1qn1HYxDPKlECYAzX5CI6FKtv4NXCq8K7SJTscmFo79RcwZoj1o3de+4V0aiJAVZMCpbMIF/sZVA==",
+    "Xamarin.CommunityToolkit/2.0.0": {
+      "sha512": "hY5MqkmipQ7Q6FikK3E4YnBj9llqvQv10sT8LhYcf2oMwnalWvCHuoPujjmCP/YmxPNbQm4JwWYp7CBuvzHMVw==",
       "type": "package",
-      "path": "xamarin.communitytoolkit/1.1.0",
+      "path": "xamarin.communitytoolkit/2.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE",
-        "build/PreserveXamarinCommunityToolkit.cs",
-        "build/Xamarin.CommunityToolkit.targets",
+        "analyzers/dotnet/xct/cs/Xamarin.CommunityToolkit.SourceGenerator.dll",
         "icon.png",
         "lib/monoandroid10.0/Xamarin.CommunityToolkit.dll",
         "lib/monoandroid10.0/Xamarin.CommunityToolkit.xml",
@@ -562,9 +570,9 @@
         "lib/netstandard2.1/Xamarin.CommunityToolkit.xml",
         "lib/tizen40/Xamarin.CommunityToolkit.dll",
         "lib/tizen40/Xamarin.CommunityToolkit.xml",
-        "lib/uap10.0.19041/Xamarin.CommunityToolkit.dll",
-        "lib/uap10.0.19041/Xamarin.CommunityToolkit.pri",
-        "lib/uap10.0.19041/Xamarin.CommunityToolkit.xml",
+        "lib/uap10.0.18362/Xamarin.CommunityToolkit.dll",
+        "lib/uap10.0.18362/Xamarin.CommunityToolkit.pri",
+        "lib/uap10.0.18362/Xamarin.CommunityToolkit.xml",
         "lib/xamarinios10/Xamarin.CommunityToolkit.dll",
         "lib/xamarinios10/Xamarin.CommunityToolkit.xml",
         "lib/xamarinmac20/Xamarin.CommunityToolkit.dll",
@@ -573,14 +581,14 @@
         "lib/xamarintvos10/Xamarin.CommunityToolkit.xml",
         "lib/xamarinwatchos10/Xamarin.CommunityToolkit.dll",
         "lib/xamarinwatchos10/Xamarin.CommunityToolkit.xml",
-        "xamarin.communitytoolkit.1.1.0.nupkg.sha512",
+        "xamarin.communitytoolkit.2.0.0.nupkg.sha512",
         "xamarin.communitytoolkit.nuspec"
       ]
     },
-    "Xamarin.Essentials/1.6.1": {
-      "sha512": "gG1Bp4j4bpJQ0dp9MeBJQJ9c8xULauIlhc7Cx5Qw4J2K1c+4Glq5n+gkb9Pm0UA/CevXVqLK5ZXmZkuYI52FgA==",
+    "Xamarin.Essentials/1.7.1": {
+      "sha512": "u7pUgvHJKTYo5ATiwRZvYviq2O0AQXIqxdna+sMxqidfWpbD7FBgFOLNAZzWKSll/AQBPeDrqLAWZNLq+ztpmQ==",
       "type": "package",
-      "path": "xamarin.essentials/1.6.1",
+      "path": "xamarin.essentials/1.7.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -589,15 +597,6 @@
         "lib/monoandroid10.0/Xamarin.Essentials.dll",
         "lib/monoandroid10.0/Xamarin.Essentials.pdb",
         "lib/monoandroid10.0/Xamarin.Essentials.xml",
-        "lib/monoandroid80/Xamarin.Essentials.dll",
-        "lib/monoandroid80/Xamarin.Essentials.pdb",
-        "lib/monoandroid80/Xamarin.Essentials.xml",
-        "lib/monoandroid81/Xamarin.Essentials.dll",
-        "lib/monoandroid81/Xamarin.Essentials.pdb",
-        "lib/monoandroid81/Xamarin.Essentials.xml",
-        "lib/monoandroid90/Xamarin.Essentials.dll",
-        "lib/monoandroid90/Xamarin.Essentials.pdb",
-        "lib/monoandroid90/Xamarin.Essentials.xml",
         "lib/netstandard1.0/Xamarin.Essentials.dll",
         "lib/netstandard1.0/Xamarin.Essentials.pdb",
         "lib/netstandard1.0/Xamarin.Essentials.xml",
@@ -624,14 +623,14 @@
         "lib/xamarinwatchos10/Xamarin.Essentials.pdb",
         "lib/xamarinwatchos10/Xamarin.Essentials.xml",
         "readme.txt",
-        "xamarin.essentials.1.6.1.nupkg.sha512",
+        "xamarin.essentials.1.7.1.nupkg.sha512",
         "xamarin.essentials.nuspec"
       ]
     },
-    "Xamarin.Forms/5.0.0.2012": {
-      "sha512": "Rqc6xvWR/sf+Db5+qRCFmuYTWVp04QWRfwPto2/JHbShSy4Ed53Q2jpoFzsoloXkJA6saD236PlaWAhT6vI4gw==",
+    "Xamarin.Forms/5.0.0.2337": {
+      "sha512": "2AYl2V1YHjEDEmA5d+aP382ielCKr8d/jo3zCgPSvLE/4Pw/em7pHBGmN3yZ/WzxIMV16f7wBfoFCHesMud0AA==",
       "type": "package",
-      "path": "xamarin.forms/5.0.0.2012",
+      "path": "xamarin.forms/5.0.0.2337",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -840,8 +839,30 @@
         "lib/uap10.0.16299/Xamarin.Forms.Xaml.dll",
         "lib/uap10.0.16299/Xamarin.Forms.Xaml.pdb",
         "lib/uap10.0.16299/Xamarin.Forms.Xaml.xml",
-        "xamarin.forms.5.0.0.2012.nupkg.sha512",
+        "xamarin.forms.5.0.0.2337.nupkg.sha512",
         "xamarin.forms.nuspec"
+      ]
+    },
+    "Xamarin.Forms.Visual.Material/5.0.0.2337": {
+      "sha512": "eAvlOQmP1FDGsVjyWLd7A2K9aS9Qm4eLV6tA+Pc1EyMbvluEQ9zff4tfcl8IOVZKvn41pNHPLlOeSjXMwM3PHQ==",
+      "type": "package",
+      "path": "xamarin.forms.visual.material/5.0.0.2337",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Assets/xamarin_128x128.png",
+        "build/MonoAndroid10/Xamarin.Forms.Visual.Material.targets",
+        "buildTransitive/MonoAndroid10/Xamarin.Forms.Visual.Material.targets",
+        "lib/MonoAndroid10.0/Xamarin.Forms.Material.dll",
+        "lib/MonoAndroid10.0/Xamarin.Forms.Material.pdb",
+        "lib/MonoAndroid10/_._",
+        "lib/Xamarin.iOS10/Xamarin.Forms.Material.dll",
+        "lib/Xamarin.iOS10/Xamarin.Forms.Material.pdb",
+        "lib/netstandard1.0/_._",
+        "lib/tizen40/Xamarin.Forms.Material.dll",
+        "lib/tizen40/Xamarin.Forms.Material.pdb",
+        "xamarin.forms.visual.material.5.0.0.2337.nupkg.sha512",
+        "xamarin.forms.visual.material.nuspec"
       ]
     }
   },
@@ -849,29 +870,30 @@
     ".NETStandard,Version=v2.0": [
       "NETStandard.Library >= 2.0.3",
       "Newtonsoft.Json >= 13.0.1",
-      "Xamarin.CommunityToolkit >= 1.1.0",
-      "Xamarin.Essentials >= 1.6.1",
-      "Xamarin.Forms >= 5.0.0.2012"
+      "Xamarin.CommunityToolkit >= 2.0.0",
+      "Xamarin.Essentials >= 1.7.1",
+      "Xamarin.Forms >= 5.0.0.2337",
+      "Xamarin.Forms.Visual.Material >= 5.0.0.2337"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\dell\\.nuget\\packages\\": {},
+    "C:\\Users\\ADMIN\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dell\\Desktop\\NOBLE_SALE\\NOBLE_SALE\\NOBLE_SALE\\NOBLE_SALE\\NOBLE_SALE.csproj",
+      "projectUniqueName": "E:\\X\\NOBLE_SALE\\NOBLE_SALE\\NOBLE_SALE\\NOBLE_SALE\\NOBLE_SALE.csproj",
       "projectName": "NOBLE_SALE",
-      "projectPath": "C:\\Users\\dell\\Desktop\\NOBLE_SALE\\NOBLE_SALE\\NOBLE_SALE\\NOBLE_SALE\\NOBLE_SALE.csproj",
-      "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\dell\\Desktop\\NOBLE_SALE\\NOBLE_SALE\\NOBLE_SALE\\NOBLE_SALE\\obj\\",
+      "projectPath": "E:\\X\\NOBLE_SALE\\NOBLE_SALE\\NOBLE_SALE\\NOBLE_SALE\\NOBLE_SALE.csproj",
+      "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+      "outputPath": "E:\\X\\NOBLE_SALE\\NOBLE_SALE\\NOBLE_SALE\\NOBLE_SALE\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -880,8 +902,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {},
-        "https://nuget.devexpress.com/qJ5E4ZMOI39epljtSN7J8v2FNjXAuUd4SKGB1VICN9Wt8HeECk/api": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netstandard2.0": {
@@ -911,15 +932,19 @@
           },
           "Xamarin.CommunityToolkit": {
             "target": "Package",
-            "version": "[1.1.0, )"
+            "version": "[2.0.0, )"
           },
           "Xamarin.Essentials": {
             "target": "Package",
-            "version": "[1.6.1, )"
+            "version": "[1.7.1, )"
           },
           "Xamarin.Forms": {
             "target": "Package",
-            "version": "[5.0.0.2012, )"
+            "version": "[5.0.0.2337, )"
+          },
+          "Xamarin.Forms.Visual.Material": {
+            "target": "Package",
+            "version": "[5.0.0.2337, )"
           }
         },
         "imports": [
@@ -932,7 +957,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
       }
     }
   }
