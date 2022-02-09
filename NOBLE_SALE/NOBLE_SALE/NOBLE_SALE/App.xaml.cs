@@ -13,7 +13,7 @@ namespace NOBLE_SALE
         {
             InitializeComponent();
             LocalizationResourceManager.Current.Init(AppResources.ResourceManager);
-            MainPage = new RegisterLocation();
+            MainPage = new NavigationPage(new IPConfiguration()) { BarBackgroundColor = Color.FromHex("#3178fc") };
         }
 
         protected override void OnStart()

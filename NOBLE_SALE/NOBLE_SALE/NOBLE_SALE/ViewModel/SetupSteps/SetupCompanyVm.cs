@@ -18,9 +18,9 @@ namespace NOBLE_SALE.ViewModel.SetupSteps
             set { _Company = value;  }
         }
 
-        private BusinessVm _CompanyInfo;
+        private NOBLE_SALE.Model.SetupSteps.BusinessVm _CompanyInfo;
 
-        public BusinessVm CompanyInfo
+        public NOBLE_SALE.Model.SetupSteps.BusinessVm CompanyInfo
         {
             get { return _CompanyInfo; }
             set { _CompanyInfo = value;OnPropertyChanged(); }
@@ -62,7 +62,7 @@ namespace NOBLE_SALE.ViewModel.SetupSteps
         {
             GetCompanyDetail();
             Company = new CompanyDto();
-            CompanyInfo = new BusinessVm();
+            CompanyInfo = new NOBLE_SALE.Model.SetupSteps.BusinessVm();
             Steps = new StepsVm();
             UpdateCommand = new Command(UpdateHandler);
         }

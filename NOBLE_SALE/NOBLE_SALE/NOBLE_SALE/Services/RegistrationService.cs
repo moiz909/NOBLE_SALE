@@ -32,9 +32,9 @@ namespace NOBLE_SALE.Services
 
             try
             {
-                var response = await client.PostAsync(url, business);
-                var details = JsonConvert.DeserializeObject<PagedResult<ObservableCollection<InventoryLookUpModel>>>(response);
-                return details;
+                var response = await client.PostAsync(url, contents);
+                //var details = JsonConvert.DeserializeObject<PagedResult<ObservableCollection<InventoryLookUpModel>>>(response);
+                return "HELLO";
             }
             catch (Exception e)
             {

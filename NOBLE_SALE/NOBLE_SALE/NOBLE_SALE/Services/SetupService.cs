@@ -112,7 +112,7 @@ namespace NOBLE_SALE.Services
             }
         }
 
-        public async Task<bool> UpdateCompany(BusinessVm business)
+        public async Task<bool> UpdateCompany(NOBLE_SALE.Model.SetupSteps.BusinessVm business)
         {
             url = new WebAPI().URL;
             client = new WebAPI().client;
@@ -138,7 +138,7 @@ namespace NOBLE_SALE.Services
         }
 
 
-        public async Task<bool> UpdateSteps(StepsVm steps)
+        public async Task<bool> UpdateSteps(NOBLE_SALE.Model.SetupSteps.StepsVm steps)
         {
             url = new WebAPI().URL;
             client = new WebAPI().client;
