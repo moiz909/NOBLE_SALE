@@ -8,6 +8,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using NOBLE_SALE.Services;
 using NOBLE_SALE.View;
+using NOBLE_SALE.View.Sale;
 
 namespace NOBLE_SALE.ViewModel
 {
@@ -179,7 +180,7 @@ namespace NOBLE_SALE.ViewModel
                     await Application.Current.MainPage.Navigation.PushAsync(new TermsAndConditionView());
                 }
                 else if( DataSet.Step1 == false || DataSet.Step2 == false
-                    || DataSet.Step3 == false || DataSet.Step4 == false || DataSet.Step5 == false)
+                    || DataSet.Step3 == false || DataSet.Step4 == false )
                 {
                     if(!DataSet.Step2)
                     {
@@ -216,7 +217,7 @@ namespace NOBLE_SALE.ViewModel
                         }
                         else
                         {
-                            await Application.Current.MainPage.Navigation.PushAsync(new Dashboard());
+                            await Application.Current.MainPage.Navigation.PushAsync(new SaleInvoice1());
                         }
 
                     }
