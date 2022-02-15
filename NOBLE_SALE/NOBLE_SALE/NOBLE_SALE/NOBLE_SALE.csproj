@@ -23,6 +23,7 @@
     <None Remove="Resources\Icons\Password.svg" />
     <None Remove="Resources\Icons\visibility.svg" />
     <None Remove="Resources\Icons\visibilityOff.svg" />
+    <None Remove="Resources\Vector.svg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +39,7 @@
     <EmbeddedResource Include="Resources\Icons\Password.svg" />
     <EmbeddedResource Include="Resources\Icons\visibility.svg" />
     <EmbeddedResource Include="Resources\Icons\visibilityOff.svg" />
+    <EmbeddedResource Include="Resources\Icons\Vector.svg" />
   </ItemGroup>
 
   <ItemGroup>

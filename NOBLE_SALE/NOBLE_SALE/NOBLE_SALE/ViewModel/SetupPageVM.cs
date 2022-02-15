@@ -1,5 +1,6 @@
 ﻿using NOBLE_SALE.Helper;
 using NOBLE_SALE.View;
+using NOBLE_SALE.View.Sale;
 using NOBLE_SALE.View.SetupSteps;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,11 @@ namespace NOBLE_SALE.ViewModel
         {
             if(!UserData.CurrencyandVat && !UserData.CompanySetup)
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new Dashboard());
+                await Application.Current.MainPage.Navigation.PushAsync(new SaleInvoice1());
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("", "Please Complete following Steps", "Ok");
             }
         }
 

@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace NOBLE_SALE.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Dashboard : ContentPage
+    public partial class SaleInvoice : ContentPage
     {
-        public Dashboard()
+        public SaleInvoice()
         {
             InitializeComponent();
         }

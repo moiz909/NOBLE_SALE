@@ -16,7 +16,7 @@ namespace NOBLE_SALE.Services
         public string url;
         public HttpClient client;
 
-        public async Task<PagedResult<ProductListModel>> GetProducts(Guid? CategoryId, string SearchTerm, Guid WarehouseId, int PageNumber)
+        public async Task<PagedResult<ProductListModel>> GetProducts(Guid? CategoryId, string SearchTerm, Guid? WarehouseId, int PageNumber)
         {
             url = new WebAPI().URL;
             client = new WebAPI().client;

@@ -172,13 +172,13 @@ namespace NOBLE_SALE.ViewModel
                 {
                     await Application.Current.MainPage.DisplayAlert("", "Please check Email/Password", "Ok");
                 }
-                else if(DataSet.TermsCondition == false )
-                {
-                    UserData.CurrencyandVat = true;
-                    UserData.CompanySetup = true;
+                //else if(DataSet.TermsCondition == false )
+                //{
+                //    UserData.CurrencyandVat = true;
+                //    UserData.CompanySetup = true;
 
-                    await Application.Current.MainPage.Navigation.PushAsync(new TermsAndConditionView());
-                }
+                //    await Application.Current.MainPage.Navigation.PushAsync(new TermsAndConditionView());
+                //}
                 else if( DataSet.Step1 == false || DataSet.Step2 == false
                     || DataSet.Step3 == false || DataSet.Step4 == false )
                 {
@@ -186,7 +186,7 @@ namespace NOBLE_SALE.ViewModel
                     {
                         UserData.CompanySetup = true;
                     }
-                    else if(!DataSet.Step3)
+                    if(!DataSet.Step3)
                     {
                         UserData.CurrencyandVat = true;
                     }

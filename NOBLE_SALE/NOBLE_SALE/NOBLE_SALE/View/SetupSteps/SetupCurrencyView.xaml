@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:NOBLE_SALE.ViewModel.SetupSteps"
+             BackgroundColor="White"
              x:Class="NOBLE_SALE.View.SetupSteps.SetupCurrencyView">
 
     <ContentPage.BindingContext>
@@ -13,67 +14,97 @@
         <StackLayout>
 
 
-            <Frame BackgroundColor="#2196F3" Padding="15"  CornerRadius="0">
-                <Label Text="Setup Currency And VAT" HorizontalTextAlignment="Center" TextColor="White" FontSize="20"/>
-            </Frame>
-
-
-            <Frame HasShadow="True" BackgroundColor="{DynamicResource xBlue}" VerticalOptions="CenterAndExpand" Margin="20,0,20,0">
+            <!--<Frame BackgroundColor="White" Padding="15"  CornerRadius="0">
+                <Label Text="Setup Currency And VAT" HorizontalTextAlignment="Center" TextColor="Black" FontSize="20"/>
+            </Frame>-->
+            <ScrollView>
                 <StackLayout>
+                    <Frame HasShadow="True" BackgroundColor="{DynamicResource ColorFields}" VerticalOptions="CenterAndExpand" Margin="20,0,20,0">
+                        <StackLayout>
 
-                    <Label TextColor="Black" FontSize="Caption" FontAttributes="Bold" HorizontalOptions="Center" Margin="5,0,5,0">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span Text="Setup Currency"/>
-                                <Span Text=" "/>
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
+                            <Label TextColor="Black" FontSize="Caption" FontAttributes="Bold" HorizontalOptions="Center" Margin="5,0,5,0">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Setup Currency"/>
+                                        <Span Text=" "/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
 
-                    <Entry Text="{Binding Currency.Name,Mode=TwoWay}" Placeholder="Currency Name" Keyboard="Default" Margin="0,0,0,0" 
+                            <!--<Entry Text="{Binding Currency.Name,Mode=TwoWay}" Placeholder="Currency Name" Keyboard="Default" Margin="0,0,0,0" 
                            BackgroundColor="{DynamicResource xBlue}" PlaceholderColor="Black" TextColor="Black"
                            FontSize="Caption">
-                    </Entry>
+                    </Entry>-->
 
-                    <Entry Text="{Binding Currency.Sign,Mode=TwoWay}" Placeholder="Currency Sign" Keyboard="Default" Margin="0,0,0,0"
+                            <Label Text="Currency Name:" TextColor="Black" FontSize="Caption" FontFamily="Ubuntu-regular"/>
+
+                            <Entry Text="{Binding Currency.Name, Mode=TwoWay}" HeightRequest="48" Placeholder="Currency Name" BackgroundColor="{DynamicResource ColorFields}"
+                           TextColor="{DynamicResource ColorFieldsText}" 
+                           FontSize="Caption" FontFamily="Ubuntu-regular"/>
+
+                            <!--<Entry Text="{Binding Currency.Sign,Mode=TwoWay}" Placeholder="Currency Sign" Keyboard="Default" Margin="0,0,0,0"
                            BackgroundColor="{DynamicResource xBlue}" PlaceholderColor="Black" TextColor="Black"
                            FontSize="Caption">
-                    </Entry>
+                    </Entry>-->
+
+                            <Label Text="Currency Sign:" TextColor="Black" FontSize="Caption" FontFamily="Ubuntu-regular"/>
+
+                            <Entry Text="{Binding Currency.Sign, Mode=TwoWay}" HeightRequest="48" Placeholder="Currency Sign" BackgroundColor="{DynamicResource ColorFields}"
+                           TextColor="{DynamicResource ColorFieldsText}" 
+                           FontSize="Caption" FontFamily="Ubuntu-regular"/>
 
 
-                    <Label TextColor="Black" FontSize="Caption" FontAttributes="Bold" HorizontalOptions="Center" Margin="5,0,5,0">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span Text="Setup Vat"/>
-                                <Span Text=" "/>
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
+                            <Label TextColor="Black" FontSize="Caption" FontAttributes="Bold" HorizontalOptions="Center" Margin="5,0,5,0">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Setup Vat"/>
+                                        <Span Text=" "/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
 
-                    <Entry Text="{Binding Tax.Name,Mode=TwoWay}" Placeholder="Tax Name" Keyboard="Default" Margin="0,0,0,0" 
+                            <!--<Entry Text="{Binding Tax.Name,Mode=TwoWay}" Placeholder="Tax Name" Keyboard="Default" Margin="0,0,0,0" 
                            BackgroundColor="{DynamicResource xBlue}" PlaceholderColor="Black" TextColor="Black"
                            FontSize="Caption">
-                    </Entry>
+                    </Entry>-->
 
-                    <Entry Text="{Binding Tax.Rate,Mode=TwoWay}" Placeholder="Tax Rate %" Keyboard="Numeric" Margin="0,0,0,0"
+                            <Label Text="Tax Name:" TextColor="Black" FontSize="Caption" FontFamily="Ubuntu-regular"/>
+
+                            <Entry Text="{Binding Tax.Name, Mode=TwoWay}" HeightRequest="48" Placeholder="Tax Name" BackgroundColor="{DynamicResource ColorFields}"
+                           TextColor="{DynamicResource ColorFieldsText}" 
+                           FontSize="Caption" FontFamily="Ubuntu-regular"/>
+
+
+                            <!--<Entry Text="{Binding Tax.Rate,Mode=TwoWay}" Placeholder="Tax Rate %" Keyboard="Numeric" Margin="0,0,0,0"
                            BackgroundColor="{DynamicResource xBlue}" PlaceholderColor="Black" TextColor="Black"
                            FontSize="Caption">
-                    </Entry>
-                    
-                    <Picker
-                        SelectedItem="{Binding Tax.TaxMethod}" Title="Tax Method" TextColor="Black" >
-                        <Picker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>Inclusive</x:String>
-                                <x:String>Exclusive</x:String>
-                            </x:Array>
-                        </Picker.ItemsSource>
-                    </Picker>
+                    </Entry>-->
 
-                    <Button Text="Save" Margin="20,10,20,5" BackgroundColor="{DynamicResource xDarkNavy}"
-                            TextColor="White" Command="{Binding SaveCommand,Mode=TwoWay}" FontSize="Caption"/>
+                            <Label Text="Tax Rate:" TextColor="Black" FontSize="Caption" FontFamily="Ubuntu-regular"/>
+
+                            <Entry Text="{Binding Tax.Rate, Mode=TwoWay}" HeightRequest="48"  Placeholder="Tax Rate %" Keyboard="Numeric" BackgroundColor="{DynamicResource ColorFields}"
+                           TextColor="{DynamicResource ColorFieldsText}" 
+                           FontSize="Caption" FontFamily="Ubuntu-bold"/>
+
+
+                            <Picker
+                                SelectedItem="{Binding Tax.TaxMethod}" HeightRequest="48" BackgroundColor="{DynamicResource ColorFields}" Title="Tax Method" TextColor="Black" >
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Inclusive</x:String>
+                                        <x:String>Exclusive</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+
+                            <Button Text="Save" Margin="20,10,20,5" BackgroundColor="{DynamicResource ColorNobleBlue}" HeightRequest="48" TextColor="White" FontFamily="Ubuntu-Regular" FontSize="Caption" Command="{Binding SaveCommand,Mode=TwoWay}" />
+                        </StackLayout>
+                    </Frame>
                 </StackLayout>
-            </Frame>
+            </ScrollView>
+
+
+            
 
         </StackLayout>
     </ContentPage.Content>

@@ -61,7 +61,7 @@
                 <SearchBar Placeholder="Search" HeightRequest="20" WidthRequest="295" Visual="Default"  CancelButtonColor="#FF3030"  />
 
                 <Frame  BackgroundColor="#FF3030" HeightRequest="20" Padding="13" WidthRequest="20" IsClippedToBounds="False" >
-                    <svg:Icon ResourceId="NOBLE_SALE.Resources.Vector.svg"   
+                    <svg:Icon ResourceId="NOBLE_SALE.Resources.Icons.Vector.svg"   
                             WidthRequest="14" HeightRequest="13"  />
                 </Frame>
             </StackLayout>
@@ -106,7 +106,7 @@
 
             <CollectionView BackgroundColor="White" SelectionMode="Multiple" 
                             ItemsSource="{Binding Products.Results.Products}"
-                            SelectedItems="{Binding ProductList}" SelectedItem="{Binding Product}" SelectionChangedCommand="{Binding SelectionCommand,Mode=TwoWay}">
+                            SelectedItems="{Binding ProductList}" >
                 
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical" Span="4" />
@@ -131,6 +131,15 @@
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
+
+                <CollectionView.EmptyView>
+                    <ContentView>
+                        <StackLayout>
+                            <Label Text="No Products To Show" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                                   TextColor="DarkGray" FontSize="Small"/>
+                        </StackLayout>
+                    </ContentView>
+                </CollectionView.EmptyView>
             </CollectionView>
             <!--<ScrollView>
                 <StackLayout>

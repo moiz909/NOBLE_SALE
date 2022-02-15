@@ -1,8 +1,10 @@
-﻿using NOBLE_SALE.Model;
+﻿using NOBLE_SALE.Helper;
+using NOBLE_SALE.Model;
 using NOBLE_SALE.Model.Product;
 using NOBLE_SALE.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using Xamarin.Forms;
 
@@ -30,18 +32,18 @@ namespace NOBLE_SALE.ViewModel.Sale
 
         public Command SelectCategoryCommand { get; set; }
 
-        private List<ProductLookUpModel> _ProductList;
+        private ObservableCollection<ProductLookUpModel> _ProductList;
 
-        public List<ProductLookUpModel> ProductList
+        public ObservableCollection<ProductLookUpModel> ProductList
         {
             get { return _ProductList; }
             set { _ProductList = value; OnPropertyChanged(); }
         }
 
 
-        private List<ProductLookUpModel> _ProductList2;
+        private ObservableCollection<ProductLookUpModel> _ProductList2;
 
-        public List<ProductLookUpModel> ProductList2
+        public ObservableCollection<ProductLookUpModel> ProductList2
         {
             get { return _ProductList2; }
             set { _ProductList2 = value; }
@@ -55,8 +57,8 @@ namespace NOBLE_SALE.ViewModel.Sale
         public SaleInvoice1Vm()
         {
             GetProducts();
-            ProductList = new List<ProductLookUpModel>();
-            ProductList2 = new List<ProductLookUpModel>();
+            ProductList = new ObservableCollection<ProductLookUpModel>();
+            ProductList2 = new ObservableCollection<ProductLookUpModel>();
             Products = new PagedResult<ProductListModel>();
             Categories = new PagedResult<CategoryListModel>();
             SelectedCategory = new CategoryLookUpModel();
@@ -67,6 +69,7 @@ namespace NOBLE_SALE.ViewModel.Sale
 
         private void SelectionHandler(object obj)
         {
+            ProductList2 = ProductList;
             ProductList.Add(Product);
             Product = new ProductLookUpModel();
         }
@@ -80,13 +83,13 @@ namespace NOBLE_SALE.ViewModel.Sale
         {
             Products = new PagedResult<ProductListModel>();
             var service = new ProductService();
-            Products = await service.GetProducts(SelectedCategory.Id, null, Guid.Parse("ebcd6522-fc96-4be7-ddbe-08d9b7cf900e"), 1);
+            Products = await service.GetProducts(SelectedCategory.Id, null, UserData.Current.WarehouseId, 1);
         }
 
         private async void GetProducts()
         {
             var service = new ProductService();
-            Products = await service.GetProducts(null,null, Guid.Parse("ebcd6522-fc96-4be7-ddbe-08d9b7cf900e"),1);
+            Products = await service.GetProducts(null,null, UserData.Current.WarehouseId, 1);
             Categories = await service.GetCategories(true,1,null);
         }
     }

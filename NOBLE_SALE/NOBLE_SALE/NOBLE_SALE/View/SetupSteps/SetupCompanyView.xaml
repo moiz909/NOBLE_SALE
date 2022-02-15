@@ -2,57 +2,89 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:NOBLE_SALE.ViewModel.SetupSteps"
+             BackgroundColor="White"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit" 
              x:Class="NOBLE_SALE.View.SetupSteps.SetupCompanyView">
 
     <ContentPage.BindingContext>
         <vm:SetupCompanyVm/>
     </ContentPage.BindingContext>
-    
-    
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:InvertedBoolConverter x:Key="invertBoolConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
     <ContentPage.Content>
         <StackLayout>
             <ScrollView>
                 <StackLayout>
-                    <Label Text="" TextColor="Black" FontSize="Medium" 
-                                   HorizontalOptions="Center" Margin="0,20,0,0" FontAttributes="Bold"/>
 
-                    <Frame BackgroundColor="{DynamicResource xBlue}" VerticalOptions="Center" Margin="20,40,20,0">
+                    <Frame BackgroundColor="White" VerticalOptions="Center" Margin="20,40,20,0">
                         <StackLayout>
-                            <Label Text="Business Name" TextColor="Black" />
-                            <Entry  BackgroundColor="{DynamicResource xBlue}" 
+                            <Label Text="Business Name" FontFamily="Ubuntu-regular" TextColor="Black" />
+                            <!--<Entry  BackgroundColor="{DynamicResource xBlue}" 
                                             TextColor="Black" FontSize="Small"
                                            Text="{Binding BusinessName,Mode=TwoWay}"
-                                           IsEnabled="False"/>
+                                           IsEnabled="False"/>-->
+                            <Entry Text="{Binding BusinessName, Mode=TwoWay}" HeightRequest="48" IsEnabled="False"  BackgroundColor="{DynamicResource ColorFields}"
+                           TextColor="{DynamicResource ColorFieldsText}" FontSize="16" 
+                           Grid.Column="1" FontFamily="Ubuntu-regular"/>
 
-                            <Label Text="Commercial Reg No:" TextColor="Black" />
-                            <Entry Placeholder="Commercial Reg No" BackgroundColor="{DynamicResource xBlue}"
+                            <Label Text="Commercial Reg No:" FontFamily="Ubuntu-regular" TextColor="Black" />
+                            <!--<Entry Placeholder="Commercial Reg No" BackgroundColor="{DynamicResource xBlue}"
                                            PlaceholderColor="Black" TextColor="Black" FontSize="Small"
                                            Text="{Binding CommercialRegNo,Mode=TwoWay}"
-                                           IsEnabled="False"/>
+                                           IsEnabled="False"/>-->
+
+                            <Entry Text="{Binding CommercialRegNo,Mode=TwoWay}" IsEnabled="False" HeightRequest="48" BackgroundColor="{DynamicResource ColorFields}"
+                           TextColor="{DynamicResource ColorFieldsText}" FontSize="16" 
+                            FontFamily="Ubuntu-regular"/>
 
 
-                            <Label Text="VAT\TAX No:" TextColor="Black" />
-                            <Entry Placeholder="VAT\TAX No" BackgroundColor="{DynamicResource xBlueDark}"
+                            <Label Text="VAT\TAX No:" FontFamily="Ubuntu-regular" TextColor="Black" />
+                            <!--<Entry Placeholder="VAT\TAX No" BackgroundColor="{DynamicResource xBlueDark}"
                                            PlaceholderColor="Black" TextColor="Black" FontSize="Small" IsEnabled="False"
-                                           Text="{Binding TaxNo,Mode=TwoWay}"/>
+                                           Text="{Binding TaxNo,Mode=TwoWay}"/>-->
 
-                            <Label Text="Company Name:" TextColor="Black" />
-                            <Entry Placeholder="Company Name" BackgroundColor="{DynamicResource xBlueDark}"
-                                           PlaceholderColor="Black" TextColor="Black" FontSize="Small" IsEnabled="True"
-                                           Text="{Binding CompanyInfo.CompanyNameEnglish,Mode=TwoWay}"/>
+                            <Entry Text="{Binding TaxNo,Mode=TwoWay}" HeightRequest="48"  BackgroundColor="{DynamicResource ColorFields}"
+                           TextColor="{DynamicResource ColorFieldsText}" FontSize="16" 
+                            FontFamily="Ubuntu-regular"/>
 
-                            <Label Text="Business Type:" TextColor="Black" />
-                            <Entry Placeholder="Business Type" BackgroundColor="{DynamicResource xBlueDark}"
-                                           PlaceholderColor="Black" TextColor="Black" FontSize="Small" IsEnabled="True"
-                                           Text="{Binding CompanyInfo.CategoryInEnglish,Mode=TwoWay}"/>
+                            <Label Text="Company Name:" FontFamily="Ubuntu-regular" TextColor="Black" />
 
-                            <Label Text="Address:" TextColor="Black" />
-                            <Editor Placeholder="Address" BackgroundColor="{DynamicResource xBlueDark}"
+                            <Entry Text="{Binding CompanyInfo.CompanyNameEnglish,Mode=TwoWay}" HeightRequest="48"  BackgroundColor="{DynamicResource ColorFields}"
+                           TextColor="{DynamicResource ColorFieldsText}" FontSize="16" 
+                            FontFamily="Ubuntu-regular"/>
+
+                            <!--<Entry Placeholder="Company Name" BackgroundColor="{DynamicResource xBlueDark}"
                                            PlaceholderColor="Black" TextColor="Black" FontSize="Small" IsEnabled="True"
-                                           Text="{Binding CompanyInfo.AddressInEnglish,Mode=TwoWay}"/>
+                                           Text="{Binding CompanyInfo.CompanyNameEnglish,Mode=TwoWay}"/>-->
+
+                            <Label FontFamily="Ubuntu-regular" Text="Business Type:" TextColor="Black" />
                             
+                            <!--<Entry Placeholder="Business Type" BackgroundColor="{DynamicResource xBlueDark}"
+                                           PlaceholderColor="Black" TextColor="Black" FontSize="Small" IsEnabled="True"
+                                           Text="{Binding CompanyInfo.CategoryInEnglish,Mode=TwoWay}"/>-->
 
-                            <Button Text="Update" Margin="20" 
+                            <Entry Text="{Binding CompanyInfo.CategoryInEnglish,Mode=TwoWay}" HeightRequest="48"  BackgroundColor="{DynamicResource ColorFields}"
+                           TextColor="{DynamicResource ColorFieldsText}" FontSize="16" 
+                            FontFamily="Ubuntu-regular"/>
+
+                            <Label FontFamily="Ubuntu-regular" Text="Address:" TextColor="Black" />
+                            <!--<Editor Placeholder="Address" BackgroundColor="{DynamicResource xBlueDark}"
+                                           PlaceholderColor="Black" TextColor="Black" FontSize="Small" IsEnabled="True"
+                                           Text="{Binding CompanyInfo.AddressInEnglish,Mode=TwoWay}"/>-->
+
+                            <Editor Text="{Binding CompanyInfo.AddressInEnglish,Mode=TwoWay}" HeightRequest="60" Placeholder="Address" BackgroundColor="{DynamicResource ColorFields}"
+                           TextColor="{DynamicResource ColorFieldsText}" FontSize="16" 
+                            FontFamily="Ubuntu-regular"/>
+
+
+                            <Button Text="Update" Margin="20" HeightRequest="48"
+                            BackgroundColor="{DynamicResource ColorNobleBlue}" TextColor="White" FontFamily="Ubuntu-Regular" FontSize="Caption"
                                             Command="{Binding UpdateCommand,Mode=TwoWay}"/>
                         </StackLayout>
                     </Frame>
