@@ -1,0 +1,356 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fontawesome="clr-namespace:NOBLE_SALE.Utils"
+             xmlns:svg="clr-namespace:NOBLE_SALE.Helper"
+             Visual="Material"
+             NavigationPage.HasBackButton="False"
+             xmlns:vm="clr-namespace:NOBLE_SALE.ViewModel.Sale"
+             x:Class="NOBLE_SALE.View.Sale.SaleInvoice1">
+
+    <ContentPage.BindingContext>
+        <vm:SaleInvoice1Vm/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup>
+                        <VisualState Name="Normal" />
+                        <VisualState Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"  Value="White" />
+                                <Setter TargetName="valueLabel" Property="Label.TextColor" Value="#0280FD" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+
+    <NavigationPage.TitleView>
+        <StackLayout>
+            <Grid Margin="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Text="{x:Static fontawesome:FontAwesomeIcons.AngleLeft}" Grid.Column="0"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Black"
+                          FontSize="Large" />
+                <Label Text="Sale Invoice" TextColor="#0280FD" FontSize="18"  Grid.ColumnSpan="2" HorizontalOptions="Center"
+                   FontAttributes="Bold"  FontFamily="{StaticResource UbuntuBold}" Grid.Column="1"/>
+
+                <Label Text="{x:Static fontawesome:FontAwesomeIcons.Bell}" Grid.Column="3" 
+                           FontFamily="{StaticResource FontAwesomeBrands}" TextColor="Black" HorizontalOptions="End"
+                          FontSize="18" />
+            </Grid>
+        </StackLayout>
+    </NavigationPage.TitleView>
+
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="White">
+
+
+
+            <StackLayout BackgroundColor="White" Orientation="Horizontal"  Margin="16">
+                <SearchBar Placeholder="Search" HeightRequest="20" WidthRequest="295" Visual="Default"  CancelButtonColor="#FF3030"  />
+
+                <Frame  BackgroundColor="#FF3030" HeightRequest="20" Padding="13" WidthRequest="20" IsClippedToBounds="False" >
+                    <svg:Icon ResourceId="NOBLE_SALE.Resources.Vector.svg"   
+                            WidthRequest="14" HeightRequest="13"  />
+                </Frame>
+            </StackLayout>
+
+
+            <CollectionView WidthRequest="91" BackgroundColor="White" HeightRequest="45" SelectionMode="Single" SelectedItem="{Binding SelectedCategory,Mode=TwoWay}" SelectionChangedCommand="{Binding SelectCategoryCommand,Mode=TwoWay}" ItemsSource="{Binding Categories.Results.Categories}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="5" IsClippedToBounds="True" Padding="0"    Margin="5">
+                            <Label x:Name="valueLabel" Text="{Binding Name}" VerticalOptions="Center" Margin="5" BackgroundColor="#EDF3FA"  FontFamily="{StaticResource UbuntuBold}" HeightRequest="14" WidthRequest="67" FontSize="10" TextColor="#0280FD"/>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!--<ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
+                <StackLayout  Orientation="Horizontal">
+                    <Frame CornerRadius="5" IsClippedToBounds="True" WidthRequest="91" Padding="0" HeightRequest="30"  BackgroundColor="#EDF3FA" Margin="5">
+                        <Label  Text="Gent Shoes" VerticalOptions="Center" Margin="5"  FontFamily="{StaticResource UbuntuBold}" HeightRequest="14" WidthRequest="67" FontSize="10" TextColor="#0280FD"/>
+                    </Frame>
+                    <Frame CornerRadius="5" IsClippedToBounds="True" Padding="0" WidthRequest="91" HeightRequest="30"  BackgroundColor="#EDF3FA" Margin="5">
+                        <Label Text="Flori For Men" VerticalOptions="Center" Margin="5" FontFamily="{StaticResource UbuntuBold}" HeightRequest="14" WidthRequest="67" FontSize="10" TextColor="#0280FD"/>
+                    </Frame>
+                    <Frame CornerRadius="5" IsClippedToBounds="True" Padding="0" WidthRequest="91" HeightRequest="30"  BackgroundColor="#EDF3FA" Margin="5">
+                        <Label Text="Boys Slippers" VerticalOptions="Center" Margin="5" FontFamily="{StaticResource UbuntuBold}" HeightRequest="14" WidthRequest="67" FontSize="10" TextColor="#0280FD"/>
+                    </Frame>
+                    <Frame CornerRadius="5" IsClippedToBounds="True" Padding="0" WidthRequest="91" HeightRequest="30" BackgroundColor="#EDF3FA" Margin="5">
+                        <Label Text="Boys Slippers" VerticalOptions="Center" Margin="5" FontFamily="{StaticResource UbuntuBold}" HeightRequest="14" WidthRequest="67" FontSize="10" TextColor="#0280FD"/>
+                    </Frame>
+                    <Frame CornerRadius="5" IsClippedToBounds="True" Padding="0" WidthRequest="91" HeightRequest="30" BackgroundColor="#EDF3FA" Margin="5">
+                        <Label Text="Boys Slippers" VerticalOptions="Center" Margin="5"  FontFamily="{StaticResource UbuntuBold}" HeightRequest="14" WidthRequest="67" FontSize="10" TextColor="#0280FD"/>
+                    </Frame>
+                    <Frame CornerRadius="5" IsClippedToBounds="True" Padding="0" WidthRequest="91" HeightRequest="30" BackgroundColor="#EDF3FA" Margin="5">
+                        <Label Text="Boys Slippers" VerticalOptions="Center" Margin="5"  FontFamily="{StaticResource UbuntuBold}" HeightRequest="14" WidthRequest="67" FontSize="10" TextColor="#0280FD"/>
+                    </Frame>
+                </StackLayout>
+
+            </ScrollView>-->
+
+            <CollectionView BackgroundColor="White" SelectionMode="Multiple" 
+                            ItemsSource="{Binding Products.Results.Products}"
+                            SelectedItems="{Binding ProductList}" SelectedItem="{Binding Product}" SelectionChangedCommand="{Binding SelectionCommand,Mode=TwoWay}">
+                
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="4" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                        <Grid  Padding="10" Margin="12">
+
+                            
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout   Margin="10">
+                                <Frame  BackgroundColor="#EDF3FA" WidthRequest="25" HeightRequest="25" CornerRadius="12"  IsClippedToBounds="True" >
+                                    <Label x:Name="valueLabel" Text="{x:Static fontawesome:FontAwesomeIcons.ShoppingCart}" HorizontalOptions="Center" VerticalOptions="Center"
+                                               FontFamily="{StaticResource FontAwesomeSolid}"  FontSize="23" />
+                                    
+                                </Frame>
+                                <Label  Text="{Binding EnglishName}"  FontFamily="{StaticResource UbuntuNormal}" TextColor="#17191C"/>
+                            </StackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <!--<ScrollView>
+                <StackLayout>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout   Grid.Column="0" Grid.Row="0"  Margin="10">
+                            <Frame BackgroundColor="#EDF3FA" WidthRequest="25" HeightRequest="25" CornerRadius="12"  IsClippedToBounds="True" >
+                                <Label Text="{x:Static fontawesome:FontAwesomeIcons.RupeeSign}" HorizontalOptions="Center" VerticalOptions="Center"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Black"
+                          FontSize="23" />
+                            </Frame>
+                            <Label Text="Send Money" FontFamily="{StaticResource UbuntuNormal}" TextColor="#17191C"/>
+                        </StackLayout>
+                        <StackLayout   Grid.Column="1" Grid.Row="0"  Margin="10">
+                            <Frame BackgroundColor="#EDF3FA" WidthRequest="25" HeightRequest="25" CornerRadius="12"  IsClippedToBounds="True" >
+                                <Label Text="{x:Static fontawesome:FontAwesomeIcons.RupeeSign}" HorizontalOptions="Center" VerticalOptions="Center"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Black"
+                          FontSize="23" />
+                            </Frame>
+                            <Label Text="Recieve Money" FontFamily="{StaticResource UbuntuNormal}" TextColor="#17191C"/>
+                        </StackLayout>
+                        <StackLayout   Grid.Column="2" Grid.Row="0"  Margin="10">
+                            <Frame BackgroundColor="#EDF3FA" WidthRequest="25" HeightRequest="25" CornerRadius="12"  IsClippedToBounds="True" >
+                                <Label Text="{x:Static fontawesome:FontAwesomeIcons.Mobile}" HorizontalOptions="Center" VerticalOptions="Center"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Black"
+                          FontSize="Large" />
+                            </Frame>
+                            <Label Text="Mobile Prepaid" FontFamily="{StaticResource UbuntuNormal}" TextColor="#17191C"/>
+                        </StackLayout>
+                        <StackLayout   Grid.Column="3" Grid.Row="0"  Margin="10">
+                            <Frame BackgroundColor="#EDF3FA" WidthRequest="25" HeightRequest="25" CornerRadius="12"  IsClippedToBounds="True" >
+                                <Label Text="{x:Static fontawesome:FontAwesomeIcons.Bolt}" HorizontalOptions="Center" VerticalOptions="Center"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="#0280FD"
+                          FontSize="Large" />
+                            </Frame>
+                            <Label Text="Electricity Bill" FontFamily="{StaticResource UbuntuNormal}" TextColor="#17191C"/>
+                        </StackLayout>
+
+                        
+                        <StackLayout   Grid.Column="0" Grid.Row="1"  Margin="10">
+                            <Frame BackgroundColor="#EDF3FA" WidthRequest="25" HeightRequest="25" CornerRadius="12"  IsClippedToBounds="True" >
+                                <Label Text="{x:Static fontawesome:FontAwesomeIcons.RupeeSign}" HorizontalOptions="Center" VerticalOptions="Center"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Black"
+                          FontSize="23" />
+                            </Frame>
+                            <Label Text="Send Money" FontFamily="{StaticResource UbuntuNormal}" TextColor="#17191C"/>
+                        </StackLayout>
+                        <StackLayout   Grid.Column="1" Grid.Row="1"  Margin="10">
+                            <Frame BackgroundColor="#EDF3FA" WidthRequest="25" HeightRequest="25" CornerRadius="12"  IsClippedToBounds="True" >
+                                <Label Text="{x:Static fontawesome:FontAwesomeIcons.RupeeSign}" HorizontalOptions="Center" VerticalOptions="Center"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="#0280FD"
+                          FontSize="23" />
+                            </Frame>
+                            <Label Text="Recieve Money" FontFamily="{StaticResource UbuntuNormal}" TextColor="#17191C"/>
+                        </StackLayout>
+                        <StackLayout   Grid.Column="2" Grid.Row="1"  Margin="10">
+                            <Frame BackgroundColor="#EDF3FA" WidthRequest="25" HeightRequest="25" CornerRadius="12"  IsClippedToBounds="True" >
+                                <Label Text="{x:Static fontawesome:FontAwesomeIcons.Mobile}" HorizontalOptions="Center" VerticalOptions="Center"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Black"
+                          FontSize="Large" />
+                            </Frame>
+                            <Label Text="Mobile Prepaid" FontFamily="{StaticResource UbuntuNormal}" TextColor="#17191C"/>
+                        </StackLayout>
+                        <StackLayout   Grid.Column="3" Grid.Row="1"  Margin="10">
+                            <Frame BackgroundColor="#EDF3FA" WidthRequest="25" HeightRequest="25" CornerRadius="12"  IsClippedToBounds="True" >
+                                <Label Text="{x:Static fontawesome:FontAwesomeIcons.Bolt}" HorizontalOptions="Center" VerticalOptions="Center"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Black"
+                          FontSize="Large" />
+                            </Frame>
+                            <Label Text="Electricity Bill" FontFamily="{StaticResource UbuntuNormal}" TextColor="#17191C"/>
+                        </StackLayout>
+
+
+                        <StackLayout   Grid.Column="0" Grid.Row="2"  Margin="10">
+                            <Frame BackgroundColor="#EDF3FA" WidthRequest="25" HeightRequest="25" CornerRadius="12"  IsClippedToBounds="True" >
+                                <Label Text="{x:Static fontawesome:FontAwesomeIcons.RupeeSign}" HorizontalOptions="Center" VerticalOptions="Center"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Black"
+                          FontSize="23" />
+                            </Frame>
+                            <Label Text="Send Money" FontFamily="{StaticResource UbuntuNormal}" TextColor="#17191C"/>
+                        </StackLayout>
+                        <StackLayout   Grid.Column="1" Grid.Row="2"  Margin="10">
+                            <Frame BackgroundColor="#EDF3FA" WidthRequest="25" HeightRequest="25" CornerRadius="12"  IsClippedToBounds="True" >
+                                <Label Text="{x:Static fontawesome:FontAwesomeIcons.RupeeSign}" HorizontalOptions="Center" VerticalOptions="Center"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Black"
+                          FontSize="23" />
+                            </Frame>
+                            <Label Text="Recieve Money" FontFamily="{StaticResource UbuntuNormal}" TextColor="#17191C"/>
+                        </StackLayout>
+                        <StackLayout   Grid.Column="2" Grid.Row="2"  Margin="10">
+                            <Frame BackgroundColor="#EDF3FA" WidthRequest="25" HeightRequest="25" CornerRadius="12"  IsClippedToBounds="True" >
+                                <Label Text="{x:Static fontawesome:FontAwesomeIcons.Mobile}" HorizontalOptions="Center" VerticalOptions="Center"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="#0280FD"
+                          FontSize="Large" />
+                            </Frame>
+                            <Label Text="Mobile Prepaid" FontFamily="{StaticResource UbuntuNormal}" TextColor="#17191C"/>
+                        </StackLayout>
+                        <StackLayout   Grid.Column="3" Grid.Row="2"  Margin="10">
+                            <Frame BackgroundColor="#EDF3FA" WidthRequest="25" HeightRequest="25" CornerRadius="12"  IsClippedToBounds="True" >
+                                <Label Text="{x:Static fontawesome:FontAwesomeIcons.Bolt}" HorizontalOptions="Center" VerticalOptions="Center"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Black"
+                          FontSize="Large" />
+                            </Frame>
+                            <Label Text="Electricity Bill" FontFamily="{StaticResource UbuntuNormal}" TextColor="#17191C"/>
+                        </StackLayout>
+
+
+                        <StackLayout   Grid.Column="0" Grid.Row="3"  Margin="10">
+                            <Frame BackgroundColor="#EDF3FA" WidthRequest="25" HeightRequest="25" CornerRadius="12"  IsClippedToBounds="True" >
+                                <Label Text="{x:Static fontawesome:FontAwesomeIcons.RupeeSign}" HorizontalOptions="Center" VerticalOptions="Center"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Black"
+                          FontSize="23" />
+                            </Frame>
+                            <Label Text="Send Money" FontFamily="{StaticResource UbuntuNormal}" TextColor="#17191C"/>
+                        </StackLayout>
+                        <StackLayout   Grid.Column="1" Grid.Row="3"  Margin="10">
+                            <Frame BackgroundColor="#EDF3FA" WidthRequest="25" HeightRequest="25" CornerRadius="12"  IsClippedToBounds="True" >
+                                <Label Text="{x:Static fontawesome:FontAwesomeIcons.RupeeSign}" HorizontalOptions="Center" VerticalOptions="Center"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Black"
+                          FontSize="23" />
+                            </Frame>
+                            <Label Text="Recieve Money" FontFamily="{StaticResource UbuntuNormal}" TextColor="#17191C"/>
+                        </StackLayout>
+                        <StackLayout   Grid.Column="2" Grid.Row="3"  Margin="10">
+                            <Frame BackgroundColor="#EDF3FA" WidthRequest="25" HeightRequest="25" CornerRadius="12"  IsClippedToBounds="True" >
+                                <Label Text="{x:Static fontawesome:FontAwesomeIcons.Mobile}" HorizontalOptions="Center" VerticalOptions="Center"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Black"
+                          FontSize="Large" />
+                            </Frame>
+                            <Label Text="Mobile Prepaid" FontFamily="{StaticResource UbuntuNormal}" TextColor="#17191C"/>
+                        </StackLayout>
+                        <StackLayout   Grid.Column="3" Grid.Row="3"  Margin="10">
+                            <Frame BackgroundColor="#EDF3FA" WidthRequest="25" HeightRequest="25" CornerRadius="12"  IsClippedToBounds="True" >
+                                <Label Text="{x:Static fontawesome:FontAwesomeIcons.Bolt}" HorizontalOptions="Center" VerticalOptions="Center"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Black"
+                          FontSize="Large" />
+                            </Frame>
+                            <Label Text="Electricity Bill" FontFamily="{StaticResource UbuntuNormal}" TextColor="#17191C"/>
+                        </StackLayout>
+
+
+                        <StackLayout   Grid.Column="0" Grid.Row="4"  Margin="10">
+                            <Frame BackgroundColor="#EDF3FA" WidthRequest="25" HeightRequest="25" CornerRadius="12"  IsClippedToBounds="True" >
+                                <Label Text="{x:Static fontawesome:FontAwesomeIcons.RupeeSign}" HorizontalOptions="Center" VerticalOptions="Center"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Black"
+                          FontSize="23" />
+                            </Frame>
+                            <Label Text="Send Money" FontFamily="{StaticResource UbuntuNormal}" TextColor="#17191C"/>
+                        </StackLayout>
+                        <StackLayout   Grid.Column="1" Grid.Row="4"  Margin="10">
+                            <Frame BackgroundColor="#EDF3FA" WidthRequest="25" HeightRequest="25" CornerRadius="12"  IsClippedToBounds="True" >
+                                <Label Text="{x:Static fontawesome:FontAwesomeIcons.RupeeSign}" HorizontalOptions="Center" VerticalOptions="Center"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Black"
+                          FontSize="23" />
+                            </Frame>
+                            <Label Text="Recieve Money" FontFamily="{StaticResource UbuntuNormal}" TextColor="#17191C"/>
+                        </StackLayout>
+                        <StackLayout   Grid.Column="2" Grid.Row="4"  Margin="10">
+                            <Frame BackgroundColor="#EDF3FA" WidthRequest="25" HeightRequest="25" CornerRadius="12"  IsClippedToBounds="True" >
+                                <Label Text="{x:Static fontawesome:FontAwesomeIcons.Mobile}" HorizontalOptions="Center" VerticalOptions="Center"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Black"
+                          FontSize="Large" />
+                            </Frame>
+                            <Label Text="Mobile Prepaid" FontFamily="{StaticResource UbuntuNormal}" TextColor="#17191C"/>
+                        </StackLayout>
+                        <StackLayout   Grid.Column="3" Grid.Row="4"  Margin="10">
+                            <Frame BackgroundColor="#EDF3FA" WidthRequest="25" HeightRequest="25" CornerRadius="12"  IsClippedToBounds="True" >
+                                <Label Text="{x:Static fontawesome:FontAwesomeIcons.Bolt}" HorizontalOptions="Center" VerticalOptions="Center"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Black"
+                          FontSize="Large" />
+                            </Frame>
+                            <Label Text="Electricity Bill" FontFamily="{StaticResource UbuntuNormal}" TextColor="#17191C"/>
+                        </StackLayout>
+                        <Frame BackgroundColor="#EDF3FA" WidthRequest="40" HeightRequest="40" CornerRadius="12" Grid.Column="0" Grid.Row="0" IsClippedToBounds="True" Margin="16">
+                            <Label Text="{x:Static fontawesome:FontAwesomeIcons.RupeeSign}" HorizontalOptions="Center" VerticalOptions="Center"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Black"
+                          FontSize="Large" />
+                        </Frame>
+
+            <StackLayout>
+                            
+                        </StackLayout>
+                        <Frame BackgroundColor="#EDF3FA" WidthRequest="40" HeightRequest="40" CornerRadius="12" Grid.Column="1" Grid.Row="0" IsClippedToBounds="True" Margin="16">
+                            <Label Text="{x:Static fontawesome:FontAwesomeIcons.RupeeSign}" HorizontalOptions="Center" VerticalOptions="Center"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Black"
+                          FontSize="Large" />
+                        </Frame>
+
+                        <Frame BackgroundColor="#EDF3FA" WidthRequest="40" HeightRequest="40" CornerRadius="12" Grid.Column="2" Grid.Row="0" IsClippedToBounds="True" Margin="16">
+                            <Label Text="{x:Static fontawesome:FontAwesomeIcons.RupeeSign}" HorizontalOptions="Center" VerticalOptions="Center"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Black"
+                          FontSize="Large" />
+                        </Frame>
+
+                        <Frame BackgroundColor="#EDF3FA" WidthRequest="40"  HeightRequest="40" CornerRadius="12" Grid.Column="3" Grid.Row="0" IsClippedToBounds="True" Margin="16">
+                            <Label Text="{x:Static fontawesome:FontAwesomeIcons.RupeeSign}" HorizontalOptions="Center" VerticalOptions="Center"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Black"
+                          FontSize="Large" />
+                        </Frame>
+
+            </Grid>
+        </StackLayout>
+        </ScrollView>-->
+
+
+
+        <Button Text="Next" WidthRequest="343" HeightRequest="38" Margin="5" HorizontalOptions="Center" BackgroundColor="#12AB5A" Command="{Binding NextBtnCommand,Mode=TwoWay}"
+                    TextColor="White"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

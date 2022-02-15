@@ -1,5 +1,6 @@
 ﻿using NOBLE_SALE.Resources;
 using NOBLE_SALE.View;
+using NOBLE_SALE.View.Sale;
 using System;
 using Xamarin.CommunityToolkit.Helpers;
 using Xamarin.Forms;
@@ -13,7 +14,11 @@ namespace NOBLE_SALE
         {
             InitializeComponent();
             LocalizationResourceManager.Current.Init(AppResources.ResourceManager);
-            MainPage = new NavigationPage(new IPConfiguration()) { BarBackgroundColor = Color.FromHex("#3178fc") };
+            MainPage = new NavigationPage(new IPConfiguration()) 
+            { 
+                BarBackgroundColor = Color.White,
+                BarTextColor = Color.Black
+            };
         }
 
         protected override void OnStart()
