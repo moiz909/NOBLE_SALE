@@ -153,6 +153,15 @@
   <data name="Address" xml:space="preserve">
     <value>عنوان</value>
   </data>
+  <data name="Address is required" xml:space="preserve">
+    <value>العنوان مطلوب</value>
+  </data>
+  <data name="Admin Info" xml:space="preserve">
+    <value>معلومات المسؤول</value>
+  </data>
+  <data name="Agree" xml:space="preserve">
+    <value>أنا أوافق على</value>
+  </data>
   <data name="Allow All" xml:space="preserve">
     <value>اسمح للكل</value>
   </data>
@@ -236,6 +245,12 @@
   </data>
   <data name="Business License History" xml:space="preserve">
     <value>تاريخ الرخصة التجارية</value>
+  </data>
+  <data name="Business Name" xml:space="preserve">
+    <value>اسم تجاري</value>
+  </data>
+  <data name="Business Name Required" xml:space="preserve">
+    <value>الاسم التجاري مطلوب</value>
   </data>
   <data name="Businesses" xml:space="preserve">
     <value>الأعمال</value>
@@ -390,6 +405,9 @@
   <data name="Discount Amount" xml:space="preserve">
     <value>مقدار الخصم</value>
   </data>
+  <data name="Dont have an account" xml:space="preserve">
+    <value>ليس لديك حساب؟</value>
+  </data>
   <data name="Edit" xml:space="preserve">
     <value>تعديل</value>
   </data>
@@ -423,6 +441,12 @@
   <data name="Enter a valid port number" xml:space="preserve">
     <value>أدخل رقم منفذ صالح</value>
   </data>
+  <data name="Enter email pass" xml:space="preserve">
+    <value>أدخل بريدك الإلكتروني وكلمة المرور للمتابعة</value>
+  </data>
+  <data name="Enter Port IP" xml:space="preserve">
+    <value>أدخل المنفذ وعنوان IP الخاص بك للمتابعة</value>
+  </data>
   <data name="Equity" xml:space="preserve">
     <value>حقوق الملكية</value>
   </data>
@@ -449,6 +473,9 @@
   </data>
   <data name="FOCS icon" xml:space="preserve">
     <value>ب</value>
+  </data>
+  <data name="Forgot Password" xml:space="preserve">
+    <value>هل نسيت كلمة السر</value>
   </data>
   <data name="Free Of Cost Purchase" xml:space="preserve">
     <value>خالية من تكلفة الشراء</value>
@@ -552,6 +579,9 @@
   <data name="Location" xml:space="preserve">
     <value>موقعك</value>
   </data>
+  <data name="Location Email" xml:space="preserve">
+    <value>البريد الإلكتروني للفرع</value>
+  </data>
   <data name="Location License History" xml:space="preserve">
     <value>التاريخ رخصة الموقع</value>
   </data>
@@ -572,6 +602,9 @@
   </data>
   <data name="Mobile" xml:space="preserve">
     <value>رقم الهاتف الجوال</value>
+  </data>
+  <data name="Mobile Number Required" xml:space="preserve">
+    <value>رقم الهاتف المحمول مطلوب</value>
   </data>
   <data name="My Settings" xml:space="preserve">
     <value>الإعدادات</value>
@@ -614,6 +647,9 @@
   </data>
   <data name="Password" xml:space="preserve">
     <value>كلمة المرور</value>
+  </data>
+  <data name="Password Detail" xml:space="preserve">
+    <value>يجب أن تحتوي كلمة المرور على رقم واحد على الأقل [0-9] ، وحرف صغير واحد [a-z] ، وحرف كبير واحد [A-Z] ، وحرف خاص واحد على الأقل و 8 أحرف على الأقل في الطول.</value>
   </data>
   <data name="Password Do Not Match" xml:space="preserve">
     <value>كلمة المرورغير متطابقة</value>
@@ -720,11 +756,17 @@
   <data name="Received Amount" xml:space="preserve">
     <value>المبلغ الذي تسلمه</value>
   </data>
+  <data name="Register Location" xml:space="preserve">
+    <value>تسجيل الموقع / الفرع</value>
+  </data>
   <data name="Registration Date" xml:space="preserve">
     <value>تاريخ التسجيل</value>
   </data>
   <data name="Registration number" xml:space="preserve">
     <value>رقم التسجيل</value>
+  </data>
+  <data name="Registration Number Required" xml:space="preserve">
+    <value>رقم التسجيل مطلوب</value>
   </data>
   <data name="Remarks" xml:space="preserve">
     <value>ملاحظات</value>
@@ -783,6 +825,9 @@
   <data name="Sign Up Employee Icon" xml:space="preserve">
     <value>ت</value>
   </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>التسجيل</value>
+  </data>
   <data name="SPP icon" xml:space="preserve">
     <value>م</value>
   </data>
@@ -821,6 +866,9 @@
   </data>
   <data name="Terminal" xml:space="preserve">
     <value>ختام العمر</value>
+  </data>
+  <data name="Terms and Conditions" xml:space="preserve">
+    <value>الأحكام والشروط</value>
   </data>
   <data name="To" xml:space="preserve">
     <value>إلى</value>
@@ -876,6 +924,9 @@
   <data name="Username" xml:space="preserve">
     <value>اسم المستخدم</value>
   </data>
+  <data name="Username is required" xml:space="preserve">
+    <value>اسم المستخدم مطلوب</value>
+  </data>
   <data name="Users" xml:space="preserve">
     <value>المستخدمون</value>
   </data>
@@ -884,6 +935,12 @@
   </data>
   <data name="Value Added Tax" xml:space="preserve">
     <value>رقم ضريبي</value>
+  </data>
+  <data name="Value added tax number required" xml:space="preserve">
+    <value>رقم ضريبة القيمة المضافة مطلوب</value>
+  </data>
+  <data name="VAT Number" xml:space="preserve">
+    <value>رقم ضريبة القيمة المضافة</value>
   </data>
   <data name="VAT Paid" xml:space="preserve">
     <value>ضريبة القيمة المضافة المدفوعة</value>

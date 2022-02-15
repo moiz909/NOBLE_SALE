@@ -5,6 +5,7 @@ using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
 using System.Net;
+using AndroidX.AppCompat.App;
 
 namespace NOBLE_SALE.Droid
 {
@@ -16,6 +17,7 @@ namespace NOBLE_SALE.Droid
             base.OnCreate(savedInstanceState);
 
             ServicePointManager.ServerCertificateValidationCallback += (o, cert, chain, errors) => true;
+            AppCompatDelegate.DefaultNightMode = AppCompatDelegate.ModeNightNo;
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             global::Xamarin.Forms.FormsMaterial.Init(this, savedInstanceState);

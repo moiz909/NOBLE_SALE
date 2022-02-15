@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:vm="clr-namespace:NOBLE_SALE.ViewModel.Registration" xmlns:xct="http://xamarin.com/schemas/2020/toolkit" x:DataType="vm:RegisterLocationVM"
              x:Class="NOBLE_SALE.View.RegisterLocation"
+             NavigationPage.IconColor="Black"
              Visual="Material"
              BackgroundColor="White">
 
@@ -21,114 +22,212 @@
         <StackLayout>
             <ScrollView>
                 <StackLayout>
-                    <Label Text="Register Location / Branch" HorizontalOptions="Center" FontSize="18" TextColor="Black" Margin="0,20,0,20"
-                   FontAttributes="Bold"/>
+                    <Label Text="{xct:Translate Register Location}" FontSize="22" TextColor="Black" Margin="16,0,16,0" FontFamily="Ubuntu-Bold"/>
 
-                    <Entry BackgroundColor="WhiteSmoke" Placeholder="Business Name*" PlaceholderColor="Black" Margin="5,0,5,0" FontSize="14"
-                   Text="{Binding Business.NameInEnglish,Mode=TwoWay}">
+                    <Label FontSize="12" Margin="16,24,16,0" FontFamily="Ubuntu-Medium">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{xct:Translate Business Name}" TextColor="Black"/>
+                                <Span Text=" * " TextColor="{DynamicResource ColorRed}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Entry Text="{Binding Business.NameInEnglish,Mode=TwoWay}" BackgroundColor="{DynamicResource ColorFields}"
+                           TextColor="{DynamicResource ColorFieldsText}" FontSize="16" FontFamily="Ubuntu-regular" Visual="Default" Margin="16,0,16,0"
+                           HeightRequest="48">
                         <Entry.Behaviors>
-                            <xct:TextValidationBehavior  MinimumLength="1" Flags="ValidateOnValueChanging" IsValid="{Binding IsValidBuisnessName,Mode=TwoWay}"/>
+                            <xct:TextValidationBehavior  MinimumLength="1" Flags="ValidateOnValueChanging" 
+                                                         IsValid="{Binding IsValidBuisnessName,Mode=TwoWay}"/>
                         </Entry.Behaviors>
                     </Entry>
 
-                    <Label Text="Business Name Required" TextColor="Maroon" FontSize="Micro" Margin="5,0,5,0"
-                   IsVisible="{Binding IsValidBuisnessName, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
+                    <Label Text="{xct:Translate Business Name Required}" TextColor="{DynamicResource ColorRed}" FontSize="8" Margin="16,0,16,0" 
+                           IsVisible="{Binding IsValidBuisnessName, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
 
-                    <Entry BackgroundColor="WhiteSmoke" Placeholder="Registration #*" PlaceholderColor="Black" Margin="5,0,5,0"
-                       FontSize="14" Text="{Binding Business.CompanyRegNo,Mode=TwoWay}">
+
+                    <Label FontSize="12" Margin="16,0,16,0" FontFamily="Ubuntu-Medium">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{xct:Translate Registration number}" TextColor="Black"/>
+                                <Span Text=" * " TextColor="{DynamicResource ColorRed}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Entry Text="{Binding Business.CompanyRegNo,Mode=TwoWay}" BackgroundColor="{DynamicResource ColorFields}"
+                           TextColor="{DynamicResource ColorFieldsText}" FontSize="16" FontFamily="Ubuntu-regular" Visual="Default" Margin="16,0,16,0"
+                           HeightRequest="48">
                         <Entry.Behaviors>
                             <xct:TextValidationBehavior  MinimumLength="1" Flags="ValidateOnValueChanging" IsValid="{Binding IsValidReg,Mode=TwoWay}"/>
                         </Entry.Behaviors>
                     </Entry>
 
-                    <Label Text="*Registration Number Required" TextColor="Maroon" FontSize="Micro" Margin="5,0,5,0"
+                    <Label Text="{xct:Translate Registration Number Required}" TextColor="{DynamicResource ColorRed}" FontSize="8" Margin="16,0,16,0"
                        IsVisible="{Binding IsValidReg, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
 
-                    <Entry BackgroundColor="WhiteSmoke" Placeholder="VAT/NTN/TAX NO*" PlaceholderColor="Black" Margin="5,0,5,0"
-                       FontSize="14" Grid.Row="0" Grid.Column="1" Text="{Binding Business.VatRegistrationNo,Mode=TwoWay}">
+                    <Label FontSize="12" Margin="16,0,16,0" FontFamily="Ubuntu-Medium">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{xct:Translate VAT Number}" TextColor="Black"/>
+                                <Span Text=" * " TextColor="{DynamicResource ColorRed}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Entry Text="{Binding Business.VatRegistrationNo,Mode=TwoWay}" BackgroundColor="{DynamicResource ColorFields}"
+                           TextColor="{DynamicResource ColorFieldsText}" FontSize="16" FontFamily="Ubuntu-regular" Visual="Default" Margin="16,0,16,0"
+                           HeightRequest="48">
                         <Entry.Behaviors>
                             <xct:TextValidationBehavior  MinimumLength="1" Flags="ValidateOnValueChanging" IsValid="{Binding IsValidVat,Mode=TwoWay}"/>
                         </Entry.Behaviors>
                     </Entry>
 
-                    <Label Text="*VAT Number Required" TextColor="Maroon" FontSize="Micro" Margin="5,0,5,0"
-                       IsVisible="{Binding IsValidVat, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
+                    <Label Text="{xct:Translate Value added tax number required}" TextColor="{DynamicResource ColorRed}" FontSize="8" 
+                           Margin="16,0,16,0" IsVisible="{Binding IsValidVat, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
 
 
-                    <Entry BackgroundColor="WhiteSmoke" Placeholder="Location Email*" PlaceholderColor="Black" Margin="5,0,5,0" 
-                   FontSize="14" Text="{Binding Business.Email,Mode=TwoWay}">
+                    <Label FontSize="12" Margin="16,0,16,0" FontFamily="Ubuntu-Medium">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{xct:Translate Location Email}" TextColor="Black"/>
+                                <Span Text=" * " TextColor="{DynamicResource ColorRed}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Entry Text="{Binding Business.Email,Mode=TwoWay}" BackgroundColor="{DynamicResource ColorFields}"
+                           TextColor="{DynamicResource ColorFieldsText}" FontSize="16" FontFamily="Ubuntu-regular" Visual="Default" Margin="16,0,16,0"
+                           HeightRequest="48" Keyboard="Email">
                         <Entry.Behaviors>
                             <xct:EmailValidationBehavior IsValid="{Binding IsValidBuisnessEmail,Mode=TwoWay}" Flags="ValidateOnValueChanging"/>
                         </Entry.Behaviors>
                     </Entry>
 
-                    <Label Text="Invalid Email" TextColor="Maroon" FontSize="Micro" Margin="5,0,5,0"
-                   IsVisible="{Binding IsValidBuisnessEmail, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
+                    <Label Text="{xct:Translate Invalid Email}" TextColor="{DynamicResource ColorRed}" FontSize="8" Margin="16,0,16,0"
+                           IsVisible="{Binding IsValidBuisnessEmail, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
 
-                    <Entry BackgroundColor="WhiteSmoke" Placeholder="Mobile Number*" PlaceholderColor="Black" Margin="5,0,5,0"
-                       FontSize="14" Text="{Binding Business.LandLine,Mode=TwoWay}">
+                    <Label FontSize="12" Margin="16,0,16,0" FontFamily="Ubuntu-Medium">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{xct:Translate Mobile}" TextColor="Black"/>
+                                <Span Text=" * " TextColor="{DynamicResource ColorRed}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Entry Text="{Binding Business.PhoneNumber,Mode=TwoWay}" BackgroundColor="{DynamicResource ColorFields}"
+                           TextColor="{DynamicResource ColorFieldsText}" FontSize="16" FontFamily="Ubuntu-regular" Visual="Default" Margin="16,0,16,0"
+                           HeightRequest="48" Keyboard="Telephone">
                         <Entry.Behaviors>
                             <xct:TextValidationBehavior  MinimumLength="1" Flags="ValidateOnValueChanging" IsValid="{Binding IsValidNumber,Mode=TwoWay}"/>
                         </Entry.Behaviors>
                     </Entry>
 
-                    <Label Text="Mobile Number Required" TextColor="Maroon" FontSize="Micro" Margin="5,0,5,0"
-                   IsVisible="{Binding IsValidNumber, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
+                    <Label Text="{xct:Translate Mobile Number Required}" TextColor="{DynamicResource ColorRed}" FontSize="8" Margin="16,0,16,0"
+                           IsVisible="{Binding IsValidNumber, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
 
-                    <Entry BackgroundColor="WhiteSmoke" Placeholder="Address*" PlaceholderColor="Black" Margin="5,0,5,0"
-                   FontSize="14" Text="{Binding Business.AddressInEnglish,Mode=TwoWay}">
+                    <Label FontSize="12" Margin="16,0,16,0" FontFamily="Ubuntu-Medium">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{xct:Translate Address}" TextColor="Black"/>
+                                <Span Text=" * " TextColor="{DynamicResource ColorRed}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Entry Text="{Binding Business.AddressInEnglish,Mode=TwoWay}" BackgroundColor="{DynamicResource ColorFields}"
+                           TextColor="{DynamicResource ColorFieldsText}" FontSize="16" FontFamily="Ubuntu-regular" Visual="Default" Margin="16,0,16,0"
+                           HeightRequest="48">
                         <Entry.Behaviors>
                             <xct:TextValidationBehavior  MinimumLength="1" Flags="ValidateOnValueChanging" IsValid="{Binding IsValidAddress,Mode=TwoWay}"/>
                         </Entry.Behaviors>
                     </Entry>
 
-                    <Label Text="Address Required" TextColor="Maroon" FontSize="Micro" Margin="5,0,5,0"
+                    <Label Text="{xct:Translate Address is required}" TextColor="{DynamicResource ColorRed}" FontSize="8" Margin="16,0,16,0"
                    IsVisible="{Binding IsValidAddress, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
 
-                    <Label Text="Admin Info" HorizontalOptions="Center" FontSize="18" TextColor="Black" Margin="0,20,0,20"
-                   FontAttributes="Bold"/>
+                    <Label Text="{xct:Translate Admin Info}" FontSize="22" TextColor="Black" Margin="16" FontFamily="Ubuntu-Bold"/>
 
-                    <Entry BackgroundColor="WhiteSmoke" Placeholder="Email*" PlaceholderColor="Black" Margin="5,0,5,0" FontSize="14"
-                       Text="{Binding Business.UserEmail,Mode=TwoWay}">
+                    <Label FontSize="12" Margin="16,0,16,0" FontFamily="Ubuntu-Medium">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{xct:Translate Email}" TextColor="Black"/>
+                                <Span Text=" * " TextColor="{DynamicResource ColorRed}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
 
+                    <Entry Text="{Binding Business.UserEmail,Mode=TwoWay}" BackgroundColor="{DynamicResource ColorFields}"
+                           TextColor="{DynamicResource ColorFieldsText}" FontSize="16" FontFamily="Ubuntu-regular" Visual="Default" Margin="16,0,16,0"
+                           HeightRequest="48" Keyboard="Email">
                         <Entry.Behaviors>
                             <xct:EmailValidationBehavior IsValid="{Binding IsValidEmail,Mode=TwoWay}" Flags="ValidateOnValueChanging"/>
                         </Entry.Behaviors>
                     </Entry>
 
-                    <Label Text="*Invalid Email" TextColor="Maroon" FontSize="Micro" Margin="5,0,5,0"
-                   IsVisible="{Binding IsValidEmail, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
+                    <Label Text="{xct:Translate Invalid Email}" TextColor="{DynamicResource ColorRed}" FontSize="8" Margin="16,0,16,0"
+                           IsVisible="{Binding IsValidEmail, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
 
+                    <Label FontSize="12" Margin="16,0,16,0" FontFamily="Ubuntu-Medium">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{xct:Translate Username}" TextColor="Black"/>
+                                <Span Text=" * " TextColor="{DynamicResource ColorRed}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
 
-                    <Entry BackgroundColor="WhiteSmoke" Placeholder="Username*" PlaceholderColor="Black" Margin="5,0,5,0" FontSize="14"
-                       Grid.Column="1" Text="{Binding Business.FirstName,Mode=TwoWay}">
+                    <Entry Text="{Binding Business.FirstName,Mode=TwoWay}" BackgroundColor="{DynamicResource ColorFields}"
+                           TextColor="{DynamicResource ColorFieldsText}" FontSize="16" FontFamily="Ubuntu-regular" Visual="Default" Margin="16,0,16,0"
+                           HeightRequest="48">
                         <Entry.Behaviors>
                             <xct:TextValidationBehavior IsValid="{Binding IsValidUsername,Mode=TwoWay}" Flags="ValidateOnValueChanging" MinimumLength="1"/>
                         </Entry.Behaviors>
                     </Entry>
 
-                    <Label Text="*Username Required" TextColor="Maroon" FontSize="Micro" Margin="5,0,5,0"
-                   IsVisible="{Binding IsValidUsername, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
+                    <Label Text="{xct:Translate Username is required}" TextColor="{DynamicResource ColorRed}" FontSize="8" Margin="16,0,16,0"
+                           IsVisible="{Binding IsValidUsername, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
 
-                    <Entry BackgroundColor="WhiteSmoke" Placeholder="Password*" PlaceholderColor="Black" Margin="5,0,5,0" FontSize="14"
-                   Text="{Binding Business.Password,Mode=TwoWay}">
+                    <Label FontSize="12" Margin="16,0,16,0" FontFamily="Ubuntu-Medium">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{xct:Translate Password}" TextColor="Black"/>
+                                <Span Text=" * " TextColor="{DynamicResource ColorRed}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Entry  Text="{Binding Business.Password,Mode=TwoWay}" BackgroundColor="{DynamicResource ColorFields}"
+                           TextColor="{DynamicResource ColorFieldsText}" FontSize="16" FontFamily="Ubuntu-regular" Visual="Default" Margin="16,0,16,0"
+                           HeightRequest="48" IsPassword="True">
                         <Entry.Behaviors>
                             <xct:TextValidationBehavior Flags="ValidateOnValueChanging" RegexPattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$" 
                                                 IsValid="{Binding IsValidPassword,Mode=TwoWay}"/>
                         </Entry.Behaviors>
                     </Entry>
 
-                    <Label Text="Password must contain atleast one digit [0-9], one lowercase character[a-z], one uppercase character [A-Z], At least one special character and at least 8 characters in length." 
-                       TextColor="Maroon" FontSize="Micro" Margin="5,0,5,0" IsVisible="{Binding IsValidPassword, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
+                    <Label Text="{xct:Translate Password Detail}" TextColor="{DynamicResource ColorRed}" FontSize="8" Margin="16,0,16,0"
+                           IsVisible="{Binding IsValidPassword, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
 
-                    <Entry BackgroundColor="WhiteSmoke" Placeholder="Confirm Password*" PlaceholderColor="Black" Margin="5,0,5,0"
-                   FontSize="14" Text="{Binding Business.ConfirmPassword,Mode=TwoWay}"/>
+                    <Label FontSize="12" Margin="16,0,16,0" FontFamily="Ubuntu-Medium">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{xct:Translate Confirm New Password}" TextColor="Black"/>
+                                <Span Text=" * " TextColor="{DynamicResource ColorRed}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
 
+                    <Entry  Text="{Binding Business.ConfirmPassword,Mode=TwoWay}" BackgroundColor="{DynamicResource ColorFields}" TextColor="{DynamicResource ColorFieldsText}" FontSize="16"
+                            FontFamily="Ubuntu-regular" Visual="Default" Margin="16,0,16,0" HeightRequest="48" IsPassword="True">
+                    </Entry>
 
-                    <Label Text="*Password Donot Match" TextColor="Maroon" FontSize="Micro" Margin="5,0,5,0"
+                    <Label Text="{xct:Translate Password Do Not Match}" TextColor="{DynamicResource ColorRed}" FontSize="8" Margin="16,0,16,0"
                    IsVisible="{Binding IsValidConfirmPassword, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
 
-                    <Button Text="Sign Up" Margin="5" Command="{Binding SignUpHandler,Mode=TwoWay}"/>
+                    <Button Text="Sign Up" Margin="16,20,16,20" Command="{Binding SignUpHandler,Mode=TwoWay}" HeightRequest="48"
+                            BackgroundColor="{DynamicResource ColorNobleBlue}" Font="Ubuntu-Regular"/>
                 </StackLayout>
             </ScrollView>
         </StackLayout>

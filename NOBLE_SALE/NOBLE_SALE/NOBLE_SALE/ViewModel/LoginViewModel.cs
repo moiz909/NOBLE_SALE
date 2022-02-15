@@ -42,6 +42,7 @@ namespace NOBLE_SALE.ViewModel
         }
         public ICommand LoginButtonCommand { get; set; }
         public ICommand LanguageHandler { get; set; }
+        public ICommand SignupButtonHandler { get; set; }
 
         private bool _isBusy;
         public bool isBusy
@@ -89,8 +90,10 @@ namespace NOBLE_SALE.ViewModel
         public LoginViewModel()
         {
             InputModel = new InputModel();
+            InputModel.RememberMe = true;
             LoginButtonCommand = new Command(async () => await LoginCommandAsync());
             LanguageHandler = new Command(SelectLanguage);
+            SignupButtonHandler = new Command(async () => await SignUpCommand());
 
             SelectedLanguage = UserData.SelectedLanguage;
 
@@ -118,6 +121,11 @@ namespace NOBLE_SALE.ViewModel
             }
 
             SelectedLanguage = UserData.SelectedLanguage;
+        }
+
+        private async Task SignUpCommand()
+        {
+            await Application.Current.MainPage.Navigation.PushAsync(new RegisterLocation());
         }
 
         private async Task LoginCommandAsync()

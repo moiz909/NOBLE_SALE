@@ -6,6 +6,7 @@
              Visual="Material"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="White"
+             x:Name="IpConfigPage"
              x:Class="NOBLE_SALE.View.IPConfiguration">
 
     <ContentPage.Resources>
@@ -21,110 +22,171 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <Grid HorizontalOptions="End">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
-                </Grid.ColumnDefinitions>
+            <ScrollView>
 
-                <Frame BackgroundColor="White" HasShadow="False" Grid.Column="0">
-                    <Label Text="{Binding SelectedLanguage,Mode=TwoWay}" FontSize="Small" FontAttributes="Bold" 
-                           TextColor="Black" HorizontalOptions="Center"/>
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding LanguageHandler,Mode=TwoWay}"/>
-                    </Frame.GestureRecognizers>
-                </Frame>
-            </Grid>
-
-            <Image Source="NOBLE.png" HeightRequest="60" HorizontalOptions="CenterAndExpand" Margin="0"/>
-
-            <Label Text="{xct:Translate POS-Retail}" TextColor="Black" FontSize="Small" HorizontalOptions="CenterAndExpand"
-                   Padding="0" Margin="0" FontAttributes="Bold"/>
-
-            <Label Text="{xct:Translate Server Settings}" TextColor="Black" FontSize="Caption" HorizontalOptions="CenterAndExpand"
-                   Padding="0" Margin="0"/>
-
-
-            <Frame HasShadow="True" BackgroundColor="{DynamicResource xBlue}" VerticalOptions="CenterAndExpand" Margin="20,0,20,0">
                 <StackLayout>
-                    <Entry Text="{Binding IP,Mode=TwoWay}" Placeholder="IP" Keyboard="Default" Margin="0,0,0,0" 
-                           BackgroundColor="{DynamicResource xBlue}" PlaceholderColor="Black" TextColor="Black"
-                           FontSize="Caption">
-                        <Entry.Behaviors>
-                            <xct:TextValidationBehavior IsNotValid="{Binding IPError,Mode=TwoWay}" 
-                                                        Flags="ValidateOnValueChanging" 
-                                                        RegexPattern="\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b"/>
-                        </Entry.Behaviors>
-                    </Entry>
-                    <Label Text="{xct:Translate Enter a valid IP address}" TextColor="Maroon" FontSize="Micro" 
-                           IsVisible="{Binding IPError,Mode=TwoWay}"/>
+                    <Grid HorizontalOptions="End">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                        </Grid.ColumnDefinitions>
 
-                    <Entry Text="{Binding Port,Mode=TwoWay}" Placeholder="Port" Keyboard="Numeric" Margin="0,0,0,0"
-                           BackgroundColor="{DynamicResource xBlue}" PlaceholderColor="Black" TextColor="Black"
-                           FontSize="Caption">
-                        <Entry.Behaviors>
-                            <xct:TextValidationBehavior IsNotValid="{Binding PortError,Mode=TwoWay}" 
-                                                        Flags="ValidateOnValueChanging" 
-                                                        MinimumLength="4" MaximumLength="5"/>
-                        </Entry.Behaviors>
+                        <Frame BackgroundColor="White" HasShadow="False" Grid.Column="0">
+                            <Label Text="{Binding SelectedLanguage,Mode=TwoWay}" FontSize="Small" FontAttributes="Bold" 
+                           TextColor="Black" HorizontalOptions="Center"/>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding LanguageHandler,Mode=TwoWay}"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                    </Grid>
 
-                    </Entry>
-                    <Label Text="{xct:Translate Enter a valid port number}" TextColor="Maroon" FontSize="Micro" 
-                           IsVisible="{Binding PortError,Mode=TwoWay}"/>
+                    <Label Text="{xct:Translate Server Settings}" TextColor="Black" FontSize="22" FontFamily="Ubuntu-Bold"
+                   Padding="0" Margin="16,0,16,0"/>
 
+                    <Label Text="{xct:Translate Enter Port IP}" TextColor="#727F8D" FontSize="12" FontFamily="Ubuntu-Regular"
+                   Padding="0" Margin="16,0,16,0"/>
 
-                    <Label TextColor="Black" FontSize="Caption" FontAttributes="Bold" HorizontalOptions="Center" Margin="5,0,5,0">
+                    <Label FontSize="12" Margin="16,22,16,0" FontFamily="Ubuntu-Medium">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="{xct:Translate Secondary}"/>
-                                <Span Text=" "/>
-                                <Span Text="{xct:Translate If Available}"/>
+                                <Span Text="IP" TextColor="Black"/>
+                                <Span Text=" * " TextColor="{DynamicResource ColorRed}"/>
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
 
-                    <Entry Text="{Binding IP2,Mode=TwoWay}" Placeholder="IP" Keyboard="Default" Margin="0,0,0,0" 
-                           BackgroundColor="{DynamicResource xBlue}" PlaceholderColor="Black" TextColor="Black"
-                           FontSize="Caption">
+                    <Entry Text="{Binding IP,Mode=TwoWay}" Keyboard="Default" Margin="16,0,16,0" HeightRequest="48" TextColor="{DynamicResource ColorFieldsText}" FontSize="16" 
+                   FontFamily="Ubuntu-Regular" Visual="Default" BackgroundColor="{DynamicResource ColorFields}" >
                         <Entry.Behaviors>
-                            <xct:TextValidationBehavior IsNotValid="{Binding IPError2,Mode=TwoWay}" 
-                                                        Flags="ValidateOnValueChanging" 
-                                                        RegexPattern="\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b"/>
+                            <xct:TextValidationBehavior IsValid="{Binding IPError,Mode=TwoWay}" Flags="ValidateOnValueChanging" 
+                                                RegexPattern="\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b"/>
                         </Entry.Behaviors>
                     </Entry>
 
-                    <Label Text="{xct:Translate Enter a valid IP address}" TextColor="Maroon" FontSize="Micro" 
-                           IsVisible="{Binding IPError2,Mode=TwoWay}"/>
+                    <Label Text="{xct:Translate Enter a valid IP address}" TextColor="{DynamicResource ColorRed}" FontSize="8" 
+                   Margin="16,0,16,0" IsVisible="{Binding IPError,Mode=TwoWay,Converter={StaticResource invertBoolConverter}}"/>
 
-                    <Entry Text="{Binding Port2,Mode=TwoWay}" Placeholder="Port" Keyboard="Numeric" Margin="0,0,0,0"
-                           BackgroundColor="{DynamicResource xBlue}" PlaceholderColor="Black" TextColor="Black"
-                           FontSize="Caption">
+
+                    <Label FontSize="12" Margin="16,0,16,0" FontFamily="Ubuntu-Medium">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Port" TextColor="Black"/>
+                                <Span Text=" * " TextColor="{DynamicResource ColorRed}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Entry Text="{Binding Port,Mode=TwoWay}" Keyboard="Numeric" Margin="16,0,16,0" HeightRequest="48" TextColor="{DynamicResource ColorFieldsText}" FontSize="16" 
+                   BackgroundColor="{DynamicResource ColorFields}" Visual="Default" PlaceholderColor="Black"  FontFamily="Ubuntu-Regular">
                         <Entry.Behaviors>
-                            <xct:TextValidationBehavior IsNotValid="{Binding PortError2,Mode=TwoWay}" 
-                                                        Flags="ValidateOnValueChanging" 
-                                                        MinimumLength="4" MaximumLength="5"/>
+                            <xct:TextValidationBehavior IsValid="{Binding PortError,Mode=TwoWay}" Flags="ValidateOnValueChanging" 
+                                                MinimumLength="4" MaximumLength="5"/>
                         </Entry.Behaviors>
                     </Entry>
-                    <Label Text="{xct:Translate Enter a valid port number}" TextColor="Maroon" FontSize="Micro" 
-                           IsVisible="{Binding PortError2,Mode=TwoWay}"/>
 
-                    <Button Text="{xct:Translate Continue}" Margin="20,10,20,5" BackgroundColor="{DynamicResource xDarkNavy}"
-                            TextColor="White" Command="{Binding ContinueHandler,Mode=TwoWay}" FontSize="Caption"
-                            IsEnabled="{Binding IsBusy, Converter={StaticResource invertBoolConverter}}"/>
-                </StackLayout>
-            </Frame>
+                    <Label Text="{xct:Translate Enter a valid port number}" TextColor="{DynamicResource ColorRed}" FontSize="8" FontFamily="Ubuntu-Regular"
+                    Margin="16,0,16,0" IsVisible="{Binding PortError,Mode=TwoWay,Converter={StaticResource invertBoolConverter}}"/>
 
 
-            <Label Text="{xct:Translate Copyright1}" TextColor="Black"
-                   HorizontalOptions="Center" FontSize="Micro" Margin="0,10,0,0" VerticalOptions="EndAndExpand"/>
-            <Label HorizontalOptions="Center" Margin="0,0,0,10" VerticalOptions="End">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="ϟ by TechQode Pvt. Ltd.  " TextColor="Gray" FontSize="Micro"/>
-                        <Span Text="www.techqode.com" TextColor="{DynamicResource xDarkNavy}" FontSize="Micro" 
+                    <Label Margin="16,0,16,0">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{xct:Translate Secondary}" FontSize="12" FontFamily="Ubuntu-Regular" TextColor="#727F8D"/>
+                                <Span Text=" "/>
+                                <Span Text="{xct:Translate If Available}" FontSize="10" FontFamily="Ubuntu-Medium" TextColor="{DynamicResource ColorNobleBlue}">
+                                    <Span.GestureRecognizers>
+
+                                    </Span.GestureRecognizers>
+                                </Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ShowSecondaryHandler,Mode=TwoWay}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <StackLayout Padding="0" Margin="0" IsVisible="{Binding ShowSecondary,Mode=TwoWay}">
+                        <Label FontSize="12" Margin="16,10,16,0" FontFamily="Ubuntu-Medium">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="IP" TextColor="Black"/>
+                                    <Span Text=" * " TextColor="{DynamicResource ColorRed}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Entry Text="{Binding IP2,Mode=TwoWay}" Keyboard="Default" Margin="16,0,16,0" HeightRequest="48" TextColor="{DynamicResource ColorFieldsText}" FontSize="16" 
+                   FontFamily="Ubuntu-Regular" Visual="Default" BackgroundColor="{DynamicResource ColorFields}" >
+                            <Entry.Behaviors>
+                                <xct:TextValidationBehavior IsValid="{Binding IPError2,Mode=TwoWay}" Flags="ValidateOnValueChanging" 
+                                                RegexPattern="\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b"/>
+                            </Entry.Behaviors>
+                        </Entry>
+
+                        <Label Text="{xct:Translate Enter a valid IP address}" TextColor="{DynamicResource ColorRed}" FontSize="8" 
+                   Margin="16,0,16,0" IsVisible="{Binding IPError2,Mode=TwoWay,Converter={StaticResource invertBoolConverter}}"/>
+
+
+                        <Label FontSize="12" Margin="16,0,16,0" FontFamily="Ubuntu-Medium">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Port" TextColor="Black"/>
+                                    <Span Text=" * " TextColor="{DynamicResource ColorRed}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Entry Text="{Binding Port2,Mode=TwoWay}" Keyboard="Numeric" Margin="16,0,16,0" HeightRequest="48" TextColor="{DynamicResource ColorFieldsText}" FontSize="16" 
+                   BackgroundColor="{DynamicResource ColorFields}" Visual="Default" PlaceholderColor="Black"  FontFamily="Ubuntu-Regular">
+                            <Entry.Behaviors>
+                                <xct:TextValidationBehavior IsValid="{Binding PortError2,Mode=TwoWay}" Flags="ValidateOnValueChanging" 
+                                                MinimumLength="4" MaximumLength="5"/>
+                            </Entry.Behaviors>
+                        </Entry>
+
+                        <Label Text="{xct:Translate Enter a valid port number}" TextColor="{DynamicResource ColorRed}" FontSize="8" FontFamily="Ubuntu-Regular"
+                    Margin="16,0,16,0" IsVisible="{Binding PortError2,Mode=TwoWay,Converter={StaticResource invertBoolConverter}}"/>
+
+                    </StackLayout>
+
+                    <Grid Margin="16,0,16,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <CheckBox Grid.Column="0" Color="{DynamicResource ColorNobleBlue}" IsChecked="{Binding TermsCondition,Mode=TwoWay}"/>
+                        <Label Grid.Column="1" VerticalOptions="Center">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{xct:Translate Agree}" TextColor="Black" FontSize="12" FontFamily="Ubuntu-Regular"/>
+                                    <Span Text=" "/>
+                                    <Span Text="{xct:Translate Terms and Conditions}" TextColor="Black" FontSize="12" FontFamily="Ubuntu-Regular" 
                                   TextDecorations="Underline"/>
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Grid>
+
+
+                    <Button Text="{xct:Translate Continue}" Margin="16,0,16,0" BackgroundColor="{DynamicResource ColorNobleBlue}"
+                            TextColor="White" Command="{Binding ContinueHandler,Mode=TwoWay}" FontSize="Caption" FontFamily="Ubuntu-Regular"
+                            IsEnabled="{Binding IsBusy, Converter={StaticResource invertBoolConverter}}" HeightRequest="48"/>
+                </StackLayout>
+            </ScrollView>
+
+            <StackLayout VerticalOptions="EndAndExpand">
+                <Label Text="{xct:Translate Copyright1}" TextColor="Black" HorizontalOptions="Center" FontSize="12" Margin="0,0,0,0" 
+                           FontFamily="Ubuntu-Regular"/>
+
+                <Label HorizontalOptions="Center" Margin="0,0,0,10" VerticalOptions="End" FontFamily="Ubuntu-Regular">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="ϟ by TechQode Pvt. Ltd.  " TextColor="Black" FontSize="12" FontFamily="Ubuntu-Regular"/>
+                            <Span Text="www.techqode.com" TextColor="Black" FontSize="12" FontFamily="Ubuntu-Bold" TextDecorations="Underline"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 

@@ -8,6 +8,8 @@ namespace NOBLE_SALE.Helper
 {
     public class UserData
     {
+        public static Guid BusinessParentId { get; set; }
+        public static Guid ClientParentId { get; set; }
         public static LoginModel Current { get; set; }
         public static bool TwoFactor { get; set; }
         public static InputModel _InputModel { get; set; }

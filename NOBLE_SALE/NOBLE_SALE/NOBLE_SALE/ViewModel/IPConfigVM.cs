@@ -30,6 +30,20 @@ namespace NOBLE_SALE.ViewModel
             }
         }
 
+        private bool _termsCondition;
+        public bool TermsCondition
+        {
+            get
+            {
+                return _termsCondition;
+            }
+            set
+            {
+                _termsCondition = value;
+                OnPropertyChanged();
+            }
+        }
+
         private bool _IPError;
         public bool IPError
         {
@@ -142,6 +156,20 @@ namespace NOBLE_SALE.ViewModel
             }
         }
 
+        private bool _ShowSecondary;
+        public bool ShowSecondary
+        {
+            get
+            {
+                return _ShowSecondary;
+            }
+            set
+            {
+                _ShowSecondary = value;
+                OnPropertyChanged();
+            }
+        }
+
         private string _SelectedLanguage;
         public string SelectedLanguage
         {
@@ -157,9 +185,20 @@ namespace NOBLE_SALE.ViewModel
         }
         public ICommand LanguageHandler { get; set; }
         public ICommand ContinueHandler { get; set; }
+        public ICommand ShowSecondaryHandler { get; set; }
         
         public IPConfigVM()
         {
+            IPError = true;
+            TermsCondition = true;
+            PortError = true; 
+            IPError2 = true;
+            PortError2 = true;
+
+            ShowSecondary = false;
+
+
+
             var ip = Preferences.Get("IP", "");
             var port = Preferences.Get("PORT", "");
 
@@ -175,6 +214,7 @@ namespace NOBLE_SALE.ViewModel
             LocalizationResourceManager.Current.CurrentCulture = CultureInfo.GetCultureInfo("en");
             LanguageHandler = new Command(SelectLanguage);
             ContinueHandler = new Command(ContinueCommand);
+            ShowSecondaryHandler = new Command(ShowSecondaryCommand);
         }
 
 
@@ -194,6 +234,14 @@ namespace NOBLE_SALE.ViewModel
             SelectedLanguage = UserData.SelectedLanguage;
         }
 
+        private void ShowSecondaryCommand()
+        {
+            if (ShowSecondary == false)
+                ShowSecondary = true;
+            else
+                ShowSecondary = false;
+        }
+
         private async void ContinueCommand()
         {
             if (IsBusy)
@@ -208,7 +256,14 @@ namespace NOBLE_SALE.ViewModel
                 flag = false;
             }
 
-            else if(!IPError && !PortError )
+            if(!TermsCondition)
+            {
+                await Application.Current.MainPage.DisplayAlert("", "Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy.", "Ok");
+                IsBusy = false;
+                return;
+            }
+
+            else if(IPError && PortError )
             {
                 if(IP!=null && Port!=null)
                 {
@@ -226,7 +281,7 @@ namespace NOBLE_SALE.ViewModel
                         var response = await client.PostAsync(url, null);
 
                         flag = false;
-                        await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
+                        await Application.Current.MainPage.Navigation.PushAsync(new Login());
                         Preferences.Set("IP", IP);
                         Preferences.Set("PORT", Port);
                     }
@@ -237,7 +292,7 @@ namespace NOBLE_SALE.ViewModel
                 }
             }
 
-            else if(!IPError2 && !PortError2)
+            else if(IPError2 && PortError2)
             {
                 if (IP2 != null && Port2 != null)
                 {
@@ -255,7 +310,7 @@ namespace NOBLE_SALE.ViewModel
                         {
                             var response = await client2.PostAsync(url2, null);
                             flag = false;
-                            await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
+                            await Application.Current.MainPage.Navigation.PushAsync(new Login());
                             Preferences.Set("IP", IP2);
                             Preferences.Set("PORT", Port2);
                         }

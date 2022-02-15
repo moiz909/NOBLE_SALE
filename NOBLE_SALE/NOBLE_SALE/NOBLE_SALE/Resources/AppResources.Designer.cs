@@ -169,6 +169,33 @@ namespace NOBLE_SALE.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Address is required.
+        /// </summary>
+        internal static string Address_is_required {
+            get {
+                return ResourceManager.GetString("Address is required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Admin Info.
+        /// </summary>
+        internal static string Admin_Info {
+            get {
+                return ResourceManager.GetString("Admin Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I agree to the.
+        /// </summary>
+        internal static string Agree {
+            get {
+                return ResourceManager.GetString("Agree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Allow All.
         /// </summary>
         internal static string Allow_All {
@@ -426,6 +453,24 @@ namespace NOBLE_SALE.Resources {
         internal static string Business_License_History {
             get {
                 return ResourceManager.GetString("Business License History", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Business Name.
+        /// </summary>
+        internal static string Business_Name {
+            get {
+                return ResourceManager.GetString("Business Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Business Name Required.
+        /// </summary>
+        internal static string Business_Name_Required {
+            get {
+                return ResourceManager.GetString("Business Name Required", resourceCulture);
             }
         }
         
@@ -889,6 +934,15 @@ namespace NOBLE_SALE.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Don&apos;t have an account?.
+        /// </summary>
+        internal static string Dont_have_an_account {
+            get {
+                return ResourceManager.GetString("Dont have an account", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
         internal static string Edit {
@@ -997,6 +1051,24 @@ namespace NOBLE_SALE.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter your email &amp; password to continue.
+        /// </summary>
+        internal static string Enter_email_pass {
+            get {
+                return ResourceManager.GetString("Enter email pass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your Port &amp; IP to continue.
+        /// </summary>
+        internal static string Enter_Port_IP {
+            get {
+                return ResourceManager.GetString("Enter Port IP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Equity.
         /// </summary>
         internal static string Equity {
@@ -1074,6 +1146,15 @@ namespace NOBLE_SALE.Resources {
         internal static string FOCS_icon {
             get {
                 return ResourceManager.GetString("FOCS icon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Forgot Password.
+        /// </summary>
+        internal static string Forgot_Password {
+            get {
+                return ResourceManager.GetString("Forgot Password", resourceCulture);
             }
         }
         
@@ -1384,6 +1465,15 @@ namespace NOBLE_SALE.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Location Email.
+        /// </summary>
+        internal static string Location_Email {
+            get {
+                return ResourceManager.GetString("Location Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LOCATION LICENSE HISTORY.
         /// </summary>
         internal static string Location_License_History {
@@ -1443,6 +1533,15 @@ namespace NOBLE_SALE.Resources {
         internal static string Mobile {
             get {
                 return ResourceManager.GetString("Mobile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mobile Phone Number is Required.
+        /// </summary>
+        internal static string Mobile_Number_Required {
+            get {
+                return ResourceManager.GetString("Mobile Number Required", resourceCulture);
             }
         }
         
@@ -1569,6 +1668,15 @@ namespace NOBLE_SALE.Resources {
         internal static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The password must contain at least one number [0-9], one lowercase letter [a-z], one uppercase letter [A-Z], at least one special character and at least 8 characters in length..
+        /// </summary>
+        internal static string Password_Detail {
+            get {
+                return ResourceManager.GetString("Password Detail", resourceCulture);
             }
         }
         
@@ -1888,6 +1996,15 @@ namespace NOBLE_SALE.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Register Location /  Branch.
+        /// </summary>
+        internal static string Register_Location {
+            get {
+                return ResourceManager.GetString("Register Location", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Registration Date.
         /// </summary>
         internal static string Registration_Date {
@@ -1902,6 +2019,15 @@ namespace NOBLE_SALE.Resources {
         internal static string Registration_number {
             get {
                 return ResourceManager.GetString("Registration number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registration Number Required.
+        /// </summary>
+        internal static string Registration_Number_Required {
+            get {
+                return ResourceManager.GetString("Registration Number Required", resourceCulture);
             }
         }
         
@@ -2077,6 +2203,15 @@ namespace NOBLE_SALE.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sign Up!.
+        /// </summary>
+        internal static string SignUp {
+            get {
+                return ResourceManager.GetString("SignUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to S.
         /// </summary>
         internal static string SPP_icon {
@@ -2190,6 +2325,15 @@ namespace NOBLE_SALE.Resources {
         internal static string Terminal {
             get {
                 return ResourceManager.GetString("Terminal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Terms and Conditions.
+        /// </summary>
+        internal static string Terms_and_Conditions {
+            get {
+                return ResourceManager.GetString("Terms and Conditions", resourceCulture);
             }
         }
         
@@ -2356,6 +2500,15 @@ namespace NOBLE_SALE.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Username is required.
+        /// </summary>
+        internal static string Username_is_required {
+            get {
+                return ResourceManager.GetString("Username is required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Users.
         /// </summary>
         internal static string Users {
@@ -2379,6 +2532,24 @@ namespace NOBLE_SALE.Resources {
         internal static string Value_Added_Tax {
             get {
                 return ResourceManager.GetString("Value Added Tax", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value added tax number required.
+        /// </summary>
+        internal static string Value_added_tax_number_required {
+            get {
+                return ResourceManager.GetString("Value added tax number required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VAT Number.
+        /// </summary>
+        internal static string VAT_Number {
+            get {
+                return ResourceManager.GetString("VAT Number", resourceCulture);
             }
         }
         

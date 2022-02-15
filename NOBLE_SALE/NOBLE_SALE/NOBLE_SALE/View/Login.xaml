@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:vm="clr-namespace:NOBLE_SALE.ViewModel" 
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit" xmlns:svg="clr-namespace:NOBLE_SALE.Helper"
+             x:Class="NOBLE_SALE.View.Login"
+             NavigationPage.HasNavigationBar="False"
+             x:Name="NobleLogin"
+             Visual="Material"
+             BackgroundColor="White">
+
+    <ContentPage.BindingContext>
+        <vm:LoginViewModel/>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:InvertedBoolConverter x:Key="invertBoolConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid HorizontalOptions="End">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+
+                <Frame BackgroundColor="White" HasShadow="False" Grid.Column="0">
+                    <Label Text="{Binding SelectedLanguage,Mode=TwoWay}" FontSize="Small" FontAttributes="Bold" 
+                           TextColor="Black" HorizontalOptions="Center"/>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" Command="{Binding LanguageHandler,Mode=TwoWay}"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </Grid>
+
+            <Label Text="{xct:Translate Greeting2}" TextColor="Black" FontSize="22" FontFamily="Ubuntu-Bold"
+                   Padding="0" Margin="16,0,16,0"/>
+            <Label Text="{xct:Translate Enter email pass}" TextColor="#727F8D" FontSize="12" FontFamily="Ubuntu-Regular"
+                   Padding="0" Margin="16,0,16,0"/>
+
+            <Label FontSize="12" Margin="16,24,16,0" FontFamily="Ubuntu-Medium">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{xct:Translate Email}" TextColor="Black"/>
+                        <Span Text=" * " TextColor="{DynamicResource ColorRed}"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <Frame HasShadow="False" BackgroundColor="{DynamicResource ColorFields}" Margin="16,0,16,0" Padding="0" CornerRadius="0" HeightRequest="48" 
+                   Visual="Default">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="48"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="34"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <svg:Icon ResourceId="NOBLE_SALE.Resources.Icons.Email.svg" HorizontalOptions="End" VerticalOptions="Center" Grid.Column="0"
+                              HeightRequest="14" WidthRequest="14"/>
+                    <Entry Text="{Binding InputModel.Email, Mode=TwoWay}" Keyboard="Email" x:Name="userEmail" BackgroundColor="{DynamicResource ColorFields}"
+                           TextColor="{DynamicResource ColorFieldsText}" FontSize="16" IsEnabled="{Binding isBusy, Converter={StaticResource invertBoolConverter}}"
+                           Grid.Column="1" FontFamily="Ubuntu-regular"/>
+                </Grid>
+            </Frame>
+
+            <Label FontSize="12" Margin="16,8,16,0" FontFamily="Ubuntu-Medium">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{xct:Translate Password}" TextColor="Black"/>
+                        <Span Text=" * " TextColor="{DynamicResource ColorRed}"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <Frame HasShadow="False" BackgroundColor="{DynamicResource ColorFields}" Margin="16,0,16,0" Padding="0" CornerRadius="0" 
+                   HeightRequest="48" Visual="Default">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="48"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="34"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="34"/>
+                    </Grid.ColumnDefinitions>
+
+                    <svg:Icon ResourceId="NOBLE_SALE.Resources.Icons.Password.svg" HorizontalOptions="End" VerticalOptions="Center" Grid.Column="0"
+                              HeightRequest="14" WidthRequest="14"/>
+                    <Entry Text="{Binding InputModel.Password, Mode=TwoWay}" IsPassword="True" Margin="0,0,0,0" x:Name="userPassword"
+                           BackgroundColor="{DynamicResource ColorFields}" TextColor="{DynamicResource ColorFieldsText}" FontSize="16" FontFamily="Ubuntu-Regular" 
+                           IsEnabled="{Binding isBusy, Converter={StaticResource invertBoolConverter}}" Grid.Column="1"/>
+                    <StackLayout Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center">
+                        <svg:Icon ResourceId="NOBLE_SALE.Resources.Icons.visibilityOff.svg" HeightRequest="20" WidthRequest="20" x:Name="eye"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ShowPass" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                </Grid>
+            </Frame>
+
+            <StackLayout Orientation="Horizontal">
+                <Grid Margin="16,0,16,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <CheckBox IsChecked="{Binding InputModel.RememberMe, Mode=TwoWay}" Grid.Column="0" Color="{DynamicResource ColorNobleBlue}"
+                              IsEnabled="{Binding isBusy, Converter={StaticResource invertBoolConverter}}"/>
+
+
+                    <Label Text="{xct:Translate Remember me}" VerticalOptions="CenterAndExpand" Grid.Column="1"
+                               TextColor="Black" FontSize="12" FontFamily="Ubuntu-Regular"/>
+                </Grid>
+
+                <Label Text="{xct:Translate Forgot Password}" TextColor="{DynamicResource ColorNobleBlue}" FontSize="12" 
+                       FontFamily="Ubuntu-Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="16,0,16,0"/>
+            </StackLayout>
+
+            <Button Text="{xct:Translate Login}" Command="{Binding LoginButtonCommand, Mode=TwoWay}" Margin="16,20,16,0" HeightRequest="48"
+                            BackgroundColor="{DynamicResource ColorNobleBlue}" TextColor="White" FontFamily="Ubuntu-Regular" 
+                            IsEnabled="{Binding isBusy, Converter={StaticResource invertBoolConverter}}"
+                            FontSize="Caption">
+            </Button>
+
+            <Label HorizontalOptions="CenterAndExpand">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{xct:Translate Dont have an account}" TextColor="Black" FontSize="12" FontFamily="Ubuntu-Regular"/>
+                        <Span Text="  "/>
+                        <Span Text="{xct:Translate SignUp}" TextColor="{DynamicResource ColorNobleBlue}" FontSize="12" FontFamily="Ubuntu-Bold">
+                            <Span.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SignupButtonHandler,Mode=TwoWay}"/>
+                            </Span.GestureRecognizers>
+                        </Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <ActivityIndicator Color="{DynamicResource Blue}" IsRunning="{Binding isBusy,Mode=TwoWay}"
+                               IsVisible="{Binding isBusy,Mode=TwoWay}" HeightRequest="40" WidthRequest="40"/>
+
+            <Label Text="{xct:Translate Copyright1}" TextColor="Black" FontFamily="Ubuntu-Regular"
+                   HorizontalOptions="Center" FontSize="12" Margin="0,10,0,0" VerticalOptions="EndAndExpand"/>
+
+            <Label HorizontalOptions="Center" Margin="0,0,0,10" VerticalOptions="End">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="ϟ by TechQode Pvt. Ltd.  " TextColor="Black" FontSize="12" FontFamily="Ubuntu-Regular"/>
+                        <Span Text="www.techqode.com" TextColor="Black" FontSize="12"  FontFamily="Ubuntu-Bold"
+                                  TextDecorations="Underline"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,6 +1,9 @@
-﻿using NOBLE_SALE.Model.Company;
+﻿using NOBLE_SALE.Helper;
+using NOBLE_SALE.Model.Company;
+using NOBLE_SALE.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -235,7 +238,7 @@ namespace NOBLE_SALE.ViewModel.Registration
             {
                 IsValidEmail = false;
             }
-            if (Business.LandLine == null || Business.LandLine == string.Empty)
+            if (Business.PhoneNumber == null || Business.PhoneNumber == string.Empty)
             {
                 IsValidNumber = false;
             }
@@ -251,12 +254,102 @@ namespace NOBLE_SALE.ViewModel.Registration
             {
                 IsValidPassword = false;
             }
-            if (Business.Password != Business.ConfirmPassword) 
+            if (Business.Password == Business.ConfirmPassword && Business.ConfirmPassword != null && Business.ConfirmPassword != string.Empty) 
             {
-                IsValidConfirmPassword = false;
+                IsValidConfirmPassword = true;
+                var service = new RegistrationService();
+                var result = await service.RegisterLocation(Business);
+
+                if(result!=null && result.check=="Add")
+                {
+                    var companiesList = await service.GetList(UserData.ClientParentId);
+
+                    if(companiesList!=null)
+                    {
+                        for (int i = 0; i < companiesList.Count; i++)
+                        {
+                            if(companiesList[i].NameEnglish == Business.NameInEnglish)
+                            {
+                                var RoleDetails = await service.GetRoles(companiesList[i].Id); 
+                                
+                                if(RoleDetails!=null)
+                                {
+                                    var data = new ObservableCollection<NobleRolesPermissionsLookUpModel>();
+                                    data.Add(new NobleRolesPermissionsLookUpModel());
+
+                                    data[0].AllowAll = "true";
+                                    data[0].Category = null;
+                                    data[0].CompanyId = companiesList[i].Id;
+                                    data[0].Description = null;
+                                    data[0].IsActive = true;
+                                    data[0].IsEdit = false;
+                                    data[0].isNobel = true;
+                                    data[0].NobleModuleId = Guid.Empty;
+                                    data[0].PermissionId = Guid.Empty;
+                                    data[0].RoleId = RoleDetails.Id;
+
+                                    if (await service.AddPermissions(data))
+                                    {
+                                        companiesList[i].IsMulti = true;
+                                        companiesList[i].Arabic = true;
+                                        companiesList[i].English = true;
+                                        companiesList[i].InvoiceWoInventory = true;
+
+                                        if(await service.AddMultiUnit(companiesList[i]))
+                                        {
+                                            var license = new CompanyLicenceVm();
+                                            license.CompanyId = companiesList[i].Id;
+                                            license.CompanyType = CompanyType.Standard;
+                                            license.FromDate = DateTime.Now;
+                                            license.Id = Guid.Empty;
+                                            license.IsActive = true;
+                                            license.IsBlock = false;
+                                            license.NumberOfTransactions = 600;
+                                            license.NumberOfUsers = 600;
+                                            license.ToDate = DateTime.Now.AddDays(365);
+
+                                            if(await service.AddLicense(license))
+                                            {
+                                                await Application.Current.MainPage.DisplayAlert("", "Account created successfully!", "Ok");
+                                                await Application.Current.MainPage.Navigation.PopAsync();
+                                            }
+                                            else
+                                            {
+                                                await Application.Current.MainPage.DisplayAlert("", "An error occured while adding license!", "Ok");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            await Application.Current.MainPage.DisplayAlert("", "An error occured while adding multi-unit!", "Ok");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        await Application.Current.MainPage.DisplayAlert("", "An error occured while adding permissions!", "Ok");
+                                    }
+                                }
+
+                                else
+                                {
+                                    await Application.Current.MainPage.DisplayAlert("", "An error occured while adding permissions!", "Ok");
+                                }
+                            }
+                        }
+                    }
+
+                    
+
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("", "An error occured or email address already in use!", "Ok");
+                }
             }    
             else
-                IsValidConfirmPassword = true;
+            {
+                IsValidConfirmPassword = false;
+            }
+                
 
             IsBusy = false;
         }

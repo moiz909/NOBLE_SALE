@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NOBLE_SALE.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,18 @@ namespace NOBLE_SALE.View
         public IPConfiguration()
         {
             InitializeComponent();
+            GetFlowDirection();
+        }
+        private void GetFlowDirection()
+        {
+            if (UserData.SelectedLanguage == "English")
+            {
+                IpConfigPage.FlowDirection = FlowDirection.RightToLeft;
+            }
+            else if (UserData.SelectedLanguage == "العربية")
+            {
+                IpConfigPage.FlowDirection = FlowDirection.LeftToRight;
+            }
         }
     }
 }

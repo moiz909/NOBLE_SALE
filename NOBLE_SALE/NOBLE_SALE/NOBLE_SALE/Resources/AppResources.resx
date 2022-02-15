@@ -153,6 +153,15 @@
   <data name="Address" xml:space="preserve">
     <value>Address</value>
   </data>
+  <data name="Address is required" xml:space="preserve">
+    <value>Address is required</value>
+  </data>
+  <data name="Admin Info" xml:space="preserve">
+    <value>Admin Info</value>
+  </data>
+  <data name="Agree" xml:space="preserve">
+    <value>I agree to the</value>
+  </data>
   <data name="Allow All" xml:space="preserve">
     <value>Allow All</value>
   </data>
@@ -239,6 +248,12 @@
   </data>
   <data name="Business License History" xml:space="preserve">
     <value>BUSINESS LICENSE DETAIL</value>
+  </data>
+  <data name="Business Name" xml:space="preserve">
+    <value>Business Name</value>
+  </data>
+  <data name="Business Name Required" xml:space="preserve">
+    <value>Business Name Required</value>
   </data>
   <data name="Businesses" xml:space="preserve">
     <value>BUSINESSES</value>
@@ -393,6 +408,9 @@
   <data name="Discount Amount" xml:space="preserve">
     <value>Discount Amount</value>
   </data>
+  <data name="Dont have an account" xml:space="preserve">
+    <value>Don't have an account?</value>
+  </data>
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
@@ -429,6 +447,12 @@
   <data name="Enter a valid port number" xml:space="preserve">
     <value>Enter a valid port number</value>
   </data>
+  <data name="Enter email pass" xml:space="preserve">
+    <value>Enter your email &amp; password to continue</value>
+  </data>
+  <data name="Enter Port IP" xml:space="preserve">
+    <value>Enter your Port &amp; IP to continue</value>
+  </data>
   <data name="Equity" xml:space="preserve">
     <value>Equity</value>
   </data>
@@ -455,6 +479,9 @@
   </data>
   <data name="FOCS icon" xml:space="preserve">
     <value>F</value>
+  </data>
+  <data name="Forgot Password" xml:space="preserve">
+    <value>Forgot Password</value>
   </data>
   <data name="Free Of Cost Purchase" xml:space="preserve">
     <value>FREE OF COST PURCHASE</value>
@@ -558,6 +585,9 @@
   <data name="Location" xml:space="preserve">
     <value>Shelf/Location</value>
   </data>
+  <data name="Location Email" xml:space="preserve">
+    <value>Location Email</value>
+  </data>
   <data name="Location License History" xml:space="preserve">
     <value>LOCATION LICENSE HISTORY</value>
   </data>
@@ -578,6 +608,9 @@
   </data>
   <data name="Mobile" xml:space="preserve">
     <value>Mobile</value>
+  </data>
+  <data name="Mobile Number Required" xml:space="preserve">
+    <value>Mobile Phone Number is Required</value>
   </data>
   <data name="My Settings" xml:space="preserve">
     <value>MY SETTINGS</value>
@@ -620,6 +653,9 @@
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="Password Detail" xml:space="preserve">
+    <value>The password must contain at least one number [0-9], one lowercase letter [a-z], one uppercase letter [A-Z], at least one special character and at least 8 characters in length.</value>
   </data>
   <data name="Password Do Not Match" xml:space="preserve">
     <value>Password Do Not Match</value>
@@ -726,11 +762,17 @@
   <data name="Received Amount" xml:space="preserve">
     <value>Received Amount</value>
   </data>
+  <data name="Register Location" xml:space="preserve">
+    <value>Register Location /  Branch</value>
+  </data>
   <data name="Registration Date" xml:space="preserve">
     <value>Registration Date</value>
   </data>
   <data name="Registration number" xml:space="preserve">
     <value>Registration No.</value>
+  </data>
+  <data name="Registration Number Required" xml:space="preserve">
+    <value>Registration Number Required</value>
   </data>
   <data name="Remarks" xml:space="preserve">
     <value>Remarks</value>
@@ -789,6 +831,9 @@
   <data name="Sign Up Employee Icon" xml:space="preserve">
     <value>S</value>
   </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>Sign Up!</value>
+  </data>
   <data name="SPP icon" xml:space="preserve">
     <value>S</value>
   </data>
@@ -827,6 +872,9 @@
   </data>
   <data name="Terminal" xml:space="preserve">
     <value>Terminal</value>
+  </data>
+  <data name="Terms and Conditions" xml:space="preserve">
+    <value>Terms and Conditions</value>
   </data>
   <data name="To" xml:space="preserve">
     <value>To</value>
@@ -882,6 +930,9 @@
   <data name="Username" xml:space="preserve">
     <value>User Name</value>
   </data>
+  <data name="Username is required" xml:space="preserve">
+    <value>Username is required</value>
+  </data>
   <data name="Users" xml:space="preserve">
     <value>Users</value>
   </data>
@@ -890,6 +941,12 @@
   </data>
   <data name="Value Added Tax" xml:space="preserve">
     <value>VAT</value>
+  </data>
+  <data name="Value added tax number required" xml:space="preserve">
+    <value>Value added tax number required</value>
+  </data>
+  <data name="VAT Number" xml:space="preserve">
+    <value>VAT Number</value>
   </data>
   <data name="VAT Paid" xml:space="preserve">
     <value>VAT Paid</value>
