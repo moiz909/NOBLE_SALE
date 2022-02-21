@@ -84,6 +84,7 @@
     <AndroidAsset Include="Assets\FontAwesome5Regular.otf" />
     <AndroidAsset Include="Assets\Ubuntu-Regular.ttf" />
     <AndroidAsset Include="Assets\Ubuntu-Bold.ttf" />
+    <AndroidAsset Include="Assets\Mulish-Regular.ttf" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />

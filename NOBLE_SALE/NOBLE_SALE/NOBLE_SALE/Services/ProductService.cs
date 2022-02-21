@@ -36,6 +36,46 @@ namespace NOBLE_SALE.Services
             }
         }
 
+        public async Task<TaxRateListModel> GetTax()
+        {
+            url = new WebAPI().URL;
+            client = new WebAPI().client;
+            url += "Product/TaxRateList" ;
+            var token = UserData.Current.Token;
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            try
+            {
+                var response = await client.GetStringAsync(url);
+                var TaxList = JsonConvert.DeserializeObject<TaxRateListModel>(response);
+                return TaxList;
+            }
+            catch (Exception E)
+            {
+                await Application.Current.MainPage.DisplayAlert("errorss", E.Message, "ok");
+                return null;
+            }
+        }
+
+        public async Task<RegistrationNoLookUp> GetRegistrationNoDetail()
+        {
+            url = new WebAPI().URL;
+            client = new WebAPI().client;
+            url += "Sale/SaleAutoGenerateNo";
+            var token = UserData.Current.Token;
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            try
+            {
+                var response = await client.GetStringAsync(url);
+                var AutoNoDetail = JsonConvert.DeserializeObject<RegistrationNoLookUp>(response);
+                return AutoNoDetail;
+            }
+            catch (Exception E)
+            {
+                await Application.Current.MainPage.DisplayAlert("errorss", E.Message, "ok");
+                return null;
+            }
+        }
+
         public async Task<PagedResult<CategoryListModel>> GetCategories(bool isActive, int PageNumber, string searchTerm)
         {
             url = new WebAPI().URL;

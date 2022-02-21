@@ -1,5 +1,6 @@
 ﻿using NOBLE_SALE.Resources;
 using NOBLE_SALE.View;
+using NOBLE_SALE.View.Sale;
 using System;
 using Xamarin.CommunityToolkit.Helpers;
 using Xamarin.Forms;

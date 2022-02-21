@@ -104,9 +104,9 @@
 
             </ScrollView>-->
 
-            <CollectionView BackgroundColor="White" SelectionMode="Multiple" 
+            <CollectionView BackgroundColor="White" SelectionMode="Multiple"
                             ItemsSource="{Binding Products.Results.Products}"
-                            SelectedItems="{Binding ProductList}" >
+                             SelectedItems="{Binding ProductList2}">
                 
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical" Span="4" />

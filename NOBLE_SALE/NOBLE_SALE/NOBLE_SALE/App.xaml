@@ -62,6 +62,9 @@
             <OnPlatform x:TypeArguments="x:String" x:Key="UbuntuNormal">
                 <On Platform="Android" Value="Ubuntu-Regular.ttf#Ubuntu" />
             </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="MulishRegular">
+                <On Platform="Android" Value="Mulish-Regular.ttf#Mulish" />
+            </OnPlatform>
 
             <OnPlatform x:TypeArguments="x:String" x:Key="UbuntuBold">
                 <On Platform="Android" Value="Ubuntu-Regular.ttf#Ubuntu" />

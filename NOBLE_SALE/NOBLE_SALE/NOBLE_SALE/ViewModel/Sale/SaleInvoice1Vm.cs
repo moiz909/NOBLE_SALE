@@ -2,9 +2,11 @@
 using NOBLE_SALE.Model;
 using NOBLE_SALE.Model.Product;
 using NOBLE_SALE.Services;
+using NOBLE_SALE.View.Sale;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using Xamarin.Forms;
 
@@ -32,18 +34,18 @@ namespace NOBLE_SALE.ViewModel.Sale
 
         public Command SelectCategoryCommand { get; set; }
 
-        private ObservableCollection<ProductLookUpModel> _ProductList;
+        private List<ProductLookUpModel> _ProductList;
 
-        public ObservableCollection<ProductLookUpModel> ProductList
+        public List<ProductLookUpModel> ProductList
         {
             get { return _ProductList; }
             set { _ProductList = value; OnPropertyChanged(); }
         }
 
 
-        private ObservableCollection<ProductLookUpModel> _ProductList2;
+        private List<Object> _ProductList2;
 
-        public ObservableCollection<ProductLookUpModel> ProductList2
+        public List<Object> ProductList2
         {
             get { return _ProductList2; }
             set { _ProductList2 = value; }
@@ -57,26 +59,23 @@ namespace NOBLE_SALE.ViewModel.Sale
         public SaleInvoice1Vm()
         {
             GetProducts();
-            ProductList = new ObservableCollection<ProductLookUpModel>();
-            ProductList2 = new ObservableCollection<ProductLookUpModel>();
+            ProductList = new List<ProductLookUpModel>();
+            ProductList2 = new List<object>();
             Products = new PagedResult<ProductListModel>();
             Categories = new PagedResult<CategoryListModel>();
             SelectedCategory = new CategoryLookUpModel();
             SelectCategoryCommand = new Command(SelectedCategoryHandler);
             NextBtnCommand = new Command(NextBtnHandler);
-            SelectionCommand = new Command(SelectionHandler);
         }
 
-        private void SelectionHandler(object obj)
-        {
-            ProductList2 = ProductList;
-            ProductList.Add(Product);
-            Product = new ProductLookUpModel();
-        }
 
-        private void NextBtnHandler(object obj)
+        
+
+        private async void NextBtnHandler(object obj)
         {
-            ProductList2 = ProductList;
+            ProductList = new List<ProductLookUpModel>();
+            ProductList = ProductList2.Cast<ProductLookUpModel>().ToList();
+            await Application.Current.MainPage.Navigation.PushAsync(new SaleInvoice2(ProductList));
         }
 
         private async void SelectedCategoryHandler(object obj)
