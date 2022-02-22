@@ -2,16 +2,24 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:fontawesome="clr-namespace:NOBLE_SALE.Utils"
-             NavigationPage.HasNavigationBar="False"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:local="clr-namespace:NOBLE_SALE.Helper"
              xmlns:vm="clr-namespace:NOBLE_SALE.ViewModel"
-             x:Class="NOBLE_SALE.View.SetupPage">
+             x:Class="NOBLE_SALE.View.SetupPage"
+             NavigationPage.HasBackButton="False"
+             BackgroundColor="White"
+             Visual="Material">
 
     <ContentPage.BindingContext>
         <vm:SetupPageVM/>
     </ContentPage.BindingContext>
 
+    <NavigationPage.TitleView>
+        <StackLayout>
+            <Label Text="{xct:Translate Account Setup}" FontSize="18" TextColor="{DynamicResource ColorNobleBlue}" FontFamily="Ubuntu-Bold"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    
     <ContentPage.Resources>
         <ResourceDictionary>
             <xct:InvertedBoolConverter x:Key="invertBoolConverter"/>
@@ -20,144 +28,125 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <Frame BackgroundColor="#2196F3" Padding="15"  CornerRadius="0">
-                <Label Text="Setup default Chart of Account,Company Info,Currency and VAT" HorizontalTextAlignment="Center" TextColor="White" FontSize="20"/>
+            <Frame BackgroundColor="{DynamicResource ColorReportsFrame}" Margin="16,8,16,0" IsVisible="{Binding Source={x:Static local:UserData.CompanySetup},Mode=TwoWay}"
+                   HasShadow="False" Padding="14" CornerRadius="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Frame Padding="0" Margin="0" Grid.Column="0" HeightRequest="65" WidthRequest="65" CornerRadius="12" HasShadow="False"
+                                   BackgroundColor="#FFE3E3">
+                        <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label Text="{x:Static fontawesome:FontAwesomeIcons.IdCard}" FontFamily="{StaticResource FontAwesomeSolid}"
+                                   TextColor="{DynamicResource ColorRed}" FontSize="Large" HorizontalTextAlignment="Center"/>
+                        </Grid>
+
+                    </Frame>
+
+                    <Label Text="{xct:Translate Setup Company Information}" TextColor="Black" VerticalOptions="Center" Grid.Column="1" FontSize="16" 
+                                   FontFamily="Ubuntu-Medium" Margin="16,0,16,0"/>
+
+                </Grid>
+
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SetupCompanyCommand,Mode=TwoWay}"/>
+                </Frame.GestureRecognizers>
             </Frame>
-            <ScrollView>
-                <StackLayout>
-                    <!--<Label Text="{x:Static fontawesome:FontAwesomeIcons.ChartBar}"
-                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Maroon" 
-                           FontSize="Large" 
-                           HorizontalTextAlignment="Center"/>
-                    <Label HorizontalOptions="Center" >
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span Text="Setup Chart of Account"
-                                      FontAttributes="Bold"
-                                      TextColor="{DynamicResource ThemeColor}"
-                                      TextDecorations="Underline">
-                                    <Span.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding ChartofAccountCommand,Mode=TwoWay}"/>
-                                    </Span.GestureRecognizers>
-                                </Span>
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>-->
+            <Frame BackgroundColor="{DynamicResource ColorReportsFrame}" Margin="16,8,16,0" 
+                   IsVisible="{Binding Source={x:Static local:UserData.CompanySetup},Mode=TwoWay,Converter={StaticResource invertBoolConverter}}"
+                   HasShadow="False" Padding="14" CornerRadius="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                    <Label Text="{x:Static fontawesome:FontAwesomeIcons.IdCard}" IsVisible="{Binding Source={x:Static local:UserData.CompanySetup},Mode=TwoWay}"
-                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Maroon"
-                          FontSize="Large" 
-                           HorizontalTextAlignment="Center"/>
-                    <Label HorizontalOptions="Center" IsVisible="{Binding Source={x:Static local:UserData.CompanySetup},Mode=TwoWay}">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span Text="Setup Company Info"
-                                      FontAttributes="Bold"
-                                      TextColor="{DynamicResource ThemeColor}"
-                                      TextDecorations="Underline">
-                                    <Span.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding SetupCompanyCommand,Mode=TwoWay}"/>
-                                    </Span.GestureRecognizers>
-                                </Span>
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
+                    <Frame Padding="0" Margin="0" Grid.Column="0" HeightRequest="65" WidthRequest="65" CornerRadius="12" HasShadow="False"
+                                   BackgroundColor="#dfffff">
+                        <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label Text="{x:Static fontawesome:FontAwesomeIcons.IdCard}" 
+                                   IsVisible="{Binding Source={x:Static local:UserData.CompanySetup},Mode=TwoWay,Converter={StaticResource invertBoolConverter}}" 
+                                   FontFamily="{StaticResource FontAwesomeSolid}" TextColor="{DynamicResource ColorGreen}" FontSize="Large" 
+                                   HorizontalTextAlignment="Center"/>
+                        </Grid>
 
+                    </Frame>
 
-                    <Label Text="{x:Static fontawesome:FontAwesomeIcons.IdCard}" IsVisible="{Binding Source={x:Static local:UserData.CompanySetup},Converter={StaticResource invertBoolConverter},Mode=TwoWay}"
-                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Green"
-                          FontSize="Large" 
-                           HorizontalTextAlignment="Center"/>
-                    <Label HorizontalOptions="Center" IsVisible="{Binding Source={x:Static local:UserData.CompanySetup},Converter={StaticResource invertBoolConverter},Mode=TwoWay}">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span Text="Setup Company Info"
-                                      FontAttributes="Bold"
-                                      TextColor="{DynamicResource ThemeColor}"
-                                      TextDecorations="Underline">
-                                </Span>
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
+                    <Label Text="{xct:Translate Setup Company Information}" TextColor="Black" VerticalOptions="Center" Grid.Column="1" FontSize="16" 
+                                   FontFamily="Ubuntu-Medium" Margin="16,0,16,0"/>
 
-                    <Label Text="{x:Static fontawesome:FontAwesomeIcons.MoneyBill}" IsVisible="{Binding Source={x:Static local:UserData.CurrencyandVat},Converter={StaticResource invertBoolConverter},Mode=TwoWay}"
-                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Green"
-                           FontSize="Large"  
-                           HorizontalTextAlignment="Center"/>
-                    <Label HorizontalOptions="Center" IsVisible="{Binding Source={x:Static local:UserData.CurrencyandVat},Converter={StaticResource invertBoolConverter},Mode=TwoWay}">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span Text="Setup Default Currency And VAT"
-                                      FontAttributes="Bold"
-                                      TextColor="{DynamicResource ThemeColor}"
-                                      TextDecorations="Underline">
-                                </Span>
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
+                </Grid>
+            </Frame>
 
-                    <Label Text="{x:Static fontawesome:FontAwesomeIcons.MoneyBill}" IsVisible="{Binding Source={x:Static local:UserData.CurrencyandVat},Mode=TwoWay}"
-                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Maroon"
-                           FontSize="Large"  
-                           HorizontalTextAlignment="Center"/>
-                    <Label HorizontalOptions="Center" IsVisible="{Binding Source={x:Static local:UserData.CurrencyandVat},Mode=TwoWay}">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span Text="Setup Default Currency And VAT"
-                                      FontAttributes="Bold"
-                                      TextColor="{DynamicResource ThemeColor}"
-                                      TextDecorations="Underline">
-                                    <Span.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding SetupCurrencyCommand,Mode=TwoWay}"/>
-                                    </Span.GestureRecognizers>
-                                </Span>
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
+            <Frame BackgroundColor="{DynamicResource ColorReportsFrame}" Margin="16,8,16,0" IsVisible="{Binding Source={x:Static local:UserData.CurrencyandVat},Mode=TwoWay}"
+                   HasShadow="False" Padding="14" CornerRadius="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                    <!--<Label Text="{x:Static fontawesome:FontAwesomeIcons.MoneyCheck}" IsVisible="{Binding Source={x:Static local:UserData.CurrencyandVat}}"
-                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Maroon"
-                           FontSize="Large"  
-                           HorizontalTextAlignment="Center"/>
-                    <Label HorizontalOptions="Center">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span Text="Setup Default VAT"
-                                      FontAttributes="Bold"
-                                      TextColor="{DynamicResource ThemeColor}"
-                                      TextDecorations="Underline">
-                                    <Span.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding SetupVatCommand,Mode=TwoWay}"/>
-                                    </Span.GestureRecognizers>
-                                </Span>
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>-->
+                    <Frame Padding="0" Margin="0" Grid.Column="0" HeightRequest="65" WidthRequest="65" CornerRadius="12" HasShadow="False"
+                                   BackgroundColor="#FFE3E3">
+                        <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label Text="{x:Static fontawesome:FontAwesomeIcons.MoneyBill}" FontFamily="{StaticResource FontAwesomeSolid}"
+                                   TextColor="{DynamicResource ColorRed}" FontSize="Large" HorizontalTextAlignment="Center"/>
+                        </Grid>
 
-                    <!--<Label Text="{x:Static fontawesome:FontAwesomeIcons.ChartLine}"
-                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Maroon"
-                           FontSize="Large"  
-                           HorizontalTextAlignment="Center"/>
-                    <Label HorizontalOptions="Center">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span Text="Setup Financial Year"
-                                      FontAttributes="Bold"
-                                      TextColor="{DynamicResource ThemeColor}"
-                                      TextDecorations="Underline">
-                                    <Span.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding SetupYearCommand,Mode=TwoWay}"/>
-                                    </Span.GestureRecognizers>
-                                </Span>
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>-->
+                    </Frame>
 
-                    
-                </StackLayout>
-            </ScrollView>
-            <Button Text="Save" Margin="30" Command="{Binding SaveCommand,Mode=TwoWay}"  BackgroundColor="#2196F3" CornerRadius="5"
-                            HorizontalOptions="Center" VerticalOptions="EndAndExpand"/>
+                    <Label Text="{xct:Translate Set Currency and VAT}" TextColor="Black" VerticalOptions="Center" Grid.Column="1" FontSize="16" 
+                                   FontFamily="Ubuntu-Medium" Margin="16,0,16,0"/>
+
+                </Grid>
+
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SetupCurrencyCommand,Mode=TwoWay}"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+            <Frame BackgroundColor="{DynamicResource ColorReportsFrame}" Margin="16,8,16,0" 
+                   IsVisible="{Binding Source={x:Static local:UserData.CurrencyandVat},Converter={StaticResource invertBoolConverter},Mode=TwoWay}"
+                   HasShadow="False" Padding="14" CornerRadius="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Frame Padding="0" Margin="0" Grid.Column="0" HeightRequest="65" WidthRequest="65" CornerRadius="12" HasShadow="False"
+                                   BackgroundColor="#dfffff">
+                        <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label Text="{x:Static fontawesome:FontAwesomeIcons.MoneyBill}" 
+                                   IsVisible="{Binding Source={x:Static local:UserData.CompanySetup},Mode=TwoWay,Converter={StaticResource invertBoolConverter}}" 
+                                   FontFamily="{StaticResource FontAwesomeSolid}" TextColor="{DynamicResource ColorGreen}" FontSize="Large" 
+                                   HorizontalTextAlignment="Center"/>
+                        </Grid>
+
+                    </Frame>
+
+                    <Label Text="{xct:Translate Set Currency and VAT}" TextColor="Black" VerticalOptions="Center" Grid.Column="1" FontSize="16" 
+                                   FontFamily="Ubuntu-Medium" Margin="16,0,16,0"/>
+
+                </Grid>
+            </Frame>
+          
+
+            <Button Text="Save" Margin="16,16,16,0" Command="{Binding SaveCommand,Mode=TwoWay}"  BackgroundColor="{DynamicResource ColorNobleBlue}" CornerRadius="5" HeightRequest="48"/>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

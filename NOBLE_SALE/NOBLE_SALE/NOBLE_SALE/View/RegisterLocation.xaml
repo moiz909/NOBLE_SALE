@@ -21,7 +21,7 @@
     <ContentPage.Content>
         <StackLayout>
             <ScrollView>
-                <StackLayout>
+                <StackLayout IsEnabled="{Binding IsBusy, Converter={StaticResource invertBoolConverter}}">
                     <Label Text="{xct:Translate Register Location}" FontSize="22" TextColor="Black" Margin="16,0,16,0" FontFamily="Ubuntu-Bold"/>
 
                     <Label FontSize="12" Margin="16,24,16,0" FontFamily="Ubuntu-Medium">
@@ -224,7 +224,7 @@
                     </Entry>
 
                     <Label Text="{xct:Translate Password Do Not Match}" TextColor="{DynamicResource ColorRed}" FontSize="8" Margin="16,0,16,0"
-                   IsVisible="{Binding IsValidConfirmPassword, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
+                                IsVisible="{Binding IsValidConfirmPassword, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
 
                     <Button Text="Sign Up" Margin="16,20,16,20" Command="{Binding SignUpHandler,Mode=TwoWay}" HeightRequest="48"
                             BackgroundColor="{DynamicResource ColorNobleBlue}" Font="Ubuntu-Regular"/>

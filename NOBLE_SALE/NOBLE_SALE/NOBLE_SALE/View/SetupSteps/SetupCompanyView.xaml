@@ -3,9 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:NOBLE_SALE.ViewModel.SetupSteps"
              BackgroundColor="White"
+             NavigationPage.IconColor="Black"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit" 
-             x:Class="NOBLE_SALE.View.SetupSteps.SetupCompanyView">
+             x:Class="NOBLE_SALE.View.SetupSteps.SetupCompanyView"
+             Visual="Material">
 
+    <NavigationPage.TitleView>
+        <StackLayout>
+            <Label Text="{xct:Translate Setup Company Information}" FontSize="18" TextColor="{DynamicResource ColorNobleBlue}" FontFamily="Ubuntu-Bold"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    
     <ContentPage.BindingContext>
         <vm:SetupCompanyVm/>
     </ContentPage.BindingContext>
@@ -18,78 +26,109 @@
 
 
     <ContentPage.Content>
-        <StackLayout>
-            <ScrollView>
-                <StackLayout>
+        <ScrollView>
+            <StackLayout>
+                <Label FontSize="12" Margin="16,24,16,0" FontFamily="Ubuntu-Medium">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{xct:Translate Business Name}" TextColor="Black"/>
+                            <Span Text=" * " TextColor="{DynamicResource ColorRed}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Entry Text="{Binding BusinessName, Mode=TwoWay}" HeightRequest="48" IsEnabled="False"  BackgroundColor="{DynamicResource ColorDisabledField}"
+                   TextColor="{DynamicResource ColorFieldsText}" FontSize="16" FontFamily="Ubuntu-regular" Visual="Default" Margin="16,0,16,0">
+                </Entry>
 
-                    <Frame BackgroundColor="White" VerticalOptions="Center" Margin="20,40,20,0">
-                        <StackLayout>
-                            <Label Text="Business Name" FontFamily="Ubuntu-regular" TextColor="Black" />
-                            <!--<Entry  BackgroundColor="{DynamicResource xBlue}" 
-                                            TextColor="Black" FontSize="Small"
-                                           Text="{Binding BusinessName,Mode=TwoWay}"
-                                           IsEnabled="False"/>-->
-                            <Entry Text="{Binding BusinessName, Mode=TwoWay}" HeightRequest="48" IsEnabled="False"  BackgroundColor="{DynamicResource ColorFields}"
-                           TextColor="{DynamicResource ColorFieldsText}" FontSize="16" 
-                           Grid.Column="1" FontFamily="Ubuntu-regular"/>
+                <Label FontSize="12" Margin="16,8,16,0" FontFamily="Ubuntu-Medium">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{xct:Translate Registration number}" TextColor="Black"/>
+                            <Span Text=" * " TextColor="{DynamicResource ColorRed}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
 
-                            <Label Text="Commercial Reg No:" FontFamily="Ubuntu-regular" TextColor="Black" />
-                            <!--<Entry Placeholder="Commercial Reg No" BackgroundColor="{DynamicResource xBlue}"
-                                           PlaceholderColor="Black" TextColor="Black" FontSize="Small"
-                                           Text="{Binding CommercialRegNo,Mode=TwoWay}"
-                                           IsEnabled="False"/>-->
+                <Entry Text="{Binding CommercialRegNo,Mode=TwoWay}" HeightRequest="48" IsEnabled="False"  BackgroundColor="{DynamicResource ColorDisabledField}"
+                   TextColor="{DynamicResource ColorFieldsText}" FontSize="16" FontFamily="Ubuntu-regular" Visual="Default" Margin="16,0,16,0">
+                </Entry>
 
-                            <Entry Text="{Binding CommercialRegNo,Mode=TwoWay}" IsEnabled="False" HeightRequest="48" BackgroundColor="{DynamicResource ColorFields}"
-                           TextColor="{DynamicResource ColorFieldsText}" FontSize="16" 
-                            FontFamily="Ubuntu-regular"/>
+                <Label FontSize="12" Margin="16,8,16,0" FontFamily="Ubuntu-Medium">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{xct:Translate VAT Number}" TextColor="Black"/>
+                            <Span Text=" * " TextColor="{DynamicResource ColorRed}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
 
+                <Entry Text="{Binding TaxNo,Mode=TwoWay}" HeightRequest="48" IsEnabled="False"  BackgroundColor="{DynamicResource ColorDisabledField}"
+                   TextColor="{DynamicResource ColorFieldsText}" FontSize="16" FontFamily="Ubuntu-regular" Visual="Default" Margin="16,0,16,0"/>
 
-                            <Label Text="VAT\TAX No:" FontFamily="Ubuntu-regular" TextColor="Black" />
-                            <!--<Entry Placeholder="VAT\TAX No" BackgroundColor="{DynamicResource xBlueDark}"
-                                           PlaceholderColor="Black" TextColor="Black" FontSize="Small" IsEnabled="False"
-                                           Text="{Binding TaxNo,Mode=TwoWay}"/>-->
+                <Label FontSize="12" Margin="16,8,16,0" FontFamily="Ubuntu-Medium">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{xct:Translate Company Name}" TextColor="Black"/>
+                            <Span Text=" * " TextColor="{DynamicResource ColorRed}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
 
-                            <Entry Text="{Binding TaxNo,Mode=TwoWay}" HeightRequest="48"  BackgroundColor="{DynamicResource ColorFields}"
-                           TextColor="{DynamicResource ColorFieldsText}" FontSize="16" 
-                            FontFamily="Ubuntu-regular"/>
+                <Entry Text="{Binding CompanyInfo.CompanyNameEnglish,Mode=TwoWay}" HeightRequest="48" BackgroundColor="{DynamicResource ColorFields}"
+                   TextColor="{DynamicResource ColorFieldsText}" FontSize="16" FontFamily="Ubuntu-regular" Visual="Default" Margin="16,0,16,0">
+                    <Entry.Behaviors>
+                        <xct:TextValidationBehavior  MinimumLength="1" Flags="ValidateOnValueChanging" 
+                                                         IsValid="{Binding ValidateName,Mode=TwoWay}"/>
+                    </Entry.Behaviors>
+                </Entry>
 
-                            <Label Text="Company Name:" FontFamily="Ubuntu-regular" TextColor="Black" />
+                <Label Text="{xct:Translate Company Name is required}" TextColor="{DynamicResource ColorRed}" FontSize="8" Margin="16,0,16,0" 
+                           IsVisible="{Binding ValidateName, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
 
-                            <Entry Text="{Binding CompanyInfo.CompanyNameEnglish,Mode=TwoWay}" HeightRequest="48"  BackgroundColor="{DynamicResource ColorFields}"
-                           TextColor="{DynamicResource ColorFieldsText}" FontSize="16" 
-                            FontFamily="Ubuntu-regular"/>
+                <Label FontSize="12" Margin="16,8,16,0" FontFamily="Ubuntu-Medium">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{xct:Translate Business Type}" TextColor="Black"/>
+                            <Span Text=" * " TextColor="{DynamicResource ColorRed}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
 
-                            <!--<Entry Placeholder="Company Name" BackgroundColor="{DynamicResource xBlueDark}"
-                                           PlaceholderColor="Black" TextColor="Black" FontSize="Small" IsEnabled="True"
-                                           Text="{Binding CompanyInfo.CompanyNameEnglish,Mode=TwoWay}"/>-->
+                <Entry Text="{Binding CompanyInfo.CategoryInEnglish,Mode=TwoWay}" HeightRequest="48" BackgroundColor="{DynamicResource ColorFields}"
+                   TextColor="{DynamicResource ColorFieldsText}" FontSize="16" FontFamily="Ubuntu-regular" Visual="Default" Margin="16,0,16,0">
+                    <Entry.Behaviors>
+                        <xct:TextValidationBehavior  MinimumLength="1" Flags="ValidateOnValueChanging" 
+                                                         IsValid="{Binding ValidateCategory,Mode=TwoWay}"/>
+                    </Entry.Behaviors>
+                </Entry>
 
-                            <Label FontFamily="Ubuntu-regular" Text="Business Type:" TextColor="Black" />
-                            
-                            <!--<Entry Placeholder="Business Type" BackgroundColor="{DynamicResource xBlueDark}"
-                                           PlaceholderColor="Black" TextColor="Black" FontSize="Small" IsEnabled="True"
-                                           Text="{Binding CompanyInfo.CategoryInEnglish,Mode=TwoWay}"/>-->
+                <Label Text="{xct:Translate Business Type is required}" TextColor="{DynamicResource ColorRed}" FontSize="8" Margin="16,0,16,0" 
+                           IsVisible="{Binding ValidateCategory, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
 
-                            <Entry Text="{Binding CompanyInfo.CategoryInEnglish,Mode=TwoWay}" HeightRequest="48"  BackgroundColor="{DynamicResource ColorFields}"
-                           TextColor="{DynamicResource ColorFieldsText}" FontSize="16" 
-                            FontFamily="Ubuntu-regular"/>
+                <Label FontSize="12" Margin="16,8,16,0" FontFamily="Ubuntu-Medium">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{xct:Translate Address}" TextColor="Black"/>
+                            <Span Text=" * " TextColor="{DynamicResource ColorRed}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
 
-                            <Label FontFamily="Ubuntu-regular" Text="Address:" TextColor="Black" />
-                            <!--<Editor Placeholder="Address" BackgroundColor="{DynamicResource xBlueDark}"
-                                           PlaceholderColor="Black" TextColor="Black" FontSize="Small" IsEnabled="True"
-                                           Text="{Binding CompanyInfo.AddressInEnglish,Mode=TwoWay}"/>-->
+                <Editor Text="{Binding CompanyInfo.AddressInEnglish,Mode=TwoWay}" HeightRequest="70" BackgroundColor="{DynamicResource ColorFields}"
+                    TextColor="{DynamicResource ColorFieldsText}" FontSize="16" Visual="Default" FontFamily="Ubuntu-regular" Margin="16,0,16,0">
+                    <Editor.Behaviors>
+                        <xct:TextValidationBehavior  MinimumLength="1" Flags="ValidateOnValueChanging" 
+                                                         IsValid="{Binding ValidateAddress,Mode=TwoWay}"/>
+                    </Editor.Behaviors>
+                </Editor>
 
-                            <Editor Text="{Binding CompanyInfo.AddressInEnglish,Mode=TwoWay}" HeightRequest="60" Placeholder="Address" BackgroundColor="{DynamicResource ColorFields}"
-                           TextColor="{DynamicResource ColorFieldsText}" FontSize="16" 
-                            FontFamily="Ubuntu-regular"/>
+                <Label Text="{xct:Translate Address is required}" TextColor="{DynamicResource ColorRed}" FontSize="8" Margin="16,0,16,0"
+                   IsVisible="{Binding ValidateAddress, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
 
+                <Button Text="Update" Margin="20" HeightRequest="48" BackgroundColor="{DynamicResource ColorNobleBlue}" TextColor="White" 
+                    FontFamily="Ubuntu-Regular" FontSize="Caption" Command="{Binding UpdateCommand,Mode=TwoWay}"/>
 
-                            <Button Text="Update" Margin="20" HeightRequest="48"
-                            BackgroundColor="{DynamicResource ColorNobleBlue}" TextColor="White" FontFamily="Ubuntu-Regular" FontSize="Caption"
-                                            Command="{Binding UpdateCommand,Mode=TwoWay}"/>
-                        </StackLayout>
-                    </Frame>
-                </StackLayout>
-            </ScrollView>
-        </StackLayout>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

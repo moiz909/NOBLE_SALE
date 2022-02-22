@@ -2,110 +2,119 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:NOBLE_SALE.ViewModel.SetupSteps"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             NavigationPage.IconColor="Black"
              BackgroundColor="White"
-             x:Class="NOBLE_SALE.View.SetupSteps.SetupCurrencyView">
+             x:Class="NOBLE_SALE.View.SetupSteps.SetupCurrencyView"
+             Visual="Material">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:InvertedBoolConverter x:Key="invertBoolConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.BindingContext>
         <vm:SetupCurrencyVm/>
     </ContentPage.BindingContext>
-    
-    
-    <ContentPage.Content>
+
+    <NavigationPage.TitleView>
         <StackLayout>
+            <Label Text="{xct:Translate Set Currency and VAT}" FontSize="18" TextColor="{DynamicResource ColorNobleBlue}" FontFamily="Ubuntu-Bold"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    
 
+    <ContentPage.Content>
+        <StackLayout IsEnabled="{Binding IsBusy, Converter={StaticResource invertBoolConverter}}">
+            <Label FontSize="12" Margin="16,24,16,0" FontFamily="Ubuntu-Medium">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{xct:Translate Currency Name}" TextColor="Black"/>
+                        <Span Text=" * " TextColor="{DynamicResource ColorRed}"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Entry Text="{Binding Currency.Name, Mode=TwoWay}" HeightRequest="48" BackgroundColor="{DynamicResource ColorFields}"
+                   TextColor="{DynamicResource ColorFieldsText}" FontSize="16" FontFamily="Ubuntu-regular" Visual="Default" Margin="16,0,16,0">
+                <Entry.Behaviors>
+                    <xct:TextValidationBehavior  MinimumLength="1" Flags="ValidateOnValueChanging" 
+                                                         IsValid="{Binding ValidCurrencyName,Mode=TwoWay}"/>
+                </Entry.Behaviors>
+            </Entry>
+            <Label Text="{xct:Translate Currency Name is required}" TextColor="{DynamicResource ColorRed}" FontSize="8" Margin="16,0,16,0" 
+                   IsVisible="{Binding ValidCurrencyName, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
 
-            <!--<Frame BackgroundColor="White" Padding="15"  CornerRadius="0">
-                <Label Text="Setup Currency And VAT" HorizontalTextAlignment="Center" TextColor="Black" FontSize="20"/>
-            </Frame>-->
-            <ScrollView>
-                <StackLayout>
-                    <Frame HasShadow="True" BackgroundColor="{DynamicResource ColorFields}" VerticalOptions="CenterAndExpand" Margin="20,0,20,0">
-                        <StackLayout>
+            <Label FontSize="12" Margin="16,8,16,0" FontFamily="Ubuntu-Medium">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{xct:Translate Currency Sign}" TextColor="Black"/>
+                        <Span Text=" * " TextColor="{DynamicResource ColorRed}"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Entry Text="{Binding Currency.Sign, Mode=TwoWay}" HeightRequest="48" BackgroundColor="{DynamicResource ColorFields}"
+                   TextColor="{DynamicResource ColorFieldsText}" FontSize="16" FontFamily="Ubuntu-regular" Visual="Default" Margin="16,0,16,0">
+                <Entry.Behaviors>
+                    <xct:TextValidationBehavior  MinimumLength="1" Flags="ValidateOnValueChanging" 
+                                                         IsValid="{Binding ValidCurrencySign,Mode=TwoWay}"/>
+                </Entry.Behaviors>
+            </Entry>
+            <Label Text="{xct:Translate Currency sign is required}" TextColor="{DynamicResource ColorRed}" FontSize="8" Margin="16,0,16,0" 
+                   IsVisible="{Binding ValidCurrencySign, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
+            
+            <Label FontSize="12" Margin="16,8,16,0" FontFamily="Ubuntu-Medium">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{xct:Translate VAT Name}" TextColor="Black"/>
+                        <Span Text=" * " TextColor="{DynamicResource ColorRed}"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Entry Text="{Binding Tax.Name, Mode=TwoWay}" HeightRequest="48" BackgroundColor="{DynamicResource ColorFields}"
+                   TextColor="{DynamicResource ColorFieldsText}" FontSize="16" FontFamily="Ubuntu-regular" Visual="Default" Margin="16,0,16,0">
+                <Entry.Behaviors>
+                    <xct:TextValidationBehavior  MinimumLength="1" Flags="ValidateOnValueChanging" 
+                                                         IsValid="{Binding ValidTaxName,Mode=TwoWay}"/>
+                </Entry.Behaviors>
+            </Entry>
+            <Label Text="{xct:Translate Tax name is required}" TextColor="{DynamicResource ColorRed}" FontSize="8" Margin="16,0,16,0" 
+                   IsVisible="{Binding ValidTaxName, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
+            
+            <Label FontSize="12" Margin="16,8,16,0" FontFamily="Ubuntu-Medium">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{xct:Translate VAT Rate}" TextColor="Black"/>
+                        <Span Text=" * " TextColor="{DynamicResource ColorRed}"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Entry Text="{Binding Tax.Rate, Mode=TwoWay}" HeightRequest="48" BackgroundColor="{DynamicResource ColorFields}" Keyboard="Numeric"
+                   TextColor="{DynamicResource ColorFieldsText}" FontSize="16" FontFamily="Ubuntu-regular" Visual="Default" Margin="16,0,16,0">
+            </Entry>
 
-                            <Label TextColor="Black" FontSize="Caption" FontAttributes="Bold" HorizontalOptions="Center" Margin="5,0,5,0">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="Setup Currency"/>
-                                        <Span Text=" "/>
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-
-                            <!--<Entry Text="{Binding Currency.Name,Mode=TwoWay}" Placeholder="Currency Name" Keyboard="Default" Margin="0,0,0,0" 
-                           BackgroundColor="{DynamicResource xBlue}" PlaceholderColor="Black" TextColor="Black"
-                           FontSize="Caption">
-                    </Entry>-->
-
-                            <Label Text="Currency Name:" TextColor="Black" FontSize="Caption" FontFamily="Ubuntu-regular"/>
-
-                            <Entry Text="{Binding Currency.Name, Mode=TwoWay}" HeightRequest="48" Placeholder="Currency Name" BackgroundColor="{DynamicResource ColorFields}"
-                           TextColor="{DynamicResource ColorFieldsText}" 
-                           FontSize="Caption" FontFamily="Ubuntu-regular"/>
-
-                            <!--<Entry Text="{Binding Currency.Sign,Mode=TwoWay}" Placeholder="Currency Sign" Keyboard="Default" Margin="0,0,0,0"
-                           BackgroundColor="{DynamicResource xBlue}" PlaceholderColor="Black" TextColor="Black"
-                           FontSize="Caption">
-                    </Entry>-->
-
-                            <Label Text="Currency Sign:" TextColor="Black" FontSize="Caption" FontFamily="Ubuntu-regular"/>
-
-                            <Entry Text="{Binding Currency.Sign, Mode=TwoWay}" HeightRequest="48" Placeholder="Currency Sign" BackgroundColor="{DynamicResource ColorFields}"
-                           TextColor="{DynamicResource ColorFieldsText}" 
-                           FontSize="Caption" FontFamily="Ubuntu-regular"/>
-
-
-                            <Label TextColor="Black" FontSize="Caption" FontAttributes="Bold" HorizontalOptions="Center" Margin="5,0,5,0">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="Setup Vat"/>
-                                        <Span Text=" "/>
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-
-                            <!--<Entry Text="{Binding Tax.Name,Mode=TwoWay}" Placeholder="Tax Name" Keyboard="Default" Margin="0,0,0,0" 
-                           BackgroundColor="{DynamicResource xBlue}" PlaceholderColor="Black" TextColor="Black"
-                           FontSize="Caption">
-                    </Entry>-->
-
-                            <Label Text="Tax Name:" TextColor="Black" FontSize="Caption" FontFamily="Ubuntu-regular"/>
-
-                            <Entry Text="{Binding Tax.Name, Mode=TwoWay}" HeightRequest="48" Placeholder="Tax Name" BackgroundColor="{DynamicResource ColorFields}"
-                           TextColor="{DynamicResource ColorFieldsText}" 
-                           FontSize="Caption" FontFamily="Ubuntu-regular"/>
-
-
-                            <!--<Entry Text="{Binding Tax.Rate,Mode=TwoWay}" Placeholder="Tax Rate %" Keyboard="Numeric" Margin="0,0,0,0"
-                           BackgroundColor="{DynamicResource xBlue}" PlaceholderColor="Black" TextColor="Black"
-                           FontSize="Caption">
-                    </Entry>-->
-
-                            <Label Text="Tax Rate:" TextColor="Black" FontSize="Caption" FontFamily="Ubuntu-regular"/>
-
-                            <Entry Text="{Binding Tax.Rate, Mode=TwoWay}" HeightRequest="48"  Placeholder="Tax Rate %" Keyboard="Numeric" BackgroundColor="{DynamicResource ColorFields}"
-                           TextColor="{DynamicResource ColorFieldsText}" 
-                           FontSize="Caption" FontFamily="Ubuntu-bold"/>
-
-
-                            <Picker
-                                SelectedItem="{Binding Tax.TaxMethod}" HeightRequest="48" BackgroundColor="{DynamicResource ColorFields}" Title="Tax Method" TextColor="Black" >
-                                <Picker.ItemsSource>
-                                    <x:Array Type="{x:Type x:String}">
-                                        <x:String>Inclusive</x:String>
-                                        <x:String>Exclusive</x:String>
-                                    </x:Array>
-                                </Picker.ItemsSource>
-                            </Picker>
-
-                            <Button Text="Save" Margin="20,10,20,5" BackgroundColor="{DynamicResource ColorNobleBlue}" HeightRequest="48" TextColor="White" FontFamily="Ubuntu-Regular" FontSize="Caption" Command="{Binding SaveCommand,Mode=TwoWay}" />
-                        </StackLayout>
-                    </Frame>
-                </StackLayout>
-            </ScrollView>
-
+            <Label FontSize="12" Margin="16,8,16,0" FontFamily="Ubuntu-Medium">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{xct:Translate Tax Method}" TextColor="Black"/>
+                        <Span Text=" * " TextColor="{DynamicResource ColorRed}"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Picker SelectedItem="{Binding Tax.TaxMethod}" HeightRequest="48" BackgroundColor="{DynamicResource ColorFields}" TextColor="Black" 
+                    Margin="16,0,16,0" Visual="Default" FontSize="16" FontFamily="Ubuntu-Regular">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Inclusive</x:String>
+                        <x:String>Exclusive</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            <Label Text="{xct:Translate Select the type of tax}" TextColor="{DynamicResource ColorRed}" FontSize="8" Margin="16,0,16,0" 
+                   IsVisible="{Binding ValidTaxType, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
 
             
-
+            <Button Text="Save" Margin="20,10,20,5" BackgroundColor="{DynamicResource ColorNobleBlue}" HeightRequest="48" TextColor="White" FontFamily="Ubuntu-Regular" FontSize="Caption" Command="{Binding SaveCommand,Mode=TwoWay}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

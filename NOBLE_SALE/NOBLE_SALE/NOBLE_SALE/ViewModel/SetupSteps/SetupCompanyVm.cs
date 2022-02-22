@@ -26,7 +26,6 @@ namespace NOBLE_SALE.ViewModel.SetupSteps
             set { _CompanyInfo = value;OnPropertyChanged(); }
         }
 
-
         public StepsVm Steps { get; set; }
 
         public Command UpdateCommand { get; set; }
@@ -55,11 +54,54 @@ namespace NOBLE_SALE.ViewModel.SetupSteps
             set { _TaxNo = value; OnPropertyChanged(); }
         }
 
+        private bool validateName;
+        public bool ValidateName
+        {
+            get
+            {
+                return validateName;
+            }
+            set
+            {
+                validateName = value;
+                OnPropertyChanged();
+            }
+        }
 
+        private bool validateCategory;
+        public bool ValidateCategory
+        {
+            get
+            {
+                return validateCategory;
+            }
+            set
+            {
+                validateCategory = value;
+                OnPropertyChanged();
+            }
+        }
 
+        private bool validateAddress;
+        public bool ValidateAddress
+        {
+            get
+            {
+                return validateAddress;
+            }
+            set
+            {
+                validateAddress = value;
+                OnPropertyChanged();
+            }
+        }
 
         public SetupCompanyVm()
         {
+            ValidateAddress = true;
+            ValidateCategory = true;
+            ValidateName = true;
+
             GetCompanyDetail();
             Company = new CompanyDto();
             CompanyInfo = new NOBLE_SALE.Model.SetupSteps.BusinessVm();
@@ -69,32 +111,53 @@ namespace NOBLE_SALE.ViewModel.SetupSteps
 
         private async void UpdateHandler(object obj)
         {
-            CompanyInfo.NameInArabic = string.Empty;
-            CompanyInfo.CategoryInArabic = string.Empty;
-            CompanyInfo.AddressInArabic = string.Empty;
-            var service = new SetupService();
-            var response = await service.UpdateCompany(CompanyInfo);
-            if (response)
+            if (CompanyInfo.CompanyNameEnglish == null || CompanyInfo.CompanyNameEnglish == string.Empty)
             {
-                UserData.CompanySetup = false;
-                Steps.CompanyId = UserData.Current.CompanyId;
-                Steps.Step2 = true;
-                response = await service.UpdateSteps(Steps);
+                ValidateName = false;
+            }
+            if (CompanyInfo.CategoryInEnglish == null || CompanyInfo.CategoryInEnglish == string.Empty)
+            {
+                ValidateCategory = false;
+            }
+            if (CompanyInfo.AddressInEnglish == null || CompanyInfo.AddressInEnglish == string.Empty)
+            {
+                ValidateAddress = false;
+            }
+
+            if(ValidateName && ValidateCategory && ValidateAddress)
+            {
+                CompanyInfo.NameInArabic = string.Empty;
+                CompanyInfo.CategoryInArabic = string.Empty;
+                CompanyInfo.AddressInArabic = string.Empty;
+                var service = new SetupService();
+                var response = await service.UpdateCompany(CompanyInfo);
                 if (response)
                 {
-                    
-                    
-                    response = await service.SetFinancialYear();
+                    UserData.CompanySetup = false;
+                    Steps.CompanyId = UserData.Current.CompanyId;
+                    Steps.Step2 = true;
+                    response = await service.UpdateSteps(Steps);
                     if (response)
                     {
-                        Steps.CompanyId = UserData.Current.CompanyId;
-                        Steps.Step5 = true;
-                        response = await service.UpdateSteps(Steps);
+
+
+                        response = await service.SetFinancialYear();
                         if (response)
                         {
-                            await Application.Current.MainPage.Navigation.PopAsync();
-                            await Application.Current.MainPage.Navigation.PopAsync();
-                            await Application.Current.MainPage.Navigation.PushAsync(new SetupPage());
+                            Steps.CompanyId = UserData.Current.CompanyId;
+                            Steps.Step5 = true;
+                            response = await service.UpdateSteps(Steps);
+                            if (response)
+                            {
+                                await Application.Current.MainPage.Navigation.PopAsync();
+                                await Application.Current.MainPage.Navigation.PopAsync();
+                                await Application.Current.MainPage.Navigation.PushAsync(new SetupPage());
+                            }
+                            else
+                            {
+                                await Application.Current.MainPage.DisplayAlert("errorss", "Request Failed", "ok");
+                            }
+
                         }
                         else
                         {
@@ -106,18 +169,14 @@ namespace NOBLE_SALE.ViewModel.SetupSteps
                     {
                         await Application.Current.MainPage.DisplayAlert("errorss", "Request Failed", "ok");
                     }
-
                 }
+
                 else
                 {
                     await Application.Current.MainPage.DisplayAlert("errorss", "Request Failed", "ok");
                 }
             }
-
-            else
-            {
-                await Application.Current.MainPage.DisplayAlert("errorss", "Request Failed", "ok");
-            }
+            
         }
 
         private async void GetCompanyDetail()

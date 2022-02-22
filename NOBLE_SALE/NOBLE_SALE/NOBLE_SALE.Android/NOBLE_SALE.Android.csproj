@@ -73,8 +73,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EditorDroid.cs" />
     <Compile Include="EntryDroid.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="PickerDroid.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

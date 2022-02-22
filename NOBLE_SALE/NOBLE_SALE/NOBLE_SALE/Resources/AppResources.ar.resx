@@ -129,6 +129,9 @@
   <data name="Account Ledger Icon" xml:space="preserve">
     <value>د</value>
   </data>
+  <data name="Account Setup" xml:space="preserve">
+    <value>اعدادات الحساب</value>
+  </data>
   <data name="Account Type" xml:space="preserve">
     <value>نوع الحساب</value>
   </data>
@@ -252,6 +255,12 @@
   <data name="Business Name Required" xml:space="preserve">
     <value>الاسم التجاري مطلوب</value>
   </data>
+  <data name="Business Type" xml:space="preserve">
+    <value>نوع من الاعمال</value>
+  </data>
+  <data name="Business Type is required" xml:space="preserve">
+    <value>نوع العمل مطلوب</value>
+  </data>
   <data name="Businesses" xml:space="preserve">
     <value>الأعمال</value>
   </data>
@@ -281,6 +290,9 @@
   </data>
   <data name="Cash in Hand" xml:space="preserve">
     <value>نقد في اليد</value>
+  </data>
+  <data name="Category is Required" xml:space="preserve">
+    <value>فئة الشركة المطلوبة</value>
   </data>
   <data name="Category Name" xml:space="preserve">
     <value>اسم التصنيف</value>
@@ -321,6 +333,9 @@
   <data name="Company Name" xml:space="preserve">
     <value>اسم الشركة</value>
   </data>
+  <data name="Company Name is required" xml:space="preserve">
+    <value>اسم الشركة مطلوب</value>
+  </data>
   <data name="Confirm New Password" xml:space="preserve">
     <value>تأكيد كلمة المرور الجديدة</value>
   </data>
@@ -344,6 +359,18 @@
   </data>
   <data name="Credit" xml:space="preserve">
     <value>تنسب إليه</value>
+  </data>
+  <data name="Currency Name" xml:space="preserve">
+    <value>اسم العملة</value>
+  </data>
+  <data name="Currency Name is required" xml:space="preserve">
+    <value>اسم العملة مطلوب</value>
+  </data>
+  <data name="Currency Sign" xml:space="preserve">
+    <value>علامة العملة</value>
+  </data>
+  <data name="Currency sign is required" xml:space="preserve">
+    <value>مطلوب علامة العملة</value>
   </data>
   <data name="Current Password" xml:space="preserve">
     <value>كلمة المرور الحالية</value>
@@ -440,6 +467,9 @@
   </data>
   <data name="Enter a valid port number" xml:space="preserve">
     <value>أدخل رقم منفذ صالح</value>
+  </data>
+  <data name="Enter a valid tax rate" xml:space="preserve">
+    <value>أدخل معدل ضريبة صالح</value>
   </data>
   <data name="Enter email pass" xml:space="preserve">
     <value>أدخل بريدك الإلكتروني وكلمة المرور للمتابعة</value>
@@ -813,8 +843,17 @@
   <data name="Select" xml:space="preserve">
     <value>اختار</value>
   </data>
+  <data name="Select the type of tax" xml:space="preserve">
+    <value>حدد نوع الضريبة</value>
+  </data>
   <data name="Server Settings" xml:space="preserve">
     <value>اعدادات الخادم</value>
+  </data>
+  <data name="Set Currency and VAT" xml:space="preserve">
+    <value>تعيين العملة وضريبة القيمة المضافة</value>
+  </data>
+  <data name="Setup Company Information" xml:space="preserve">
+    <value>إعداد معلومات الشركة</value>
   </data>
   <data name="Setup Forms" xml:space="preserve">
     <value>معالج الاعداد</value>
@@ -863,6 +902,12 @@
   </data>
   <data name="Supplier Product Purchase" xml:space="preserve">
     <value>منتج شراء المورد</value>
+  </data>
+  <data name="Tax Method" xml:space="preserve">
+    <value>الطريقة الضريبية</value>
+  </data>
+  <data name="Tax name is required" xml:space="preserve">
+    <value>الاسم الضريبي مطلوب</value>
   </data>
   <data name="Terminal" xml:space="preserve">
     <value>ختام العمر</value>
@@ -939,6 +984,9 @@
   <data name="Value added tax number required" xml:space="preserve">
     <value>رقم ضريبة القيمة المضافة مطلوب</value>
   </data>
+  <data name="VAT Name" xml:space="preserve">
+    <value>اسم ضريبة القيمة المضافة</value>
+  </data>
   <data name="VAT Number" xml:space="preserve">
     <value>رقم ضريبة القيمة المضافة</value>
   </data>
@@ -950,6 +998,9 @@
   </data>
   <data name="Vat Payable Report" xml:space="preserve">
     <value>تقرير ضريبة القيمة المضافة</value>
+  </data>
+  <data name="VAT Rate" xml:space="preserve">
+    <value>قيمة الضريبة</value>
   </data>
   <data name="Warehouse" xml:space="preserve">
     <value>المستودعات</value>

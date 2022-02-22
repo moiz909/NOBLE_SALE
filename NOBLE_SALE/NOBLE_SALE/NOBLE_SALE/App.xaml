@@ -10,24 +10,32 @@
             <Color x:Key="ColorRed">#FF3030</Color>
             <Color x:Key="ColorNobleBlue">#0280FD</Color>
             <Color x:Key="ColorFieldsText">#444C55</Color>
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+            <Color x:Key="ColorDashboardFrame">#F9F9F9</Color>
+            <Color x:Key="ColorDashboardFrameText">#5D5C5D</Color>
+            <Color x:Key="ColorFlyoutFrame">#DBEDFF</Color>
+            <Color x:Key="ColorExpander">#727F8D</Color>
+            <Color x:Key="ColorReportsFrame">#F9FBFF</Color>
+            <Color x:Key="ColorReportExpanderFrame">#F3F5F6</Color>
+            <Color x:Key="ColorDisabledField">#E5E5E5</Color>
+            <Color x:Key="ColorGreen">#12AB5A</Color>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <OnPlatform x:TypeArguments="x:String" 
                 x:Key="FontAwesomeBrands">
                 <On Platform="Android" 

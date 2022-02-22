@@ -97,6 +97,15 @@ namespace NOBLE_SALE.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Account Setup.
+        /// </summary>
+        internal static string Account_Setup {
+            get {
+                return ResourceManager.GetString("Account Setup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Account Type.
         /// </summary>
         internal static string Account_Type {
@@ -475,6 +484,24 @@ namespace NOBLE_SALE.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Business Type.
+        /// </summary>
+        internal static string Business_Type {
+            get {
+                return ResourceManager.GetString("Business Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Business Type is required.
+        /// </summary>
+        internal static string Business_Type_is_required {
+            get {
+                return ResourceManager.GetString("Business Type is required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to BUSINESSES.
         /// </summary>
         internal static string Businesses {
@@ -561,6 +588,15 @@ namespace NOBLE_SALE.Resources {
         internal static string Cash_in_Hand {
             get {
                 return ResourceManager.GetString("Cash in Hand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category is Required.
+        /// </summary>
+        internal static string Category_is_Required {
+            get {
+                return ResourceManager.GetString("Category is Required", resourceCulture);
             }
         }
         
@@ -682,6 +718,15 @@ namespace NOBLE_SALE.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Company Name is required.
+        /// </summary>
+        internal static string Company_Name_is_required {
+            get {
+                return ResourceManager.GetString("Company Name is required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm New Password.
         /// </summary>
         internal static string Confirm_New_Password {
@@ -750,6 +795,42 @@ namespace NOBLE_SALE.Resources {
         internal static string Credit {
             get {
                 return ResourceManager.GetString("Credit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currency Name.
+        /// </summary>
+        internal static string Currency_Name {
+            get {
+                return ResourceManager.GetString("Currency Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currency Name is required.
+        /// </summary>
+        internal static string Currency_Name_is_required {
+            get {
+                return ResourceManager.GetString("Currency Name is required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currency Sign.
+        /// </summary>
+        internal static string Currency_Sign {
+            get {
+                return ResourceManager.GetString("Currency Sign", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currency Sign is required.
+        /// </summary>
+        internal static string Currency_sign_is_required {
+            get {
+                return ResourceManager.GetString("Currency sign is required", resourceCulture);
             }
         }
         
@@ -1047,6 +1128,15 @@ namespace NOBLE_SALE.Resources {
         internal static string Enter_a_valid_port_number {
             get {
                 return ResourceManager.GetString("Enter a valid port number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter a valid tax rate.
+        /// </summary>
+        internal static string Enter_a_valid_tax_rate {
+            get {
+                return ResourceManager.GetString("Enter a valid tax rate", resourceCulture);
             }
         }
         
@@ -2167,11 +2257,38 @@ namespace NOBLE_SALE.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select the type of tax.
+        /// </summary>
+        internal static string Select_the_type_of_tax {
+            get {
+                return ResourceManager.GetString("Select the type of tax", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Server Settings.
         /// </summary>
         internal static string Server_Settings {
             get {
                 return ResourceManager.GetString("Server Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set Currency and VAT.
+        /// </summary>
+        internal static string Set_Currency_and_VAT {
+            get {
+                return ResourceManager.GetString("Set Currency and VAT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set Company Information.
+        /// </summary>
+        internal static string Setup_Company_Information {
+            get {
+                return ResourceManager.GetString("Setup Company Information", resourceCulture);
             }
         }
         
@@ -2316,6 +2433,24 @@ namespace NOBLE_SALE.Resources {
         internal static string Supplier_Product_Purchase {
             get {
                 return ResourceManager.GetString("Supplier Product Purchase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tax Method.
+        /// </summary>
+        internal static string Tax_Method {
+            get {
+                return ResourceManager.GetString("Tax Method", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tax name is required.
+        /// </summary>
+        internal static string Tax_name_is_required {
+            get {
+                return ResourceManager.GetString("Tax name is required", resourceCulture);
             }
         }
         
@@ -2545,6 +2680,15 @@ namespace NOBLE_SALE.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to VAT Name.
+        /// </summary>
+        internal static string VAT_Name {
+            get {
+                return ResourceManager.GetString("VAT Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VAT Number.
         /// </summary>
         internal static string VAT_Number {
@@ -2577,6 +2721,15 @@ namespace NOBLE_SALE.Resources {
         internal static string Vat_Payable_Report {
             get {
                 return ResourceManager.GetString("Vat Payable Report", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VAT Rate.
+        /// </summary>
+        internal static string VAT_Rate {
+            get {
+                return ResourceManager.GetString("VAT Rate", resourceCulture);
             }
         }
         
