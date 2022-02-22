@@ -68,20 +68,20 @@
             </Grid>
 
 
-            <CollectionView HeightRequest="250" ItemsSource="{Binding Products}" x:Name="producttablelist"
+            <CollectionView HeightRequest="250" ItemsSource="{Binding Products,Mode=TwoWay}" x:Name="producttablelist"
                             VerticalScrollBarVisibility="Never">
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout>
-                                <SwipeView BackgroundColor="White">
+                                <SwipeView BackgroundColor="White" >
                                     <StackLayout Margin="16,4,16,2" HeightRequest="70" Orientation="Horizontal" BackgroundColor="#EDF3FA" >
                                         <StackLayout>
                                             <Label Text="{Binding ProductName}" Margin="10,5,5,1" FontAttributes="Bold" FontSize="12" FontFamily="{StaticResource UbuntuBold}"
                                                TextColor="#001833"  Grid.Column="0" Grid.Row="0"/>
                                             <Label Text="{Binding UnitPrice,StringFormat='Unit Price | $ {0:F0}'}"  FontAttributes="None" Margin="10,0,0,0" Padding="0"  FontSize="10" FontFamily="{StaticResource UbuntuBold}"
                                                TextColor="#757575"  Grid.Column="0" Grid.Row="1"/>
-                                            <Label Text="{Binding UnitPrice}" FontAttributes="None" Margin="10,0,0,10" Padding="0" FontSize="12" FontFamily="{StaticResource UbuntuBold}"
+                                            <Label Text="{Binding Total}" FontAttributes="None" Margin="10,0,0,10" Padding="0" FontSize="12" FontFamily="{StaticResource UbuntuBold}"
                                                TextColor="#001833"  Grid.Column="0" Grid.Row="2"/>
                                         </StackLayout>
 
@@ -92,7 +92,7 @@
                                                         <TapGestureRecognizer  Command="{Binding Path=BindingContext.DecrementQtyHandler,Source={x:Reference producttablelist},Mode=TwoWay}" CommandParameter="{Binding .}"/>
                                                     </Label.GestureRecognizers>
                                                 </Label>
-                                                <Label Text="{Binding Quantity}" TextColor="Black"
+                                                <Label Text="{Binding Quantity,Mode=TwoWay}" TextColor="Black"
                                                    FontSize="14" HorizontalOptions="Center"/>
                                                 <Label Text="+" TextColor="Black" VerticalOptions="End" FontSize="14" HorizontalOptions="End">
                                                     <Label.GestureRecognizers>
@@ -103,11 +103,14 @@
                                             <!--<Label HorizontalOptions="Center" VerticalOptions="Center" Text="-   3   +" TextColor="Black" FontSize="14" Margin="0"/>-->
                                         </Frame>
                                     </StackLayout>
-                                    <SwipeView.RightItems>
-                                        <SwipeItems>
-                                            <SwipeItemView BackgroundColor="White" >
+                                    <SwipeView.RightItems >
+                                        <SwipeItems >
+                                        <SwipeItemView BackgroundColor="White" Command="{Binding Path=BindingContext.DeleteItemHandler,Source={x:Reference producttablelist},Mode=TwoWay}" >
                                                 <StackLayout WidthRequest="48" HeightRequest="70" Padding="0" Margin="4,0,0,0" BackgroundColor="#FFE5E5">
                                                     <svg:Icon HeightRequest="24" WidthRequest="24" VerticalOptions="CenterAndExpand" ResourceId="NOBLE_SALE.Resources.Icons.Delete.svg" />
+                                                <!--<StackLayout.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.DeleteItemHandler,Source={x:Reference producttablelist},Mode=TwoWay}"/>
+                                                </StackLayout.GestureRecognizers>-->
                                                 </StackLayout>
                                             </SwipeItemView>
                                         </SwipeItems>
@@ -240,17 +243,17 @@
                 <Label Text="Total with Vat" TextColor="#001833" FontFamily="{StaticResource UbuntuBold}" FontSize="12" Grid.Column="0"
                        Grid.Row="5"/>
 
-                <Label Text="5" HorizontalOptions="End" TextColor="#001833" FontFamily="{StaticResource UbuntuBold}" FontSize="12" Grid.Column="1"
+                <Label Text="{Binding TotalItems,Mode=TwoWay}" HorizontalOptions="End" TextColor="#001833" FontFamily="{StaticResource UbuntuBold}" FontSize="12" Grid.Column="1"
                        Grid.Row="0"/>
-                <Label Text="18" HorizontalOptions="End" TextColor="#001833" FontFamily="{StaticResource UbuntuBold}" FontSize="12" Grid.Column="1"
+                <Label Text="{Binding TotalQuantity,Mode=TwoWay}" HorizontalOptions="End" TextColor="#001833" FontFamily="{StaticResource UbuntuBold}" FontSize="12" Grid.Column="1"
                        Grid.Row="1"/>
-                <Label Text="238.00" HorizontalOptions="End" TextColor="#001833" FontFamily="{StaticResource UbuntuBold}" FontSize="12" Grid.Column="1"
+                <Label Text="{Binding Total, StringFormat='{0:0.##}',Mode=TwoWay}" HorizontalOptions="End" TextColor="#001833" FontFamily="{StaticResource UbuntuBold}" FontSize="12" Grid.Column="1"
                        Grid.Row="2"/>
                 <Label Text="0.00" HorizontalOptions="End" TextColor="#001833" FontFamily="{StaticResource UbuntuBold}" FontSize="12" Grid.Column="1"
                        Grid.Row="3"/>
-                <Label Text="35.70" HorizontalOptions="End" TextColor="#001833" FontFamily="{StaticResource UbuntuBold}" FontSize="12" Grid.Column="1"
+                <Label Text="{Binding TotalVat, StringFormat='{0:0.##}',Mode=TwoWay}" HorizontalOptions="End" TextColor="#001833" FontFamily="{StaticResource UbuntuBold}" FontSize="12" Grid.Column="1"
                        Grid.Row="4"/>
-                <Label Text="273.70" HorizontalOptions="End" TextColor="#001833" FontFamily="{StaticResource UbuntuBold}" FontSize="12" Grid.Column="1"
+                <Label Text="{Binding Total, StringFormat='{0:0.##}',Mode=TwoWay}" HorizontalOptions="End" TextColor="#001833" FontFamily="{StaticResource UbuntuBold}" FontSize="12" Grid.Column="1"
                        Grid.Row="5"/>
 
 
@@ -265,7 +268,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Text="Total with Vat"  TextColor="#001833" FontFamily="{StaticResource UbuntuBold}" FontSize="16" Grid.Column="0"/>
-                <Label Text="$273.70"  TextColor="#001833" FontFamily="{StaticResource UbuntuBold}" HorizontalOptions="End" FontSize="16" Grid.Column="1"/>
+                <Label Text="{Binding Total, StringFormat='{0:0.##}',Mode=TwoWay}"  TextColor="#001833" FontFamily="{StaticResource UbuntuBold}" HorizontalOptions="End" FontSize="16" Grid.Column="1"/>
             </Grid>
 
 
