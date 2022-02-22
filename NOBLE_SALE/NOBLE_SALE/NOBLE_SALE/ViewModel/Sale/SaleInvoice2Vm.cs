@@ -1,6 +1,8 @@
 ﻿using NOBLE_SALE.Model.Product;
 using NOBLE_SALE.Model.Sale;
 using NOBLE_SALE.Services;
+using NOBLE_SALE.View.Sale;
+using Rg.Plugins.Popup.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -30,6 +32,8 @@ namespace NOBLE_SALE.ViewModel.Sale
         public Command DecrementQtyHandler { get; set; }
         public Command IncrementQtyHandler { get; set; }
         public Command DeleteItemHandler { get; set; }
+        public Command RemovePage { get; set; }
+        public Command WalkinHandler { get; set; }
 
         //private List<ProductLookUpModel> _Products;
 
@@ -66,6 +70,19 @@ namespace NOBLE_SALE.ViewModel.Sale
                 OnPropertyChanged();
             }
         }
+
+        private SaleLookupModel _Sale;
+
+        public SaleLookupModel Sale
+        {
+            get { return _Sale; }
+            set 
+            { 
+                _Sale = value;
+                OnPropertyChanged();
+            }
+        }
+
 
 
 
@@ -106,6 +123,29 @@ namespace NOBLE_SALE.ViewModel.Sale
             }
         }
 
+        private string _TodayDate;
+
+        public string TodayDate
+        {
+            get { return _TodayDate; }
+            set 
+            {
+                _TodayDate = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _TimeNow;
+
+        public string TimeNow
+        {
+            get { return _TimeNow; }
+            set 
+            { 
+                _TimeNow = value;
+                OnPropertyChanged();
+            }
+        }
 
 
 
@@ -115,13 +155,106 @@ namespace NOBLE_SALE.ViewModel.Sale
         {
             ProductList = model;
             Products = new ObservableCollection<SaleItemLookupModel>();
+            Sale = new SaleLookupModel();
             GetData(model);
             TotalItems = model.Count;
             TotalQuantity = model.Count;
             DecrementQtyHandler = new Command(DecrementQtyCommand);
             IncrementQtyHandler = new Command(IncrementQtyCommand);
             DeleteItemHandler = new Command(DeleteItemCommand);
+            WalkinHandler = new Command(WalkinCommand);
+            TodayDate = DateTime.Now.ToString("dddd, dd MMMM yyyy");
+            TimeNow = DateTime.Now.ToString("hh:mm tt");
+            RemovePage = new Command(RemovePageCommand);
+        }
 
+        public SaleInvoice2Vm()
+        {
+            Products = new ObservableCollection<SaleItemLookupModel>();
+            Sale = new SaleLookupModel();
+            DecrementQtyHandler = new Command(DecrementQtyCommand);
+            IncrementQtyHandler = new Command(IncrementQtyCommand);
+            DeleteItemHandler = new Command(DeleteItemCommand);
+            WalkinHandler = new Command(WalkinCommand);
+            TodayDate = DateTime.Now.ToString("dddd, dd MMMM yyyy");
+            TimeNow = DateTime.Now.ToString("hh:mm tt");
+            RemovePage = new Command(RemovePageCommand);
+        }
+
+        private async void WalkinCommand(object obj)
+        {
+            await Application.Current.MainPage.Navigation.PushPopupAsync(new CustomerPopupPage());
+        }
+
+        private async void RemovePageCommand(object obj)
+        {
+            await Application.Current.MainPage.Navigation.PopAsync();
+        }
+
+        public Command<SaleItemLookupModel> RemoveCommand
+        {
+            get
+            {
+                return new Command<SaleItemLookupModel>((Product) => {
+                    var lastproducts = new List<SaleItemLookupModel>();
+                    TotalVat = 0;
+                    Total = 0;
+                    Products.Remove(Product);
+                    foreach (var item in Products)
+                    {
+                        var saleitem = new SaleItemLookupModel
+                        {
+                            Code = item.Code,
+                            Id = Guid.Empty,
+                            ProductId = item.ProductId,
+                            ProductName = item.ProductName,
+                            Quantity = item.Quantity,
+                            SaleId = Guid.Empty,
+                            SaleReturnDays = "0",
+                            Total = item.Total,
+                            TaxMethod = item.TaxMethod,
+                            TaxRateId = item.TaxRateId,
+                            UnitPrice = item.UnitPrice,
+                            WareHouseId = Guid.Empty
+                        };
+                        lastproducts.Add(saleitem);
+                    }
+                    Products.Clear();
+
+                    foreach (var item in lastproducts)
+                    {
+                        var sale = new SaleItemLookupModel
+                        {
+                            Code = item.Code,
+                            Id = Guid.Empty,
+                            ProductId = item.ProductId,
+                            ProductName = item.ProductName,
+                            Quantity = item.Quantity,
+                            SaleId = Guid.Empty,
+                            Total = item.Total,
+                            SaleReturnDays = "0",
+                            TaxMethod = item.TaxMethod,
+                            TaxRateId = item.TaxRateId,
+                            UnitPrice = item.UnitPrice,
+                            WareHouseId = Guid.Empty
+                        };
+                        Products.Add(sale);
+                    }
+
+                    foreach (var item in Products)
+                    {
+                        if (item.TaxMethod == "Inclusive")
+                        {
+                            TotalVat = TotalVat + ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / (100 + TaxRateList.TaxRates[0].Rate));
+                            Total = Total + (item.UnitPrice * item.Quantity);
+                        }
+                        else
+                        {
+                            TotalVat = TotalVat + ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / 100);
+                        }
+                    }
+                });
+            }
         }
 
         private void DeleteItemCommand(object obj)
@@ -331,6 +464,8 @@ namespace NOBLE_SALE.ViewModel.Sale
 
         private async void GetData(List<ProductLookUpModel> products)
         {
+
+
             foreach (var item in products)
             {
                 var sale = new SaleItemLookupModel
