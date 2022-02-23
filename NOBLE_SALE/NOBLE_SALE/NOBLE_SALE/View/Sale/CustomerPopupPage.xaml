@@ -6,9 +6,7 @@
                  xmlns:vm="clr-namespace:NOBLE_SALE.ViewModel.Sale"
                  x:Class="NOBLE_SALE.View.Sale.CustomerPopupPage">
 
-    <pages:PopupPage.BindingContext>
-        <vm:SaleInvoice1Vm/>
-    </pages:PopupPage.BindingContext>
+    
 
     <pages:PopupPage.Animation>
         <animations:ScaleAnimation

@@ -358,7 +358,7 @@
 
 
 
-        <Button Text="Next" WidthRequest="343" HeightRequest="38" Margin="5" HorizontalOptions="Center" BackgroundColor="#12AB5A" Command="{Binding NextBtnCommand,Mode=TwoWay}"
+        <Button Text="Next" WidthRequest="343" HeightRequest="38" Margin="5" HorizontalOptions="Center" VerticalOptions="End" BackgroundColor="#12AB5A" Command="{Binding NextBtnCommand,Mode=TwoWay}"
                     TextColor="White"/>
         </StackLayout>
     </ContentPage.Content>

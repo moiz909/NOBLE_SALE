@@ -276,7 +276,7 @@
             </Grid>
 
 
-            <StackLayout HeightRequest="80" HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+            <StackLayout HeightRequest="80" VerticalOptions="End" HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
                 <Frame WidthRequest="60" Margin="16,16,2,16" Padding="0" CornerRadius="5"  BackgroundColor="#FFEBF0" >
                     <Label Text="{x:Static fontawesome:FontAwesomeIcons.Times}" Grid.Column="0" VerticalOptions="Center"
                            FontFamily="{StaticResource FontAwesomeSolid}" TextColor="#FF3030" HorizontalOptions="Center"
