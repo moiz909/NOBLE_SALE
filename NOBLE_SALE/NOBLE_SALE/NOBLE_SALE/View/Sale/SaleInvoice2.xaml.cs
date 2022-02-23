@@ -35,9 +35,5 @@ namespace NOBLE_SALE.View.Sale
             vm.RemoveCommand.Execute(product);
         }
 
-        private void SwipeItemView_Invoked_1(object sender, EventArgs e)
-        {
-
-        }
     }
 }

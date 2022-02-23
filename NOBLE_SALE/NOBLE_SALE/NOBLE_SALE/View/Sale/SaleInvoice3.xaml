@@ -5,9 +5,13 @@
              xmlns:svg="clr-namespace:NOBLE_SALE.Helper"
              Visual="Material"
              BackgroundColor="White"
-             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:vm="clr-namespace:NOBLE_SALE.ViewModel.Sale"
              NavigationPage.HasBackButton="False"
              x:Class="NOBLE_SALE.View.Sale.SaleInvoice3">
+
+    <ContentPage.BindingContext>
+        <vm:SaleInvoice3Vm/>
+    </ContentPage.BindingContext>
 
 
     <NavigationPage.TitleView>
@@ -88,16 +92,16 @@
                         </Grid.RowDefinitions>
 
                         <Label Text="Due Amount" TextColor="#444C55" FontFamily="Ubuntu-regular" Grid.Column="0" Grid.Row="0"/>
-                        <Entry Keyboard="Numeric" BackgroundColor="#EDF3FA" Grid.Column="0" Grid.Row="1"/>
+                        <Entry Keyboard="Numeric" IsEnabled="False" Text="{Binding due,Mode=TwoWay}" BackgroundColor="#EDF3FA" Grid.Column="0" Grid.Row="1"/>
 
                         <Label Text="Recieved" TextColor="#444C55" FontFamily="Ubuntu-regular" Grid.Column="1" Grid.Row="0"/>
-                        <Entry Keyboard="Numeric" BackgroundColor="#EDF3FA" Grid.Column="1" Grid.Row="1"/>
+                        <Entry Keyboard="Numeric" Text="{Binding recieved,Mode=TwoWay}" BackgroundColor="#EDF3FA" Grid.Column="1" Grid.Row="1"/>
 
                         <Label Text="Balance" TextColor="#444C55" FontFamily="Ubuntu-regular" Grid.Column="0" Grid.Row="2"/>
-                        <Entry Keyboard="Numeric" BackgroundColor="#EDF3FA" Grid.Column="0" Grid.Row="3"/>
+                        <Entry Keyboard="Numeric" IsEnabled="False" Text="{Binding balance,Mode=TwoWay}" BackgroundColor="#EDF3FA" Grid.Column="0" Grid.Row="3"/>
 
-                        <Label Text="Change" TextColor="#444C55" FontFamily="Ubuntu-regular" Grid.Column="1" Grid.Row="2"/>
-                        <Entry Keyboard="Numeric" BackgroundColor="#EDF3FA" Grid.Column="1" Grid.Row="3"/>
+                        <Label Text="Change"  TextColor="#444C55" FontFamily="Ubuntu-regular" Grid.Column="1" Grid.Row="2"/>
+                        <Entry Keyboard="Numeric" IsEnabled="False" Text="{Binding balance,Mode=TwoWay}" BackgroundColor="#EDF3FA" Grid.Column="1" Grid.Row="3"/>
                         
                     </Grid>
 
