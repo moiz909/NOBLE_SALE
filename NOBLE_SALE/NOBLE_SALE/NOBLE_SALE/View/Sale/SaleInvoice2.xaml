@@ -190,6 +190,10 @@
                            FontFamily="{StaticResource FontAwesomeSolid}"  TextColor="White"
                           FontSize="18" />
                     </StackLayout>
+
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding PayBtnHandler}"/>
+                    </Frame.GestureRecognizers>
                 </Frame>
             </StackLayout>
             

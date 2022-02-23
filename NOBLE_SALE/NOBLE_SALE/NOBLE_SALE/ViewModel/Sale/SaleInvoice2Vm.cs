@@ -2,6 +2,7 @@
 using NOBLE_SALE.Model.Product;
 using NOBLE_SALE.Model.Sale;
 using NOBLE_SALE.Services;
+using NOBLE_SALE.View;
 using NOBLE_SALE.View.Sale;
 using Rg.Plugins.Popup.Extensions;
 using System;
@@ -151,7 +152,7 @@ namespace NOBLE_SALE.ViewModel.Sale
             RemovePage = new Command(RemovePageCommand);
         }
 
-        private void PayBtnCommand(object obj)
+        private async void PayBtnCommand(object obj)
         {
             Random rnd = new Random();
             Sale.BarCode = rnd.Next().ToString();
@@ -170,6 +171,8 @@ namespace NOBLE_SALE.ViewModel.Sale
             Sale.SaleItems = Products;
             Sale.VoucherNo = string.Empty;
             Sale.WareHouseId = (Guid)UserData.Current.WarehouseId;
+            Sale.SalePayment.DueAmount = Total;
+            //await Application.Current.MainPage.Navigation.PushAsync(new SaleInvoice3(Sale));
         }
 
         public SaleInvoice2Vm()
