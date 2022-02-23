@@ -5,14 +5,16 @@
              xmlns:svg="clr-namespace:NOBLE_SALE.Helper"
              Visual="Material"
              BackgroundColor="White"
+             NavigationPage.IconColor="Black"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-             NavigationPage.HasBackButton="False"
              x:Class="NOBLE_SALE.View.Sale.SaleInvoice2">
 
-    <!--<ContentPage.BindingContext>
-        <vm:SaleInvoice2Vm/>
-    </ContentPage.BindingContext>-->
-
+    <NavigationPage.TitleView>
+        <StackLayout>
+            <Label Text="Sale Invoice" TextColor="{DynamicResource ColorNobleBlue}" FontSize="18" FontFamily="Ubuntu-Bold"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    
     <ContentPage.Resources>
         <ResourceDictionary>
             <xct:MathExpressionConverter x:Key="MathExpressionConverter" />
@@ -20,33 +22,10 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <NavigationPage.TitleView>
-        <StackLayout>
-            <Grid Margin="16">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition/>
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Label Text="{x:Static fontawesome:FontAwesomeIcons.AngleLeft}" Grid.Column="0"
-                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Black"
-                          FontSize="Large" />
-                <Label Text="Sale Invoice" TextColor="#0280FD" FontSize="18"  Grid.ColumnSpan="2" HorizontalOptions="Center"
-                   FontAttributes="Bold"  FontFamily="{StaticResource UbuntuBold}" Grid.Column="1"/>
-
-                <Label Text="{x:Static fontawesome:FontAwesomeIcons.Bell}" Grid.Column="3" 
-                           FontFamily="{StaticResource FontAwesomeBrands}" TextColor="Black" HorizontalOptions="End"
-                          FontSize="18" />
-            </Grid>
-        </StackLayout>
-    </NavigationPage.TitleView>
 
     <ContentPage.Content>
-
         <StackLayout>
-
-            <Grid Margin="16" WidthRequest="343" HeightRequest="44">
+            <Grid Margin="16" HeightRequest="40">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -56,38 +35,83 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Label Text="Walk-In" FontAttributes="Bold"  FontFamily="{StaticResource MulishRegular}" TextColor="#0280FD"
-                       Grid.Row="0" Grid.Column="0" HorizontalOptions="Start" FontSize="16">
+                <Label Text="Walk-In" FontFamily="Ubuntu-Medium" TextColor="{DynamicResource ColorNobleBlue}" Grid.Row="0" 
+                       Grid.Column="0" HorizontalOptions="Start" FontSize="16">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding WalkinHandler}"/>
                     </Label.GestureRecognizers>
                 </Label>
-                <Label Text="{Binding TodayDate,Mode=TwoWay}" TextColor="#5D5C5D" FontSize="12" Grid.Column="1" 
-                       Grid.Row="0" FontFamily="{StaticResource MulishRegular}" HorizontalOptions="End"/>
-                <Label Text="{Binding RegistrationNoDetail.Paid}" TextColor="#5D5C5D" FontSize="16" FontFamily="{StaticResource MulishRegular}"
-                       HorizontalOptions="Start" Grid.Column="0" Grid.Row="1"/>
-                <Label Text="{Binding TimeNow,Mode=TwoWay}" TextColor="#5D5C5D" FontSize="12" FontFamily="{StaticResource MulishRegular}"
-                       HorizontalOptions="End" Grid.Row="1" Grid.Column="1"/>
-
+                <Label Text="{Binding TodayDate,Mode=TwoWay}" TextColor="{DynamicResource ColorFieldsText}" FontSize="12" Grid.Column="1" 
+                       Grid.Row="0" FontFamily="Ubuntu-Regular" HorizontalOptions="End"/>
+                <Label Text="{Binding RegistrationNoDetail.Paid}" TextColor="{DynamicResource ColorFieldsText}" FontSize="16" 
+                       FontFamily="Ubuntu-Medium" HorizontalOptions="Start" Grid.Column="0" Grid.Row="1"/>
+                <Label Text="{Binding TimeNow,Mode=TwoWay}" TextColor="{DynamicResource ColorFieldsText}" FontSize="12" 
+                       FontFamily="Ubuntu-Regular" HorizontalOptions="End" Grid.Row="1" Grid.Column="1"/>
             </Grid>
 
 
             <CollectionView HeightRequest="250" ItemsSource="{Binding Products,Mode=TwoWay}" x:Name="producttablelist"
                             VerticalScrollBarVisibility="Never">
-
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout>
-                                <SwipeView BackgroundColor="White" >
-                                    <StackLayout Margin="16,4,16,2" HeightRequest="70" Orientation="Horizontal" BackgroundColor="#EDF3FA" >
-                                        <StackLayout>
-                                            <Label Text="{Binding ProductName}" Margin="10,5,5,1" FontAttributes="Bold" FontSize="12" FontFamily="{StaticResource UbuntuBold}"
-                                               TextColor="#001833"  Grid.Column="0" Grid.Row="0"/>
-                                            <Label Text="{Binding UnitPrice,StringFormat='Unit Price | $ {0:F0}'}"  FontAttributes="None" Margin="10,0,0,0" Padding="0"  FontSize="10" FontFamily="{StaticResource UbuntuBold}"
-                                               TextColor="#757575"  Grid.Column="0" Grid.Row="1"/>
-                                            <Label Text="{Binding Total}" FontAttributes="None" Margin="10,0,0,10" Padding="0" FontSize="12" FontFamily="{StaticResource UbuntuBold}"
-                                               TextColor="#001833"  Grid.Column="0" Grid.Row="2"/>
-                                        </StackLayout>
+                        <StackLayout HeightRequest="100">
+                            <SwipeView BackgroundColor="{DynamicResource ColorFields}" Padding="0" Margin="16,5,16,0">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="120"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="{Binding ProductName}" Padding="16,5,16,0" FontSize="10" FontFamily="Ubuntu-Medium" Grid.Row="0" Grid.Column="0"
+                                           TextColor="Black"/>
+                                    <Label Text="{Binding UnitPrice,StringFormat='Unit Price | $ {0:F0}'}"  Padding="16,0,16,0" 
+                                           FontSize="10" FontFamily="Ubuntu-Regular" TextColor="{DynamicResource ColorFieldsText}"  Grid.Column="0" Grid.Row="1"/>
+                                    <Label Text="{Binding Total}" FontSize="10" FontFamily="{StaticResource UbuntuBold}"
+                                           TextColor="Black"  Grid.Column="0" Grid.Row="2" Padding="16,0,16,0" Margin="0,0,0,10"/>
+
+                                    <Frame BackgroundColor="White" Padding="0" Margin="0" Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" 
+                                           VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="35" WidthRequest="120">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Frame Grid.Column="0" Padding="0">
+                                                <Label Text="-" TextColor="Black" FontSize="20" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                                
+                                                <Frame.GestureRecognizers>
+                                                    <TapGestureRecognizer  Command="{Binding Path=BindingContext.DecrementQtyHandler,Source={x:Reference producttablelist},Mode=TwoWay}" CommandParameter="{Binding .}"/>
+                                                </Frame.GestureRecognizers>
+                                            </Frame>
+                                            
+                                            <Label Text="{Binding Quantity,Mode=TwoWay}" TextColor="Black" FontSize="18" Grid.Column="1" 
+                                                   HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+
+                                            <Label Text="+" TextColor="Black" FontSize="20" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Column="2">
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.IncrementQtyHandler,Source={x:Reference producttablelist},Mode=TwoWay}" CommandParameter="{Binding .}"/>
+                                                </Label.GestureRecognizers>
+                                            </Label>
+                                        </Grid>
+                                    </Frame>
+                                </Grid>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <!--<StackLayout Margin="16,5,16,0" HeightRequest="100" Orientation="Horizontal" BackgroundColor="#EDF3FA" >
+                                        <Grid>
+                                        </Grid>
 
                                         <Frame BackgroundColor="#FFFFFF" Padding="0" CornerRadius="50" BorderColor="#D8D8D8" Margin="180,22,10,23"  HeightRequest="25" WidthRequest="73"   >
                                             <StackLayout Padding="0" HorizontalOptions="Center" VerticalOptions="Center" Orientation="Horizontal">
@@ -104,9 +128,9 @@
                                                     </Label.GestureRecognizers>
                                                 </Label>
                                             </StackLayout>
-                                            <!--<Label HorizontalOptions="Center" VerticalOptions="Center" Text="-   3   +" TextColor="Black" FontSize="14" Margin="0"/>-->
+                                            --><!--<Label HorizontalOptions="Center" VerticalOptions="Center" Text="-   3   +" TextColor="Black" FontSize="14" Margin="0"/>--><!--
                                         </Frame>
-                                    </StackLayout>
+                                    </StackLayout>-->
                                     <SwipeView.RightItems>
                                         <SwipeItems SwipeBehaviorOnInvoked="RemainOpen" Mode="Execute">
                                         <SwipeItemView BackgroundColor="White" Command="{Binding DeleteItemHandler}" >

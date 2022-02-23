@@ -14,7 +14,6 @@ namespace NOBLE_SALE.ViewModel.Sale
     class SaleInvoice2Vm : BaseViewModel
     {
         private TaxRateListModel _TaxRateList;
-
         public TaxRateListModel TaxRateList
         {
             get { return _TaxRateList; }
@@ -22,7 +21,6 @@ namespace NOBLE_SALE.ViewModel.Sale
         }
 
         private RegistrationNoLookUp _RegistrationNoDetail;
-
         public RegistrationNoLookUp RegistrationNoDetail
         {
             get { return _RegistrationNoDetail; }
@@ -35,20 +33,7 @@ namespace NOBLE_SALE.ViewModel.Sale
         public Command RemovePage { get; set; }
         public Command WalkinHandler { get; set; }
 
-        //private List<ProductLookUpModel> _Products;
-
-        //public List<ProductLookUpModel> Products
-        //{
-        //    get { return _Products; }
-        //    set 
-        //    { 
-        //        _Products = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
-
         private int _TotalItems;
-
         public int TotalItems
         {
             get { return _TotalItems; }
@@ -60,7 +45,6 @@ namespace NOBLE_SALE.ViewModel.Sale
         }
 
         private int _TotalQuantity;
-
         public int TotalQuantity
         {
             get { return _TotalQuantity; }
@@ -72,7 +56,6 @@ namespace NOBLE_SALE.ViewModel.Sale
         }
 
         private SaleLookupModel _Sale;
-
         public SaleLookupModel Sale
         {
             get { return _Sale; }

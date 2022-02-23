@@ -822,6 +822,9 @@
   <data name="SALE" xml:space="preserve">
     <value>SALES</value>
   </data>
+  <data name="Sale Invoice" xml:space="preserve">
+    <value>Sales Invoice</value>
+  </data>
   <data name="Sale Invoice - Sale Return" xml:space="preserve">
     <value>Sale Invoice / Sale Return</value>
   </data>

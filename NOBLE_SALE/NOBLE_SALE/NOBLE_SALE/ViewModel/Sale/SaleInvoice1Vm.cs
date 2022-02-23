@@ -15,7 +15,6 @@ namespace NOBLE_SALE.ViewModel.Sale
     class SaleInvoice1Vm : BaseViewModel
     {
         private PagedResult<ProductListModel> _Products;
-
         public PagedResult<ProductListModel> Products
         {
             get { return _Products; }
@@ -23,7 +22,6 @@ namespace NOBLE_SALE.ViewModel.Sale
         }
 
         private PagedResult<CategoryListModel> _Categories;
-
         public PagedResult<CategoryListModel> Categories
         {
             get { return _Categories; }
@@ -31,24 +29,20 @@ namespace NOBLE_SALE.ViewModel.Sale
         }
 
         public CategoryLookUpModel SelectedCategory { get; set; }
-
         public Command SelectCategoryCommand { get; set; }
 
         private List<ProductLookUpModel> _ProductList;
-
         public List<ProductLookUpModel> ProductList
         {
             get { return _ProductList; }
             set { _ProductList = value; OnPropertyChanged(); }
         }
 
-
-        private List<Object> _ProductList2;
-
-        public List<Object> ProductList2
+        private List<Object> _SelectedProducts;
+        public List<Object> SelectedProducts
         {
-            get { return _ProductList2; }
-            set { _ProductList2 = value; }
+            get { return _SelectedProducts; }
+            set { _SelectedProducts = value; }
         }
 
         public ProductLookUpModel Product { get; set; }
@@ -56,11 +50,26 @@ namespace NOBLE_SALE.ViewModel.Sale
         public Command SelectionCommand { get; set; }
         public Command NextBtnCommand { get; set; }
 
+        private bool isBusy;
+        public bool IsBusy 
+        { 
+            get 
+            { 
+                return isBusy;
+            } 
+            set 
+            {
+                isBusy = value;
+                OnPropertyChanged();
+            } 
+        }
+
         public SaleInvoice1Vm()
         {
+            IsBusy = false;
             GetProducts();
             ProductList = new List<ProductLookUpModel>();
-            ProductList2 = new List<object>();
+            SelectedProducts = new List<object>();
             Products = new PagedResult<ProductListModel>();
             Categories = new PagedResult<CategoryListModel>();
             SelectedCategory = new CategoryLookUpModel();
@@ -73,23 +82,46 @@ namespace NOBLE_SALE.ViewModel.Sale
 
         private async void NextBtnHandler(object obj)
         {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+
             ProductList = new List<ProductLookUpModel>();
-            ProductList = ProductList2.Cast<ProductLookUpModel>().ToList();
+            ProductList = SelectedProducts.Cast<ProductLookUpModel>().ToList();
             await Application.Current.MainPage.Navigation.PushAsync(new SaleInvoice2(ProductList));
+
+            IsBusy = false;
         }
 
         private async void SelectedCategoryHandler(object obj)
         {
+
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+
             Products = new PagedResult<ProductListModel>();
             var service = new ProductService();
             Products = await service.GetProducts(SelectedCategory.Id, null, UserData.Current.WarehouseId, 1);
+
+            IsBusy = false;
         }
 
         private async void GetProducts()
         {
+
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+
             var service = new ProductService();
             Products = await service.GetProducts(null,null, UserData.Current.WarehouseId, 1);
             Categories = await service.GetCategories(true,1,null);
+
+            IsBusy = false;
         }
     }
 }

@@ -816,6 +816,9 @@
   <data name="SALE" xml:space="preserve">
     <value>المبيعات</value>
   </data>
+  <data name="Sale Invoice" xml:space="preserve">
+    <value>فاتورة البيع</value>
+  </data>
   <data name="Sale Invoice - Sale Return" xml:space="preserve">
     <value>فاتورة البيع - إرجاع البيع</value>
   </data>

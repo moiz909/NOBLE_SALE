@@ -2176,6 +2176,15 @@ namespace NOBLE_SALE.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sales Invoice.
+        /// </summary>
+        internal static string Sale_Invoice {
+            get {
+                return ResourceManager.GetString("Sale Invoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sale Invoice / Sale Return.
         /// </summary>
         internal static string Sale_Invoice___Sale_Return {
