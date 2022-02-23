@@ -68,11 +68,7 @@ namespace NOBLE_SALE.ViewModel.Sale
             }
         }
 
-
-
-
         private ObservableCollection<SaleItemLookupModel> _Products;
-
         public ObservableCollection<SaleItemLookupModel> Products
         {
             get { return _Products; }
@@ -82,6 +78,7 @@ namespace NOBLE_SALE.ViewModel.Sale
                 OnPropertyChanged();
             }
         }
+
         public List<ProductLookUpModel> ProductList { get; set; }
 
         private decimal _TotalVat;
@@ -264,6 +261,142 @@ namespace NOBLE_SALE.ViewModel.Sale
             }
         }
 
+        private void IncrementQtyCommand(object obj)
+        {
+            var lastproducts = new List<SaleItemLookupModel>();
+            TotalVat = 0;
+            Total = 0;
+            foreach (var item in Products)
+            {
+                var saleitem = new SaleItemLookupModel
+                {
+                    Code = item.Code,
+                    Id = Guid.Empty,
+                    ProductId = item.ProductId,
+                    ProductName = item.ProductName,
+                    Quantity = item.Quantity,
+                    SaleId = Guid.Empty,
+                    SaleReturnDays = "0",
+                    Total = item.Total,
+                    TaxMethod = item.TaxMethod,
+                    TaxRateId = item.TaxRateId,
+                    UnitPrice = item.UnitPrice,
+                    WareHouseId = Guid.Empty
+                };
+                lastproducts.Add(saleitem);
+            }
+            Products.Clear();
+            var content = obj as SaleItemLookupModel;
+            foreach (var item in lastproducts)
+            {
+                var sale = new SaleItemLookupModel
+                {
+                    Code = item.Code,
+                    Id = Guid.Empty,
+                    ProductId = item.ProductId,
+                    ProductName = item.ProductName,
+                    Quantity = item.Quantity,
+                    SaleId = Guid.Empty,
+                    Total = item.Total,
+                    SaleReturnDays = "0",
+                    TaxMethod = item.TaxMethod,
+                    TaxRateId = item.TaxRateId,
+                    UnitPrice = item.UnitPrice,
+                    WareHouseId = Guid.Empty
+                };
+                Products.Add(sale);
+            }
+            foreach (var item in Products)
+            {
+                if (item.ProductId == content.ProductId)
+                {
+                    item.Quantity++;
+                    item.Total = item.Quantity * item.UnitPrice;
+                    TotalQuantity++;
+                }
+                if (item.TaxMethod == "Inclusive")
+                {
+                    TotalVat = TotalVat + ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / (100 + TaxRateList.TaxRates[0].Rate));
+                    Total = Total + (item.UnitPrice * item.Quantity);
+                }
+                else
+                {
+                    TotalVat = TotalVat + ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / 100);
+                }
+            }
+        }
+        private void DecrementQtyCommand(object obj)
+        {
+            TotalVat = 0;
+            Total = 0;
+            var lastproducts = new List<SaleItemLookupModel>();
+            foreach (var item in Products)
+            {
+                var saleitem = new SaleItemLookupModel
+                {
+                    Code = item.Code,
+                    Id = Guid.Empty,
+                    ProductId = item.ProductId,
+                    ProductName = item.ProductName,
+                    Quantity = item.Quantity,
+                    SaleId = Guid.Empty,
+                    Total = item.Total,
+                    SaleReturnDays = "0",
+                    TaxMethod = item.TaxMethod,
+                    TaxRateId = item.TaxRateId,
+                    UnitPrice = item.UnitPrice,
+                    WareHouseId = Guid.Empty,
+                };
+                lastproducts.Add(saleitem);
+            }
+            Products.Clear();
+            var content = obj as SaleItemLookupModel;
+            foreach (var item in lastproducts)
+            {
+                var sale = new SaleItemLookupModel
+                {
+                    Code = item.Code,
+                    Total = item.Total,
+                    Id = Guid.Empty,
+                    ProductId = item.ProductId,
+                    ProductName = item.ProductName,
+                    Quantity = item.Quantity,
+                    SaleId = Guid.Empty,
+                    SaleReturnDays = "0",
+                    TaxMethod = item.TaxMethod,
+                    TaxRateId = item.TaxRateId,
+                    UnitPrice = item.UnitPrice,
+                    WareHouseId = Guid.Empty
+                };
+                Products.Add(sale);
+            }
+            foreach (var item in Products)
+            {
+                if (item.ProductId == content.ProductId)
+                {
+                    if (item.Quantity <= 0)
+                    {
+                        item.Total = item.Quantity * item.UnitPrice;
+                    }
+                    else
+                    {
+                        item.Total = item.Quantity * item.UnitPrice;
+                        TotalQuantity--;
+                        item.Quantity--;
+                    }
+                }
+                if (item.TaxMethod == "Inclusive")
+                {
+                    TotalVat = TotalVat + ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / (100 + TaxRateList.TaxRates[0].Rate));
+                    Total = Total + (item.UnitPrice * item.Quantity);
+                }
+                else
+                {
+                    TotalVat = TotalVat + ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / 100);
+                }
+            }
+        }
+
         private void DeleteItemCommand(object obj)
         {
             var lastproducts = new List<SaleItemLookupModel>();
@@ -328,146 +461,108 @@ namespace NOBLE_SALE.ViewModel.Sale
             }
         }
 
-        private void IncrementQtyCommand(object obj)
-        {
-            var lastproducts = new List<SaleItemLookupModel>();
-            TotalVat = 0;
-            Total = 0;
-            foreach (var item in Products)
-            {
-                var saleitem = new SaleItemLookupModel
-                {
-                    Code = item.Code,
-                    Id = Guid.Empty,
-                    ProductId = item.ProductId,
-                    ProductName = item.ProductName,
-                    Quantity = item.Quantity,
-                    SaleId = Guid.Empty,
-                    SaleReturnDays = "0",
-                    Total = item.Total,
-                    TaxMethod = item.TaxMethod,
-                    TaxRateId = item.TaxRateId,
-                    UnitPrice = item.UnitPrice,
-                    WareHouseId = Guid.Empty
-                };
-                lastproducts.Add(saleitem);
-            }
-            Products.Clear();
-            var content = obj as SaleItemLookupModel;
-            foreach (var item in lastproducts)
-            {
-                var sale = new SaleItemLookupModel
-                {
-                    Code = item.Code,
-                    Id = Guid.Empty,
-                    ProductId = item.ProductId,
-                    ProductName = item.ProductName,
-                    Quantity = item.Quantity,
-                    SaleId = Guid.Empty,
-                    Total = item.Total,
-                    SaleReturnDays = "0",
-                    TaxMethod = item.TaxMethod,
-                    TaxRateId = item.TaxRateId,
-                    UnitPrice = item.UnitPrice,
-                    WareHouseId = Guid.Empty
-                };
-                Products.Add(sale);
-            }
+        //private void IncrementQtyCommand(object obj)
+        //{
+        //    var temp = new ObservableCollection<SaleItemLookupModel>();
+        //    TotalVat = 0;
+        //    Total = 0;
 
-            foreach (var item in Products)
-            {
-                if(item.ProductId == content.ProductId)
-                {
-                    item.Quantity++;
-                    item.Total = item.Quantity * item.UnitPrice;
-                    TotalQuantity++;
-                }
-                if (item.TaxMethod == "Inclusive")
-                {
-                    TotalVat = TotalVat + ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / (100 + TaxRateList.TaxRates[0].Rate));
-                    Total = Total + (item.UnitPrice * item.Quantity);
-                }
-                else
-                {
-                    TotalVat = TotalVat + ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / 100);
-                }
-            }
-        }
+        //    var content = obj as SaleItemLookupModel;
 
-        private void DecrementQtyCommand(object obj)
-        {
-            TotalVat = 0;
-            Total = 0;
-            var lastproducts = new List<SaleItemLookupModel>();
-            foreach (var item in Products)
-            {
-                var saleitem = new SaleItemLookupModel
-                {
-                    Code = item.Code,
-                    Id = Guid.Empty,
-                    ProductId = item.ProductId,
-                    ProductName = item.ProductName,
-                    Quantity = item.Quantity,
-                    SaleId = Guid.Empty,
-                    Total = item.Total,
-                    SaleReturnDays = "0",
-                    TaxMethod = item.TaxMethod,
-                    TaxRateId = item.TaxRateId,
-                    UnitPrice = item.UnitPrice,
-                    WareHouseId = Guid.Empty,
-                };
-                lastproducts.Add(saleitem);
-            }
-            Products.Clear();
-            var content = obj as SaleItemLookupModel;
-            foreach (var item in lastproducts)
-            {
-                var sale = new SaleItemLookupModel
-                {
-                    Code = item.Code,
-                    Total = item.Total,
-                    Id = Guid.Empty,
-                    ProductId = item.ProductId,
-                    ProductName = item.ProductName,
-                    Quantity = item.Quantity,
-                    SaleId = Guid.Empty,
-                    SaleReturnDays = "0",
-                    TaxMethod = item.TaxMethod,
-                    TaxRateId = item.TaxRateId,
-                    UnitPrice = item.UnitPrice,
-                    WareHouseId = Guid.Empty
-                };
-                Products.Add(sale);
-            }
+        //    foreach (var item in Products)
+        //    {
+        //        if(item.ProductId == content.ProductId)
+        //        {
+        //            item.Quantity++;
+        //            item.Total = item.Quantity * item.UnitPrice;
+        //            TotalQuantity++;
 
-            foreach (var item in Products)
-            {
-                if (item.ProductId == content.ProductId)
-                {
-                    if(item.Quantity <= 0)
-                    {
-                        item.Total = item.Quantity * item.UnitPrice;
-                    }
-                    else
-                    {
-                        item.Total = item.Quantity * item.UnitPrice;
-                        TotalQuantity--;
-                        item.Quantity--;
-                    }
-                    
-                }
+        //            if (item.TaxMethod == "Inclusive")
+        //            {
+        //                TotalVat = TotalVat + ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / (100 + TaxRateList.TaxRates[0].Rate));
+        //                Total = Total + (item.UnitPrice * item.Quantity);
+        //            }
+        //            else
+        //            {
+        //                TotalVat = TotalVat + ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / 100);
+        //            }
+        //        }
 
-                if (item.TaxMethod == "Inclusive")
-                {
-                    TotalVat = TotalVat + ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / (100 + TaxRateList.TaxRates[0].Rate));
-                    Total = Total + (item.UnitPrice * item.Quantity);
-                }
-                else
-                {
-                    TotalVat = TotalVat + ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / 100);
-                }
-            }
-        }
+        //        var saleitem = new SaleItemLookupModel
+        //        {
+        //            Code = item.Code,
+        //            Id = Guid.Empty,
+        //            ProductId = item.ProductId,
+        //            ProductName = item.ProductName,
+        //            Quantity = item.Quantity,
+        //            SaleId = Guid.Empty,
+        //            SaleReturnDays = "0",
+        //            Total = item.Total,
+        //            TaxMethod = item.TaxMethod,
+        //            TaxRateId = item.TaxRateId,
+        //            UnitPrice = item.UnitPrice,
+        //            WareHouseId = Guid.Empty
+        //        };
+        //        temp.Add(saleitem);
+        //    }
+
+        //    Products = temp;
+        //}
+
+        //private void DecrementQtyCommand(object obj)
+        //{
+        //    var temp = new ObservableCollection<SaleItemLookupModel>();
+        //    TotalVat = 0;
+        //    Total = 0;
+
+        //    var content = obj as SaleItemLookupModel;
+
+        //    foreach (var item in Products)
+        //    {
+        //        if (item.ProductId == content.ProductId)
+        //        {
+        //            item.Quantity--;
+        //            item.Total = item.Quantity * item.UnitPrice;
+        //            TotalQuantity--;
+
+        //            if (item.TaxMethod == "Inclusive")
+        //            {
+        //                TotalVat = TotalVat + ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / (100 + TaxRateList.TaxRates[0].Rate));
+        //                Total = Total + (item.UnitPrice * item.Quantity);
+        //            }
+        //            else
+        //            {
+        //                TotalVat = TotalVat + ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / 100);
+        //            }
+        //        }
+
+        //        if(item.Quantity!=0)
+        //        {
+        //            var saleitem = new SaleItemLookupModel
+        //            {
+        //                Code = item.Code,
+        //                Id = Guid.Empty,
+        //                ProductId = item.ProductId,
+        //                ProductName = item.ProductName,
+        //                Quantity = item.Quantity,
+        //                SaleId = Guid.Empty,
+        //                SaleReturnDays = "0",
+        //                Total = item.Total,
+        //                TaxMethod = item.TaxMethod,
+        //                TaxRateId = item.TaxRateId,
+        //                UnitPrice = item.UnitPrice,
+        //                WareHouseId = Guid.Empty
+        //            };
+        //            temp.Add(saleitem);
+        //        }
+        //        else
+        //        {
+        //            TotalItems--;
+        //        }
+        //    }
+
+        //    Products = temp;
+        //}
 
         private async void GetData(List<ProductLookUpModel> products)
         {
