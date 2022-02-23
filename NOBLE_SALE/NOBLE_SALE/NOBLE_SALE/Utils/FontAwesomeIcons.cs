@@ -239,6 +239,9 @@ namespace NOBLE_SALE.Utils
         /// </summary>
         public const string Allergies = "\uf461";
 
+
+        public const string arrowrotateleft = "\uf01e";
+
         /// <summary>
         /// fa-amazon unicode value.
         /// <para/>

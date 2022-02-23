@@ -14,7 +14,7 @@ namespace NOBLE_SALE
         {
             InitializeComponent();
             LocalizationResourceManager.Current.Init(AppResources.ResourceManager);
-            MainPage = new NavigationPage(new IPConfiguration()) { BarBackgroundColor = Color.FromHex("#FFFFFF") };
+            MainPage = new NavigationPage(new SaleInvoice3()) { BarBackgroundColor = Color.FromHex("#FFFFFF") };
         }
 
         protected override void OnStart()

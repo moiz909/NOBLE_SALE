@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fontawesome="clr-namespace:NOBLE_SALE.Utils"
+             xmlns:svg="clr-namespace:NOBLE_SALE.Helper"
+             Visual="Material"
+             BackgroundColor="White"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             NavigationPage.HasBackButton="False"
+             x:Class="NOBLE_SALE.View.Sale.SaleInvoice3">
+
+
+    <NavigationPage.TitleView>
+        <StackLayout>
+            <Grid Margin="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Text="{x:Static fontawesome:FontAwesomeIcons.AngleLeft}" Grid.Column="0"
+                           FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Black"
+                          FontSize="Large" />
+                <Label Text="Sale Invoice" TextColor="#0280FD" FontSize="18"  Grid.ColumnSpan="2" HorizontalOptions="Center"
+                   FontAttributes="Bold"  FontFamily="{StaticResource UbuntuBold}" Grid.Column="1"/>
+
+                <Label Text="{x:Static fontawesome:FontAwesomeIcons.Bell}" Grid.Column="3" 
+                           FontFamily="{StaticResource FontAwesomeBrands}" TextColor="Black" HorizontalOptions="End"
+                          FontSize="18" />
+            </Grid>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView>
+                <StackLayout>
+                    <Label Margin="16" HorizontalOptions="Start" FontSize="22"  Text="Select Payment Method" 
+                   FontFamily="Ubuntu-Bold" TextColor="#17191C" />
+
+                    <Grid HorizontalOptions="Start" Margin="16">
+                        <Frame BorderColor="#E3E6E8" Grid.Column="0" CornerRadius="14" Grid.Row="0" HeightRequest="40"  WidthRequest="40" BackgroundColor="White">
+                            <StackLayout>
+
+                                <Label Text="{x:Static fontawesome:FontAwesomeIcons.HandHoldingUsd}"  
+                                       FontFamily="{StaticResource FontAwesomeSolid}" TextColor="#727F8D" HorizontalOptions="Center"  VerticalOptions="Center"
+                                       FontSize="22" />
+
+                                <Label Text="Cash" TextColor="#727F8D" HorizontalOptions="Center" FontSize="12" FontFamily="Ubuntu-regular"/>
+                            </StackLayout>
+                        </Frame>
+
+                        <Frame BorderColor="#E3E6E8" Grid.Column="1" CornerRadius="14" Grid.Row="0" HeightRequest="40"  WidthRequest="40" BackgroundColor="White">
+                            <StackLayout>
+                                <Label Text="{x:Static fontawesome:FontAwesomeIcons.Building}"  
+                                       FontFamily="{StaticResource FontAwesomeSolid}" TextColor="#727F8D" HorizontalOptions="Center"  VerticalOptions="Center"
+                                       FontSize="22" />
+                                <Label Text="Bank" TextColor="#727F8D" HorizontalOptions="Center" FontSize="12" FontFamily="Ubuntu-regular"/>
+                            </StackLayout>
+                        </Frame>
+
+                        <Frame BorderColor="#E3E6E8" Grid.Column="2" CornerRadius="14" Grid.Row="0" HeightRequest="40"  WidthRequest="40" BackgroundColor="White">
+                            <StackLayout>
+                                <!--<Label Text="{x:Static fontawesome:FontAwesomeIcons.EllipsisH}"  
+                                       FontFamily="{StaticResource FontAwesomeSolid}" TextColor="#727F8D" HorizontalOptions="Center"  VerticalOptions="Center"
+                                       FontSize="22" />-->
+                                <svg:Icon ResourceId="NOBLE_SALE.Resources.Icons.More.svg" HeightRequest="20" WidthRequest="20" 
+                                          HorizontalOptions="Center" VerticalOptions="Center"/>
+                                <Label Text="Others" TextColor="#727F8D" HorizontalOptions="Center" FontSize="12" FontFamily="Ubuntu-regular"/>
+                                
+                            </StackLayout>
+                        </Frame>
+                    </Grid>
+
+
+                    <Grid Margin="16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="16"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="16"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Text="Due Amount" TextColor="#444C55" FontFamily="Ubuntu-regular" Grid.Column="0" Grid.Row="0"/>
+                        <Entry Keyboard="Numeric" BackgroundColor="#EDF3FA" Grid.Column="0" Grid.Row="1"/>
+
+                        <Label Text="Recieved" TextColor="#444C55" FontFamily="Ubuntu-regular" Grid.Column="1" Grid.Row="0"/>
+                        <Entry Keyboard="Numeric" BackgroundColor="#EDF3FA" Grid.Column="1" Grid.Row="1"/>
+
+                        <Label Text="Balance" TextColor="#444C55" FontFamily="Ubuntu-regular" Grid.Column="0" Grid.Row="2"/>
+                        <Entry Keyboard="Numeric" BackgroundColor="#EDF3FA" Grid.Column="0" Grid.Row="3"/>
+
+                        <Label Text="Change" TextColor="#444C55" FontFamily="Ubuntu-regular" Grid.Column="1" Grid.Row="2"/>
+                        <Entry Keyboard="Numeric" BackgroundColor="#EDF3FA" Grid.Column="1" Grid.Row="3"/>
+                        
+                    </Grid>
+
+                    <BoxView HeightRequest="1" BackgroundColor="#F3F3F3" Margin="16"/>
+
+                    <Label Margin="16" HorizontalOptions="Start" FontSize="22"  Text="Payment Details" 
+                           FontFamily="Ubuntu-Bold" TextColor="#17191C" />
+
+                    <Grid Margin="16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Text="Cash:" TextColor="#001833" FontFamily="{StaticResource UbuntuBold}" FontSize="12" Grid.Column="0"
+                               Grid.Row="0"/>
+                        <Label Text="5" HorizontalOptions="End" TextColor="#001833" FontFamily="{StaticResource UbuntuBold}" FontSize="12" Grid.Column="1"
+                               Grid.Row="0"/>
+
+                    </Grid>
+
+                    <BoxView HeightRequest="1" BackgroundColor="#F3F3F3" Margin="16"/>
+
+                    <Grid HeightRequest="48" Margin="16">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="207"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Button BackgroundColor="#E60023" Text="{x:Static fontawesome:FontAwesomeIcons.arrowrotateleft}"  WidthRequest="60"
+                                 Grid.Column="0"      FontFamily="{StaticResource FontAwesomeSolid}" TextColor="White"/>
+
+
+                        <Button BackgroundColor="#12AB5A" Text="Save and Print" FontFamily="{StaticResource UbuntuBold}" Grid.Column="1" TextColor="White" WidthRequest="150"/>
+
+
+
+                        <Button BackgroundColor="#0280FD" Text="{x:Static fontawesome:FontAwesomeIcons.Save}"  WidthRequest="60" 
+                                 Grid.Column="2"      FontFamily="{StaticResource FontAwesomeSolid}" TextColor="White"/>
+                    </Grid>
+
+
+                </StackLayout>
+            </ScrollView>
+
+            
+                   
+
+
+        </StackLayout>
+    </ContentPage.Content>
+    
+    
+</ContentPage>
