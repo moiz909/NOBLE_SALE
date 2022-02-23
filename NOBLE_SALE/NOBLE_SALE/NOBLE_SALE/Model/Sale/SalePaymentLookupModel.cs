@@ -12,7 +12,7 @@ namespace NOBLE_SALE.Model.Sale
         public Decimal Balance { get; set; }
         public Decimal Change { get; set; }
         public SalePaymentType PaymentType { get; set; }
-        public ICollection<PaymentTypeLookupModel> PaymentTypes { get; set; }
+        public List<PaymentTypeLookupModel> PaymentTypes { get; set; }
         public Guid? PaymentOptionId { get; set; }
         public Guid SaleId { get; set; }
 

@@ -2,9 +2,11 @@
 using NOBLE_SALE.Helper;
 using NOBLE_SALE.Model;
 using NOBLE_SALE.Model.Product;
+using NOBLE_SALE.Model.Sale;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -35,6 +37,8 @@ namespace NOBLE_SALE.Services
                 return null;
             }
         }
+
+
 
         public async Task<TaxRateListModel> GetTax()
         {
@@ -93,6 +97,33 @@ namespace NOBLE_SALE.Services
             {
                 await Application.Current.MainPage.DisplayAlert("errorss", E.Message, "ok");
                 return null;
+            }
+        }
+
+
+        public async Task<bool> SaveSale(SaleLookupModel model)
+        {
+            url = new WebAPI().URL;
+            client = new WebAPI().client;
+            url += "Sale/SaveSaleInformation";
+            var token = UserData.Current.Token;
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            string serializedModel = await Task.Run(() => JsonConvert.SerializeObject(model));
+            var contents = new StringContent(serializedModel);
+            contents.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+            try
+            {
+                var response = await client.PostAsync(url, contents);
+                if (response.ReasonPhrase == "OK")
+                    return true;
+
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Message", ex.Message, "ok");
+                return false;
             }
         }
     }

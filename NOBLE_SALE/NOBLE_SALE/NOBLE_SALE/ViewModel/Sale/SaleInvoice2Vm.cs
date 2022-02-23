@@ -130,12 +130,27 @@ namespace NOBLE_SALE.ViewModel.Sale
             }
         }
 
+        private bool isBusy;
+        public bool IsBusy
+        {
+            get
+            {
+                return isBusy;
+            }
+            set
+            {
+                isBusy = value;
+                OnPropertyChanged();
+            }
+        }
+
 
 
 
 
         public SaleInvoice2Vm(List<ProductLookUpModel> model)
         {
+            IsBusy = false;
             ProductList = model;
             Products = new ObservableCollection<SaleItemLookupModel>();
             Sale = new SaleLookupModel();
@@ -164,6 +179,7 @@ namespace NOBLE_SALE.ViewModel.Sale
             Sale.DueDate = DateTime.Now;
             Sale.Id = Guid.Empty;
             Sale.InvoiceType = InvoiceType.Paid;
+            Sale.OtherCurrency = new OtherCurrencyLookupModel();
             Sale.OtherCurrency.Amount = 0;
             Sale.OtherCurrency.Rate = 0;
             Sale.RegistrationNo = RegistrationNoDetail.Paid;
@@ -171,8 +187,9 @@ namespace NOBLE_SALE.ViewModel.Sale
             Sale.SaleItems = Products;
             Sale.VoucherNo = string.Empty;
             Sale.WareHouseId = (Guid)UserData.Current.WarehouseId;
+            Sale.SalePayment = new SalePaymentLookupModel();
             Sale.SalePayment.DueAmount = Total;
-            //await Application.Current.MainPage.Navigation.PushAsync(new SaleInvoice3(Sale));
+            await Application.Current.MainPage.Navigation.PushAsync(new SaleInvoice3(Sale));
         }
 
         public SaleInvoice2Vm()
@@ -266,6 +283,10 @@ namespace NOBLE_SALE.ViewModel.Sale
 
         private void IncrementQtyCommand(object obj)
         {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
             var lastproducts = new List<SaleItemLookupModel>();
             TotalVat = 0;
             Total = 0;
@@ -327,9 +348,14 @@ namespace NOBLE_SALE.ViewModel.Sale
                     TotalVat = TotalVat + ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / 100);
                 }
             }
+            isBusy = false;
         }
         private void DecrementQtyCommand(object obj)
         {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
             TotalVat = 0;
             Total = 0;
             var lastproducts = new List<SaleItemLookupModel>();
@@ -398,10 +424,15 @@ namespace NOBLE_SALE.ViewModel.Sale
                     TotalVat = TotalVat + ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / 100);
                 }
             }
+            isBusy = false;
         }
 
         private void DeleteItemCommand(object obj)
         {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
             var lastproducts = new List<SaleItemLookupModel>();
             TotalVat = 0;
             Total = 0;
@@ -462,6 +493,7 @@ namespace NOBLE_SALE.ViewModel.Sale
                     TotalVat = TotalVat + ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / 100);
                 }
             }
+            isBusy = false;
         }
 
         //private void IncrementQtyCommand(object obj)
@@ -569,7 +601,10 @@ namespace NOBLE_SALE.ViewModel.Sale
 
         private async void GetData(List<ProductLookUpModel> products)
         {
+            if (IsBusy)
+                return;
 
+            IsBusy = true;
 
             foreach (var item in products)
             {
@@ -606,6 +641,8 @@ namespace NOBLE_SALE.ViewModel.Sale
                     TotalVat = TotalVat + ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / 100 );
                 }
             }
+
+            IsBusy = false;
 
         }
     }
