@@ -1,4 +1,5 @@
-﻿using NOBLE_SALE.Model.Product;
+﻿using NOBLE_SALE.Helper;
+using NOBLE_SALE.Model.Product;
 using NOBLE_SALE.Model.Sale;
 using NOBLE_SALE.Services;
 using NOBLE_SALE.View.Sale;
@@ -32,6 +33,7 @@ namespace NOBLE_SALE.ViewModel.Sale
         public Command DeleteItemHandler { get; set; }
         public Command RemovePage { get; set; }
         public Command WalkinHandler { get; set; }
+        public Command PayBtnHandler { get; set; }
 
         private int _TotalItems;
         public int TotalItems
@@ -146,9 +148,31 @@ namespace NOBLE_SALE.ViewModel.Sale
             IncrementQtyHandler = new Command(IncrementQtyCommand);
             DeleteItemHandler = new Command(DeleteItemCommand);
             WalkinHandler = new Command(WalkinCommand);
+            PayBtnHandler = new Command(PayBtnCommand);
             TodayDate = DateTime.Now.ToString("dddd, dd MMMM yyyy");
             TimeNow = DateTime.Now.ToString("hh:mm tt");
             RemovePage = new Command(RemovePageCommand);
+        }
+
+        private void PayBtnCommand(object obj)
+        {
+            Random rnd = new Random();
+            Sale.BarCode = rnd.Next().ToString();
+            Sale.CashCustomer = "Walk-In";
+            Sale.CashCustomerId = string.Empty;
+            Sale.CounterId = UserData.Current.CounterId.ToString();
+            Sale.Date = DateTime.Now;
+            Sale.DayStart = UserData.Current.DayStart;
+            Sale.DueDate = DateTime.Now;
+            Sale.Id = Guid.Empty;
+            Sale.InvoiceType = InvoiceType.Paid;
+            Sale.OtherCurrency.Amount = 0;
+            Sale.OtherCurrency.Rate = 0;
+            Sale.RegistrationNo = RegistrationNoDetail.Paid;
+            Sale.ReturnInvoiceAmount = 0;
+            Sale.SaleItems = Products;
+            Sale.VoucherNo = string.Empty;
+            Sale.WareHouseId = (Guid)UserData.Current.WarehouseId;
         }
 
         public SaleInvoice2Vm()

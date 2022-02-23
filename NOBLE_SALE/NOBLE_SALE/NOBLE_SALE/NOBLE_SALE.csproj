@@ -19,8 +19,12 @@
     <None Remove="Resources\Fonts\Ubuntu-Medium.ttf" />
     <None Remove="Resources\Fonts\Ubuntu-MediumItalic.ttf" />
     <None Remove="Resources\Fonts\Ubuntu-Regular.ttf" />
+    <None Remove="Resources\Icons\Bank.svg" />
+    <None Remove="Resources\Icons\Cash.svg" />
     <None Remove="Resources\Icons\Delete.svg" />
     <None Remove="Resources\Icons\Email.svg" />
+    <None Remove="Resources\Icons\More.svg" />
+    <None Remove="Resources\Icons\Others.svg" />
     <None Remove="Resources\Icons\Password.svg" />
     <None Remove="Resources\Icons\Trash.svg" />
     <None Remove="Resources\Icons\visibility.svg" />
@@ -37,8 +41,12 @@
     <EmbeddedResource Include="Resources\Fonts\Ubuntu-Medium.ttf" />
     <EmbeddedResource Include="Resources\Fonts\Ubuntu-MediumItalic.ttf" />
     <EmbeddedResource Include="Resources\Fonts\Ubuntu-Regular.ttf" />
+    <EmbeddedResource Include="Resources\Icons\Bank.svg" />
+    <EmbeddedResource Include="Resources\Icons\Cash.svg" />
     <EmbeddedResource Include="Resources\Icons\Delete.svg" />
     <EmbeddedResource Include="Resources\Icons\Email.svg" />
+    <EmbeddedResource Include="Resources\Icons\More.svg" />
+    <EmbeddedResource Include="Resources\Icons\Others.svg" />
     <EmbeddedResource Include="Resources\Icons\Password.svg" />
     <EmbeddedResource Include="Resources\Icons\Trash.svg" />
     <EmbeddedResource Include="Resources\Icons\visibility.svg" />
@@ -87,8 +95,17 @@
     <EmbeddedResource Update="View\Sale\SaleInvoice2.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="View\Sale\SaleInvoice3.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="View\TermsAndConditionView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="View\Sale\SaleInvoice3.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
   </ItemGroup>
 </Project>
