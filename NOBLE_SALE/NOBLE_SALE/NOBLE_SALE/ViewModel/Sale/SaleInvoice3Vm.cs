@@ -86,12 +86,25 @@ namespace NOBLE_SALE.ViewModel.Sale
         public PaymentTypeLookupModel Payment { get; set; }
 
 
-
+        private bool isBusy;
+        public bool IsBusy
+        {
+            get
+            {
+                return isBusy;
+            }
+            set
+            {
+                isBusy = value;
+                OnPropertyChanged();
+            }
+        }
 
 
 
         public SaleInvoice3Vm(SaleLookupModel sale)
         {
+            IsBusy = false;
             Sale = new SaleLookupModel();
             Payment = new PaymentTypeLookupModel();
             Sale = sale;
@@ -102,6 +115,12 @@ namespace NOBLE_SALE.ViewModel.Sale
 
         private async void SaveSaleCommand(object obj)
         {
+
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+
             Payment.Amount = recieved;
             Payment.Id = Guid.Empty;
             Payment.PaymentType = SalePaymentType.Cash;
@@ -124,10 +143,14 @@ namespace NOBLE_SALE.ViewModel.Sale
             if (response)
             {
                 await App.Current.MainPage.DisplayAlert("Message", "Sale Successfull", "ok");
+                await Application.Current.MainPage.Navigation.PopAsync();
+                await Application.Current.MainPage.Navigation.PopAsync();
+                isBusy = false;
             }
             else
             {
                 await App.Current.MainPage.DisplayAlert("Error", "Contact Support", "ok");
+                isBusy = false;
             }
         }
     }

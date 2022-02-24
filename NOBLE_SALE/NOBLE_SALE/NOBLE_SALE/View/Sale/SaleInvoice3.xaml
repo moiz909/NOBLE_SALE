@@ -45,8 +45,12 @@
     <ContentPage.Content>
         <StackLayout>
 
-            <ScrollView>
-                <StackLayout>
+            <ActivityIndicator
+                IsVisible="{Binding IsBusy,Mode=TwoWay}" IsRunning="True" HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand" Color="{DynamicResource ColorNobleBlue}"/>
+
+            <ScrollView IsVisible="{Binding IsBusy, Converter={StaticResource invertBoolConverter}}">
+                <StackLayout >
                     <Label Margin="16" HorizontalOptions="Start" FontSize="22"  Text="Select Payment Method" 
                    FontFamily="Ubuntu-Bold" TextColor="#17191C" />
 

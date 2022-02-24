@@ -190,6 +190,7 @@ namespace NOBLE_SALE.ViewModel.SetupSteps
                                     {
                                         await Application.Current.MainPage.Navigation.PopAsync();
                                         await Application.Current.MainPage.Navigation.PopAsync();
+                                        await Application.Current.MainPage.Navigation.PopAsync();
                                         await Application.Current.MainPage.Navigation.PushAsync(new SetupPage());
                                     }
                                     else

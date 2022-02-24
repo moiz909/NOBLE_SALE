@@ -283,10 +283,6 @@ namespace NOBLE_SALE.ViewModel.Sale
 
         private void IncrementQtyCommand(object obj)
         {
-            if (IsBusy)
-                return;
-
-            IsBusy = true;
             var lastproducts = new List<SaleItemLookupModel>();
             TotalVat = 0;
             Total = 0;
@@ -348,14 +344,9 @@ namespace NOBLE_SALE.ViewModel.Sale
                     TotalVat = TotalVat + ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / 100);
                 }
             }
-            isBusy = false;
         }
         private void DecrementQtyCommand(object obj)
         {
-            if (IsBusy)
-                return;
-
-            IsBusy = true;
             TotalVat = 0;
             Total = 0;
             var lastproducts = new List<SaleItemLookupModel>();
@@ -424,7 +415,6 @@ namespace NOBLE_SALE.ViewModel.Sale
                     TotalVat = TotalVat + ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / 100);
                 }
             }
-            isBusy = false;
         }
 
         private void DeleteItemCommand(object obj)
