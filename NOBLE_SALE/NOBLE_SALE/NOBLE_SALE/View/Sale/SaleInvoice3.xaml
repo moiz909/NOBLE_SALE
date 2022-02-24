@@ -64,6 +64,9 @@
 
                                 <Label Text="Cash" TextColor="#727F8D" HorizontalOptions="Center" FontSize="12" FontFamily="Ubuntu-regular"/>
                             </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CashHandler,Mode=TwoWay}"/>
+                            </Frame.GestureRecognizers>
                         </Frame>
 
                         <Frame BorderColor="#E3E6E8" Grid.Column="1" CornerRadius="14" Grid.Row="0" HeightRequest="40"  WidthRequest="40" BackgroundColor="White">
@@ -73,19 +76,95 @@
                                        FontSize="22" />
                                 <Label Text="Bank" TextColor="#727F8D" HorizontalOptions="Center" FontSize="12" FontFamily="Ubuntu-regular"/>
                             </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BankHandler,Mode=TwoWay}"/>
+                            </Frame.GestureRecognizers>
                         </Frame>
 
-                        <Frame BorderColor="#E3E6E8" Grid.Column="2" CornerRadius="14" Grid.Row="0" HeightRequest="40"  WidthRequest="40" BackgroundColor="White">
+                        <!--<Frame BorderColor="#E3E6E8" Grid.Column="2" CornerRadius="14" Grid.Row="0" HeightRequest="40"  WidthRequest="40" BackgroundColor="White">
                             <StackLayout>
-                                <!--<Label Text="{x:Static fontawesome:FontAwesomeIcons.EllipsisH}"  
+                                <Label Text="{x:Static fontawesome:FontAwesomeIcons.EllipsisH}"  
                                        FontFamily="{StaticResource FontAwesomeSolid}" TextColor="#727F8D" HorizontalOptions="Center"  VerticalOptions="Center"
-                                       FontSize="22" />-->
+                                       FontSize="22" />
                                 <svg:Icon ResourceId="NOBLE_SALE.Resources.Icons.More.svg" HeightRequest="20" WidthRequest="20" 
                                           HorizontalOptions="Center" VerticalOptions="Center"/>
                                 <Label Text="Others" TextColor="#727F8D" HorizontalOptions="Center" FontSize="12" FontFamily="Ubuntu-regular"/>
                                 
                             </StackLayout>
+                        </Frame>-->
+                    </Grid>
+
+                    <Grid Margin="16" IsVisible="{Binding IsBank,Mode=TwoWay}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Frame x:Name="frame_1" HeightRequest="40" CornerRadius="5" BackgroundColor="#EDF3FA" Grid.Row="0" Grid.Column="0">
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout Margin="5" Orientation="Vertical">
+                                    <Label Text="Master Card" TextColor="#001833" FontSize="14"/>
+                                    <Label Text="Master Card" TextColor="Gray" FontSize="8"/>
+                                </StackLayout>
+
+                                <svg:Icon ResourceId="NOBLE_SALE.Resources.Icons.MasterCard.svg" HeightRequest="20" WidthRequest="30" 
+                                          HorizontalOptions="End" Margin="5" VerticalOptions="Center"/>
+                            </StackLayout>
+
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding MasterCardHandler,Mode=TwoWay}" Tapped="TapGestureRecognizer_Tapped_2"/>
+                            </Frame.GestureRecognizers>
                         </Frame>
+
+                        <Frame x:Name="frame_2" HeightRequest="40" CornerRadius="5" BackgroundColor="#EDF3FA" Grid.Row="0" Grid.Column="1">
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout Margin="5" Orientation="Vertical">
+                                    <Label Text="Visa" TextColor="#001833" FontSize="14"/>
+                                    <Label Text="Visa" TextColor="Gray" FontSize="8"/>
+                                </StackLayout>
+
+                                <svg:Icon ResourceId="NOBLE_SALE.Resources.Icons.visa.svg" HeightRequest="20" WidthRequest="30" 
+                                          HorizontalOptions="End" Margin="5" VerticalOptions="Center"/>
+                            </StackLayout>
+
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding VisaHandler,Mode=TwoWay}" Tapped="TapGestureRecognizer_Tapped_3"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+
+
+                        <Frame x:Name="frame_3" HeightRequest="40" CornerRadius="5" BackgroundColor="#EDF3FA" Grid.Row="1" Grid.Column="0">
+                            <StackLayout  Orientation="Horizontal">
+                                <StackLayout Margin="5" Orientation="Vertical">
+                                    <Label Text="Mada" TextColor="#001833" FontSize="14"/>
+                                    <Label Text="Mada" TextColor="Gray" FontSize="8"/>
+                                </StackLayout>
+
+                                <svg:Icon ResourceId="NOBLE_SALE.Resources.Icons.Mada.svg" HeightRequest="20" WidthRequest="30" 
+                                          HorizontalOptions="End" Margin="5" VerticalOptions="Center"/>
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding MadaHandler,Mode=TwoWay}" Tapped="TapGestureRecognizer_Tapped_4"/>
+                            </Frame.GestureRecognizers>
+
+                        </Frame>
+
+                        <Frame x:Name="frame_4" HeightRequest="40" CornerRadius="5" BackgroundColor="#EDF3FA" Grid.Row="1" Grid.Column="1">
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout Margin="5" Orientation="Vertical">
+                                    <Label Text="stc pay" TextColor="#001833" FontSize="14"/>
+                                    <Label Text="stc pay" TextColor="Gray" FontSize="8"/>
+                                </StackLayout>
+
+                                <svg:Icon ResourceId="NOBLE_SALE.Resources.Icons.stcpay.svg" HeightRequest="20" WidthRequest="30" 
+                                           Margin="5" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </StackLayout>
+
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding StcHandler,Mode=TwoWay}" Tapped="TapGestureRecognizer_Tapped_5"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+
                     </Grid>
 
 
@@ -126,10 +205,15 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Text="Cash:" TextColor="#001833" FontFamily="{StaticResource UbuntuBold}" FontSize="12" Grid.Column="0"
+                        <Label Text="Paid:" TextColor="#001833" FontFamily="{StaticResource UbuntuBold}" FontSize="12" Grid.Column="0"
                                Grid.Row="0"/>
                         <Label Text="{Binding recieved,Mode=TwoWay}" HorizontalOptions="End" TextColor="#001833" FontFamily="{StaticResource UbuntuBold}" FontSize="12" Grid.Column="1"
                                Grid.Row="0"/>
+
+                        <!--<Label Text="Bank:" TextColor="#001833" FontFamily="{StaticResource UbuntuBold}" FontSize="12" Grid.Column="0"
+                               Grid.Row="0"/>
+                        <Label Text="{Binding recieved,Mode=TwoWay}" HorizontalOptions="End" TextColor="#001833" FontFamily="{StaticResource UbuntuBold}" FontSize="12" Grid.Column="1"
+                               Grid.Row="0"/>-->
 
                     </Grid>
 

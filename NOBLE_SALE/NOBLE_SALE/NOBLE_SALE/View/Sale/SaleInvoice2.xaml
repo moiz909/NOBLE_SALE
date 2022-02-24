@@ -82,9 +82,9 @@
                                     <Label Text="{Binding Total}" FontSize="10" FontFamily="{StaticResource UbuntuBold}"
                                            TextColor="Black"  Grid.Column="0" Grid.Row="2" Padding="16,0,16,0" Margin="0,0,0,10"/>
 
-                                    <Frame BackgroundColor="White" Padding="0" Margin="0" Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" 
+                                    <Frame BackgroundColor="White"  Padding="0" Margin="5" Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" 
                                            VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="35" WidthRequest="120">
-                                        <Grid>
+                                        <Grid >
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="*"/>

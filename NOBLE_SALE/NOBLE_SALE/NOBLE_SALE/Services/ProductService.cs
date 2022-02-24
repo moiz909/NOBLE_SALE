@@ -60,6 +60,26 @@ namespace NOBLE_SALE.Services
             }
         }
 
+        public async Task<PaymentOptionsListModel> GetPaymentOptions()
+        {
+            url = new WebAPI().URL;
+            client = new WebAPI().client;
+            url += "Product/PaymentOptionsList?isActive=" + true;
+            var token = UserData.Current.Token;
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            try
+            {
+                var response = await client.GetStringAsync(url);
+                var paymentoptions = JsonConvert.DeserializeObject<PaymentOptionsListModel>(response);
+                return paymentoptions;
+            }
+            catch (Exception E)
+            {
+                await Application.Current.MainPage.DisplayAlert("errorss", E.Message, "ok");
+                return null;
+            }
+        }
+
         public async Task<RegistrationNoLookUp> GetRegistrationNoDetail()
         {
             url = new WebAPI().URL;

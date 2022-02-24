@@ -23,10 +23,14 @@
     <None Remove="Resources\Icons\Cash.svg" />
     <None Remove="Resources\Icons\Delete.svg" />
     <None Remove="Resources\Icons\Email.svg" />
+    <None Remove="Resources\Icons\Mada.svg" />
+    <None Remove="Resources\Icons\MasterCard.svg" />
     <None Remove="Resources\Icons\More.svg" />
     <None Remove="Resources\Icons\Others.svg" />
     <None Remove="Resources\Icons\Password.svg" />
+    <None Remove="Resources\Icons\stcpay.svg" />
     <None Remove="Resources\Icons\Trash.svg" />
+    <None Remove="Resources\Icons\visa.svg" />
     <None Remove="Resources\Icons\visibility.svg" />
     <None Remove="Resources\Icons\visibilityOff.svg" />
     <None Remove="Resources\Vector.svg" />
@@ -45,10 +49,14 @@
     <EmbeddedResource Include="Resources\Icons\Cash.svg" />
     <EmbeddedResource Include="Resources\Icons\Delete.svg" />
     <EmbeddedResource Include="Resources\Icons\Email.svg" />
+    <EmbeddedResource Include="Resources\Icons\Mada.svg" />
+    <EmbeddedResource Include="Resources\Icons\MasterCard.svg" />
     <EmbeddedResource Include="Resources\Icons\More.svg" />
     <EmbeddedResource Include="Resources\Icons\Others.svg" />
     <EmbeddedResource Include="Resources\Icons\Password.svg" />
+    <EmbeddedResource Include="Resources\Icons\stcpay.svg" />
     <EmbeddedResource Include="Resources\Icons\Trash.svg" />
+    <EmbeddedResource Include="Resources\Icons\visa.svg" />
     <EmbeddedResource Include="Resources\Icons\visibility.svg" />
     <EmbeddedResource Include="Resources\Icons\visibilityOff.svg" />
     <EmbeddedResource Include="Resources\Icons\Vector.svg" />
@@ -87,6 +95,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\RegisterLocation.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\Sale\AddProductPopup.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\Sale\CustomerPopupPage.xaml">
