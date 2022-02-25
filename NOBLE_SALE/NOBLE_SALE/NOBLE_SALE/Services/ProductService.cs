@@ -38,6 +38,26 @@ namespace NOBLE_SALE.Services
             }
         }
 
+        public async Task<PagedResult<CategoryListModel>> GetCategories()
+        {
+            url = new WebAPI().URL;
+            client = new WebAPI().client;
+            url += "Product/GetCategoryInformation?isActive=" + true;
+            var token = UserData.Current.Token;
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            try
+            {
+                var response = await client.GetStringAsync(url);
+                var Categories = JsonConvert.DeserializeObject<PagedResult<CategoryListModel>>(response);
+                return Categories;
+            }
+            catch (Exception E)
+            {
+                await Application.Current.MainPage.DisplayAlert("errorss", E.Message, "ok");
+                return null;
+            }
+        }
+
 
 
         public async Task<TaxRateListModel> GetTax()
@@ -52,6 +72,25 @@ namespace NOBLE_SALE.Services
                 var response = await client.GetStringAsync(url);
                 var TaxList = JsonConvert.DeserializeObject<TaxRateListModel>(response);
                 return TaxList;
+            }
+            catch (Exception E)
+            {
+                await Application.Current.MainPage.DisplayAlert("errorss", E.Message, "ok");
+                return null;
+            }
+        }
+
+        public async Task<string> GetProductCode()
+        {
+            url = new WebAPI().URL;
+            client = new WebAPI().client;
+            url += "Product/ProductAutoGenerateCode";
+            var token = UserData.Current.Token;
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            try
+            {
+                var response = await client.GetStringAsync(url);
+                return response;
             }
             catch (Exception E)
             {
@@ -120,6 +159,32 @@ namespace NOBLE_SALE.Services
             }
         }
 
+
+        public async Task<bool> SaveProduct(ProductVm model)
+        {
+            url = new WebAPI().URL;
+            client = new WebAPI().client;
+            url += "Product/SaveProductInformation";
+            var token = UserData.Current.Token;
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            string serializedModel = await Task.Run(() => JsonConvert.SerializeObject(model));
+            var contents = new StringContent(serializedModel);
+            contents.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+            try
+            {
+                var response = await client.PostAsync(url, contents);
+                if (response.ReasonPhrase == "OK")
+                    return true;
+
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Message", ex.Message, "ok");
+                return false;
+            }
+        }
 
         public async Task<bool> SaveSale(SaleLookupModel model)
         {

@@ -7,13 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace NOBLE_SALE.View.Sale
+namespace NOBLE_SALE.View.Product
 {
-
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AddProductPopup : ContentPage
+    public partial class AddProduct : ContentPage
     {
-        public AddProductPopup()
+        public AddProduct()
         {
             InitializeComponent();
         }

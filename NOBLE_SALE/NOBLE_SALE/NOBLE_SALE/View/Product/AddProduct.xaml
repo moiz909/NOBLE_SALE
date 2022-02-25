@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:NOBLE_SALE.ViewModel.Product"
+             NavigationPage.IconColor="Black"
+             Visual="Material"
+             BackgroundColor="White"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="NOBLE_SALE.View.Product.AddProduct">
+
+    <ContentPage.BindingContext>
+        <vm:AddProductVm/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:InvertedBoolConverter x:Key="invertBoolConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <ContentPage.Content>
+        <StackLayout>
+
+            <ActivityIndicator
+                IsVisible="{Binding IsBusy,Mode=TwoWay}" IsRunning="True" HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand" Color="{DynamicResource ColorNobleBlue}"/>
+
+            <ScrollView IsVisible="{Binding IsBusy, Converter={StaticResource invertBoolConverter}}">
+                <StackLayout IsEnabled="{Binding IsBusy, Converter={StaticResource invertBoolConverter}}">
+                                        
+                    <Label Text="Add Product" FontSize="22" TextColor="Black" Margin="16,0,16,0" FontFamily="Ubuntu-Bold"/>
+
+                    <Label FontSize="12" Margin="16,24,16,0" FontFamily="Ubuntu-Medium">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Code" TextColor="Black"/>
+                                <Span Text="" TextColor="{DynamicResource ColorRed}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Entry Text="{Binding Code,Mode=TwoWay}" IsEnabled="False" BackgroundColor="{DynamicResource ColorFields}"
+                           TextColor="{DynamicResource ColorFieldsText}" FontSize="16" FontFamily="Ubuntu-regular" Visual="Default" Margin="16,0,16,0"
+                           HeightRequest="48">
+                    </Entry>
+
+                    <Label FontSize="12" Margin="16,24,16,0" FontFamily="Ubuntu-Medium">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Name" TextColor="Black"/>
+                                <Span Text=" * " TextColor="{DynamicResource ColorRed}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Entry Text="{Binding Product.EnglishName,Mode=TwoWay}"  BackgroundColor="{DynamicResource ColorFields}"
+                           TextColor="{DynamicResource ColorFieldsText}" FontSize="16" FontFamily="Ubuntu-regular" Visual="Default" Margin="16,0,16,0"
+                           HeightRequest="48">
+                        <Entry.Behaviors>
+                        <xct:TextValidationBehavior IsValid="{Binding IsValidName,Mode=TwoWay}" Flags="ValidateOnValueChanging" MinimumLength="1"/>
+                    </Entry.Behaviors>
+                    </Entry>
+
+                    <Label Text="Product Name is Required" TextColor="{DynamicResource ColorRed}" FontSize="8" Margin="16,0,16,0"
+                           IsVisible="{Binding IsValidName, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
+
+
+                    <Label FontSize="12" Margin="16,24,16,0" FontFamily="Ubuntu-Medium">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Sale Price" TextColor="Black"/>
+                                <Span Text=" * " TextColor="{DynamicResource ColorRed}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Entry Text="{Binding Product.SalePrice,Mode=TwoWay}"  BackgroundColor="{DynamicResource ColorFields}"
+                           TextColor="{DynamicResource ColorFieldsText}" FontSize="16" FontFamily="Ubuntu-regular" Visual="Default" Margin="16,0,16,0"
+                           HeightRequest="48">
+                    </Entry>
+
+                    <Label FontSize="12" Margin="16,24,16,0" FontFamily="Ubuntu-Medium">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Select Category" TextColor="Black"/>
+                                <!--<Span Text=" * " TextColor="{DynamicResource ColorRed}"/>-->
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Picker Title="Category"  BackgroundColor="{DynamicResource ColorFields}" 
+                            ItemsSource="{Binding Categories.Results.Categories}" TextColor="{DynamicResource ColorFieldsText}"
+                            ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedCategory,Mode=TwoWay}" HeightRequest="48"
+                            TitleColor="Black" Margin="16,0,16,0"
+                            Visual="Material" FontSize="Small">
+
+                        
+                    </Picker>
+
+                    <Label Text="Category is Required" TextColor="{DynamicResource ColorRed}" FontSize="8" Margin="16,0,16,0"
+                           IsVisible="{Binding IsValidCategory, Converter={StaticResource invertBoolConverter},Mode=TwoWay}"/>
+
+                </StackLayout>
+            </ScrollView>
+
+            <Button Text="Add Product" Margin="16,20,16,20" IsVisible="{Binding IsBusy, Converter={StaticResource invertBoolConverter}}" Command="{Binding SaveProductHandler}" IsEnabled="{Binding IsValidName,Mode=TwoWay}" HeightRequest="48"
+                    BackgroundColor="{DynamicResource ColorNobleBlue}" Font="Ubuntu-Regular"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

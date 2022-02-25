@@ -2,6 +2,7 @@
 using NOBLE_SALE.Model;
 using NOBLE_SALE.Model.Product;
 using NOBLE_SALE.Services;
+using NOBLE_SALE.View.Product;
 using NOBLE_SALE.View.Sale;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,8 @@ namespace NOBLE_SALE.ViewModel.Sale
         public CategoryLookUpModel SelectedCategory { get; set; }
         public Command SelectCategoryCommand { get; set; }
 
+        public Command AddProductHandler { get; set; }
+
         private List<ProductLookUpModel> _ProductList;
         public List<ProductLookUpModel> ProductList
         {
@@ -49,6 +52,15 @@ namespace NOBLE_SALE.ViewModel.Sale
 
         public Command SelectionCommand { get; set; }
         public Command NextBtnCommand { get; set; }
+        private bool _IsRefreshing;
+
+        public bool IsRefreshing
+        {
+            get { return _IsRefreshing; }
+            set { _IsRefreshing = value; OnPropertyChanged(); }
+        }
+
+        public Command RefreshCommand { get; set; }
 
         private bool isBusy;
         public bool IsBusy 
@@ -75,10 +87,30 @@ namespace NOBLE_SALE.ViewModel.Sale
             SelectedCategory = new CategoryLookUpModel();
             SelectCategoryCommand = new Command(SelectedCategoryHandler);
             NextBtnCommand = new Command(NextBtnHandler);
+            RefreshCommand = new Command(RefreshCommandExecution);
+            AddProductHandler = new Command(AddProductCommand);
         }
 
+        private void RefreshCommandExecution(object obj)
+        {
+            IsRefreshing = true;
+            GetProducts();
+            IsRefreshing = false;
+        }
 
-        
+        private async void AddProductCommand(object obj)
+        {
+            if (UserData.Current.InvoiceWoInventory)
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new AddProduct());
+            }
+
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Disable", "You Dont Have Permission Contact Support", "ok");
+            }
+            
+        }
 
         private async void NextBtnHandler(object obj)
         {
@@ -104,7 +136,15 @@ namespace NOBLE_SALE.ViewModel.Sale
 
             Products = new PagedResult<ProductListModel>();
             var service = new ProductService();
-            Products = await service.GetProducts(SelectedCategory.Id, null, UserData.Current.WarehouseId, 1);
+
+            if (UserData.Current.InvoiceWoInventory)
+            {
+                Products = await service.GetProducts(SelectedCategory.Id, null, null, 1);
+            }
+            else
+            {
+                Products = await service.GetProducts(SelectedCategory.Id, null, UserData.Current.WarehouseId, 1);
+            }
 
             IsBusy = false;
         }
@@ -118,7 +158,15 @@ namespace NOBLE_SALE.ViewModel.Sale
             IsBusy = true;
 
             var service = new ProductService();
-            Products = await service.GetProducts(null,null, UserData.Current.WarehouseId, 1);
+            if (UserData.Current.InvoiceWoInventory)
+            {
+                Products = await service.GetProducts(null, null, null, 1);
+            }
+            else
+            {
+                Products = await service.GetProducts(null, null, UserData.Current.WarehouseId, 1);
+            }
+            
             Categories = await service.GetCategories(true,1,null);
 
             IsBusy = false;

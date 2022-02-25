@@ -94,10 +94,10 @@
     <EmbeddedResource Update="View\Login.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="View\RegisterLocation.xaml">
+    <EmbeddedResource Update="View\Product\AddProduct.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="View\Sale\AddProductPopup.xaml">
+    <EmbeddedResource Update="View\RegisterLocation.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\Sale\CustomerPopupPage.xaml">

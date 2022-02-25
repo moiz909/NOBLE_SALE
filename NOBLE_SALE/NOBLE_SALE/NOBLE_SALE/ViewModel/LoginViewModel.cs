@@ -9,6 +9,7 @@ using Xamarin.Forms;
 using NOBLE_SALE.Services;
 using NOBLE_SALE.View;
 using NOBLE_SALE.View.Sale;
+using NOBLE_SALE.View.Product;
 
 namespace NOBLE_SALE.ViewModel
 {
@@ -218,6 +219,7 @@ namespace NOBLE_SALE.ViewModel
                         else
                         {
                             await Application.Current.MainPage.Navigation.PushAsync(new SaleInvoice1());
+                            //await Application.Current.MainPage.Navigation.PushAsync(new AddProduct());
                         }
 
                     }
