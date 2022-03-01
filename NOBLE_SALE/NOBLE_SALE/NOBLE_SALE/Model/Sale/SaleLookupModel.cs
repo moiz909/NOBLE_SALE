@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace NOBLE_SALE.Model.Sale
@@ -25,7 +26,7 @@ namespace NOBLE_SALE.Model.Sale
         public Guid? SaleInvoiceId { get; set; }
         public bool IsSaleReturnPost { get; set; }
         public InvoiceType InvoiceType { get; set; }
-        public virtual ICollection<SaleItemLookupModel> SaleItems { get; set; }
+        public virtual ObservableCollection<SaleItemLookupModel> SaleItems { get; set; }
         public virtual SalePaymentLookupModel SalePayment { get; set; }
         public virtual OtherCurrencyLookupModel OtherCurrency { get; set; }
         public string Email { get; set; }

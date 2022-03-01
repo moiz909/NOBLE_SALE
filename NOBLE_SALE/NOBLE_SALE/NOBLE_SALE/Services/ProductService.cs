@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -199,8 +200,12 @@ namespace NOBLE_SALE.Services
             try
             {
                 var response = await client.PostAsync(url, contents);
+
+                string content = await response.Content.ReadAsStringAsync();
+                var result = Regex.Replace(content, @"\t|\n|\r", "");
                 if (response.ReasonPhrase == "OK")
-                    return true;
+                    
+                return true;
 
                 else
                     return false;

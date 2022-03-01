@@ -1,5 +1,6 @@
 ﻿using NOBLE_SALE.Model.Product;
 using NOBLE_SALE.Model.Sale;
+using NOBLE_SALE.PDFReports;
 using NOBLE_SALE.Services;
 using System;
 using System.Collections.Generic;
@@ -372,21 +373,23 @@ namespace NOBLE_SALE.ViewModel.Sale
             Sale.SalePayment.PaymentTypes.Add(Payment);
 
             var service = new ProductService();
+            var pdfReport = new SalesReport(Sale.SaleItems);
 
-            var response = await service.SaveSale(Sale);
+            await pdfReport.CreateReport();
+            //var response = await service.SaveSale(Sale);
 
-            if (response)
-            {
-                await App.Current.MainPage.DisplayAlert("Message", "Sale Successfull", "ok");
-                await Application.Current.MainPage.Navigation.PopAsync();
-                await Application.Current.MainPage.Navigation.PopAsync();
-                isBusy = false;
-            }
-            else
-            {
-                await App.Current.MainPage.DisplayAlert("Error", "Contact Support", "ok");
-                isBusy = false;
-            }
+            //if (response)
+            //{
+            //    await App.Current.MainPage.DisplayAlert("Message", "Sale Successfull", "ok");
+            //    await Application.Current.MainPage.Navigation.PopAsync();
+            //    await Application.Current.MainPage.Navigation.PopAsync();
+            //    isBusy = false;
+            //}
+            //else
+            //{
+            //    await App.Current.MainPage.DisplayAlert("Error", "Contact Support", "ok");
+            //    isBusy = false;
+            //}
         }
     }
 }
