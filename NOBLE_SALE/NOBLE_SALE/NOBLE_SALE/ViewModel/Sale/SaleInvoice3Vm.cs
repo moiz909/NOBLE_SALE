@@ -212,6 +212,8 @@ namespace NOBLE_SALE.ViewModel.Sale
             }
         }
 
+        public SaleDetailLookupModel SaleDetail { get; set; }   
+
 
 
 
@@ -223,7 +225,10 @@ namespace NOBLE_SALE.ViewModel.Sale
         public Command StcHandler { get; set; }
 
 
+        public decimal Total { get; set; }
 
+        public decimal TotalItems { get; set; }
+        public decimal TotalVat { get; set; }
 
 
 
@@ -231,6 +236,9 @@ namespace NOBLE_SALE.ViewModel.Sale
 
         public SaleInvoice3Vm(SaleLookupModel sale)
         {
+            //Total = total;
+            //TotalItems = totalItems;
+            //TotalVat = totalvat;
             PaymentOption = new PaymentOptionsListModel();
             GetData();
             IsMasterCard = false;
@@ -373,23 +381,26 @@ namespace NOBLE_SALE.ViewModel.Sale
             Sale.SalePayment.PaymentTypes.Add(Payment);
 
             var service = new ProductService();
-            var pdfReport = new SalesReport(Sale.SaleItems);
+            
+            var response = await service.SaveSale(Sale);
 
-            await pdfReport.CreateReport();
-            //var response = await service.SaveSale(Sale);
+            if (response!=null)
+            {
+                SaleDetail = await service.GetSaleDetail(Guid.Parse(response));
+                await App.Current.MainPage.DisplayAlert("Message", "Sale Successfull", "ok");
 
-            //if (response)
-            //{
-            //    await App.Current.MainPage.DisplayAlert("Message", "Sale Successfull", "ok");
-            //    await Application.Current.MainPage.Navigation.PopAsync();
-            //    await Application.Current.MainPage.Navigation.PopAsync();
-            //    isBusy = false;
-            //}
-            //else
-            //{
-            //    await App.Current.MainPage.DisplayAlert("Error", "Contact Support", "ok");
-            //    isBusy = false;
-            //}
+                var pdfReport = new SalesReport(SaleDetail);
+
+                await pdfReport.CreateReport();
+                await Application.Current.MainPage.Navigation.PopAsync();
+                await Application.Current.MainPage.Navigation.PopAsync();
+                isBusy = false;
+             }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "Contact Support", "ok");
+                isBusy = false;
+            }
         }
     }
 }

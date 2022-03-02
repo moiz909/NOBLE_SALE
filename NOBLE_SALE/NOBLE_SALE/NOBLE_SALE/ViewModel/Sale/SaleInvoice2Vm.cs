@@ -274,6 +274,7 @@ namespace NOBLE_SALE.ViewModel.Sale
                         }
                         else
                         {
+                            Total = Total + (item.UnitPrice * item.Quantity);
                             TotalVat = TotalVat + ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / 100);
                         }
                     }
@@ -341,7 +342,9 @@ namespace NOBLE_SALE.ViewModel.Sale
                 }
                 else
                 {
+                    var itemvat = ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / 100);
                     TotalVat = TotalVat + ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / 100);
+                    Total = Total + (item.UnitPrice * item.Quantity) + itemvat;
                 }
             }
         }
@@ -409,10 +412,14 @@ namespace NOBLE_SALE.ViewModel.Sale
                 {
                     TotalVat = TotalVat + ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / (100 + TaxRateList.TaxRates[0].Rate));
                     Total = Total + (item.UnitPrice * item.Quantity);
+                    
                 }
                 else
                 {
+                    var itemvat = ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / 100);
                     TotalVat = TotalVat + ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / 100);
+
+                    Total = Total + (item.UnitPrice * item.Quantity) + itemvat;
                 }
             }
         }
@@ -480,7 +487,9 @@ namespace NOBLE_SALE.ViewModel.Sale
                 }
                 else
                 {
+                    var itemvat = ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / 100);
                     TotalVat = TotalVat + ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / 100);
+                    Total = Total + (item.UnitPrice * item.Quantity)+ itemvat;
                 }
             }
             isBusy = false;
@@ -628,7 +637,9 @@ namespace NOBLE_SALE.ViewModel.Sale
                 }
                 else
                 {
+                    var itemvat = ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / 100);
                     TotalVat = TotalVat + ((item.UnitPrice * item.Quantity * TaxRateList.TaxRates[0].Rate) / 100 );
+                    Total = Total + item.UnitPrice + itemvat;
                 }
             }
 

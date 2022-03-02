@@ -19,18 +19,31 @@ namespace NOBLE_SALE.PDFReports
     public class SalesReport
     {
         private Document document;
-        private ObservableCollection<SaleItemLookupModel> Products;
-        public SalesReport(ObservableCollection<SaleItemLookupModel> products)
+        private SaleDetailLookupModel SaleDetail;
+        private decimal Total;
+        private decimal TotalItems;
+        private decimal TotalVat;
+        public static bool FontResolverAlreadySet { get; set; }
+        public SalesReport(SaleDetailLookupModel products)
         {
-            GlobalFontSettings.FontResolver = new GenericFontResolver();
+
+            if (!FontResolverAlreadySet)
+            {
+                GlobalFontSettings.FontResolver = new GenericFontResolver();
+                FontResolverAlreadySet = true;
+            }
+            
             CultureInfo.CurrentCulture = new CultureInfo("en-US", false);
-            this.Products = products;
+            this.SaleDetail = products;
+            //this.Total = total;
+            //this.TotalItems = totalItems;
+            //this.TotalVat = totalvat;
         }
 
         public async Task CreateReport()
         {
             CreateDocument();
-            SetStyles();
+            //SetStyles();
 
             AddHeader();
             AddContent();
@@ -122,65 +135,92 @@ namespace NOBLE_SALE.PDFReports
             var oddHeader = section.Headers.Primary;
 
             var content = new Paragraph();
-            content.AddText("\tProduct Catalog 2021 - Tech Solutions Inc\t");
+            content.AddText("\t Sale Invoice\t");
             oddHeader.Add(content);
             oddHeader.AddTable();
 
             var headerForEvenPages = section.Headers.EvenPage;
-            headerForEvenPages.AddParagraph("Product Catalog 2021");
+            headerForEvenPages.AddParagraph("Sale Invoice");
             headerForEvenPages.AddTable();
         }
 
 
         void AddContent()
         {
-            AddText1();
-            AddText2();
+            //AddText1();
+            //AddText2();
             AddTable();
+            //AddCalculation();
+
+
         }
 
 
-        private void AddFooter()
-        {
-            var content = new Paragraph();
-            content.AddText(" Page ");
-            content.AddPageField();
-            content.AddText(" of ");
-            content.AddNumPagesField();
 
+        private void AddCalculation()
+        {
+            //// Add an invisible row as a space line to the table
+            //var section = document.LastSection;
+            //var table = section.AddTable();
+            //Row row = table.AddRow();
+            //row.Borders.Visible = false;
+
+            //// Add the total price row
+            //row = table.AddRow();
+            //row.Cells[0].Borders.Visible = false;
+            //row.Cells[0].AddParagraph("Total");
+            //row.Cells[0].Format.Font.Bold = true;
+            //row.Cells[0].Format.Alignment = ParagraphAlignment.Right;
+            //row.Cells[0].MergeRight = 4;
+            //row.Cells[5].AddParagraph(SaleDetail.SalePayment.DueAmount.ToString("0.00") + " SAR");
+
+            //row = table.AddRow();
+            //row.Cells[0].Borders.Visible = false;
+            //row.Cells[0].AddParagraph("Amount Paid");
+            //row.Cells[0].Format.Font.Bold = true;
+            //row.Cells[0].Format.Alignment = ParagraphAlignment.Right;
+            //row.Cells[0].MergeRight = 4;
+            //row.Cells[5].AddParagraph(SaleDetail.PaymentAmount + " SAR");
+
+
+            //row = table.AddRow();
+            //row.Cells[0].Borders.Visible = false;
+            //row.Cells[0].AddParagraph("Change");
+            //row.Cells[0].Format.Font.Bold = true;
+            //row.Cells[0].Format.Alignment = ParagraphAlignment.Right;
+            //row.Cells[0].MergeRight = 4;
+            //row.Cells[5].AddParagraph(SaleDetail.Change + " SAR");
+
+            // Add the total price row
             var section = document.LastSection;
-            section.Footers.Primary.Add(content);
+            var table = section.AddTable();
+            var column = table.AddColumn("5cm");
+            var row = table.AddRow();
+            row.Borders.Visible = false;
+            row.Cells[0].Borders.Visible = false;
+            row.Cells[0].AddParagraph("Total");
+            row.Cells[0].Format.Font.Bold = true;
+            row.Cells[0].Format.Alignment = ParagraphAlignment.Right;
+            row.Cells[0].MergeRight = 4;
+            row.Cells[1].AddParagraph(SaleDetail.SalePayment.DueAmount.ToString("0.00") + " SAR");
 
-            var contentForEvenPages = content.Clone();
-            contentForEvenPages.AddTab();
-            contentForEvenPages.AddText("\tDate: ");
-            //contenidoPar.AddDateField("dddd, dd \"de\" MMMM \"de\" yyyy HH:mm:ss tt");
-            contentForEvenPages.AddDateField("dddd, MMMM dd, yyyy HH:mm:ss tt");
+            row = table.AddRow();
+            row.Cells[0].Borders.Visible = false;
+            row.Cells[0].AddParagraph("Amount Paid");
+            row.Cells[0].Format.Font.Bold = true;
+            row.Cells[0].Format.Alignment = ParagraphAlignment.Right;
+            row.Cells[0].MergeRight = 4;
+            row.Cells[1].AddParagraph(SaleDetail.PaymentAmount + " SAR");
 
-            section.Footers.EvenPage.Add(contentForEvenPages);
-        }
 
-        private void AddText1()
-        {
-            var text = "At Tech Solutions Inc, it is our top priority to bring only products of the highest quality to our customers. Products always pass a strict quality control process before they are delivered to you. We put ourselves in the customer's shoes, and only want to offer products that will make our clients happy.";
-            var section = document.LastSection;
-            var mainParagraph = section.AddParagraph(text, "Heading1");
-            mainParagraph.AddLineBreak();
+            row = table.AddRow();
+            row.Cells[0].Borders.Visible = false;
+            row.Cells[0].AddParagraph("Change");
+            row.Cells[0].Format.Font.Bold = true;
+            row.Cells[0].Format.Alignment = ParagraphAlignment.Right;
+            row.Cells[0].MergeRight = 4;
+            row.Cells[1].AddParagraph(SaleDetail.Change + " SAR");
 
-            text = "All components of Tech Solutions Inc sample products have undergone strict laboratory tests for lead, nickel and cadmium content. A world-leading inspection, testing, and certification company has conducted these testsm and as you can see below, our products have passed with perfect note.";
-            section.AddParagraph(text, "Heading2");
-        }
-
-        private void AddText2()
-        {
-            var seccion = document.LastSection;
-
-            var texto = "We recommend customers to purchase products only from reliable sources where products have been tested, and only when the lead, nickel and cadmium content have passed the laboratory tests. Your health is important.";
-            var parrafo = seccion.AddParagraph(texto, "MyParagraphStyle");
-
-            texto = "\nWearing products that are not tested, or have failed to meet regulatory standards may bring harm to your health and skin";
-            parrafo = seccion.AddParagraph(texto, "MyParagraphStyle");
-            parrafo.AddLineBreak();
         }
 
         private void AddTable()
@@ -223,25 +263,78 @@ namespace NOBLE_SALE.PDFReports
                 headerRow.Borders.Width = 1;
             }
 
-            foreach (var item in Products)
+            foreach (var item in SaleDetail.SaleItems)
             {
                 var rowItem = table.AddRow();
                 rowItem.TopPadding = 1.5;
                 rowItem.Borders.Left.Width = 0.25;
 
                 var titleCell = rowItem.Cells[0];
-                titleCell.AddParagraph(item.Id.ToString());
+                titleCell.AddParagraph(item.Code);
 
                 var cellAutor = rowItem.Cells[1];
                 cellAutor.AddParagraph(item.ProductName);
 
                 var cellFecha = rowItem.Cells[2];
                 cellFecha.AddParagraph(item.UnitPrice.ToString("C2"));
+
+                //cellFecha.AddParagraph(string.Format(new CultureInfo("ar-SA"), "{0:C}", item.UnitPrice));
+
+                
             }
 
             var row = table.AddRow();
             row.Borders.Visible = false;
+
+            // Add an invisible row as a space line to the table
+            row.Borders.Visible = false;
         }
+
+        private void AddFooter()
+        {
+            var content = new Paragraph();
+            content.AddText(" Page ");
+            content.AddPageField();
+            content.AddText(" of ");
+            content.AddNumPagesField();
+
+            var section = document.LastSection;
+            section.Footers.Primary.Add(content);
+
+            
+
+            var contentForEvenPages = content.Clone();
+            contentForEvenPages.AddTab();
+            contentForEvenPages.AddText("\tDate: ");
+            contentForEvenPages.AddDateField("dddd, MMMM dd, yyyy HH:mm:ss tt");
+
+            section.Footers.EvenPage.Add(contentForEvenPages);
+        }
+
+        //private void AddText1()
+        //{
+        //    var text = "At Tech Solutions Inc, it is our top priority to bring only products of the highest quality to our customers. Products always pass a strict quality control process before they are delivered to you. We put ourselves in the customer's shoes, and only want to offer products that will make our clients happy.";
+        //    var section = document.LastSection;
+        //    var mainParagraph = section.AddParagraph(text, "Heading1");
+        //    mainParagraph.AddLineBreak();
+
+        //    text = "All components of Tech Solutions Inc sample products have undergone strict laboratory tests for lead, nickel and cadmium content. A world-leading inspection, testing, and certification company has conducted these testsm and as you can see below, our products have passed with perfect note.";
+        //    section.AddParagraph(text, "Heading2");
+        //}
+
+        //private void AddText2()
+        //{
+        //    var seccion = document.LastSection;
+
+        //    var texto = "We recommend customers to purchase products only from reliable sources where products have been tested, and only when the lead, nickel and cadmium content have passed the laboratory tests. Your health is important.";
+        //    var parrafo = seccion.AddParagraph(texto, "MyParagraphStyle");
+
+        //    texto = "\nWearing products that are not tested, or have failed to meet regulatory standards may bring harm to your health and skin";
+        //    parrafo = seccion.AddParagraph(texto, "MyParagraphStyle");
+        //    parrafo.AddLineBreak();
+        //}
+
+        
 
         private async Task SaveShowPDF()
         {

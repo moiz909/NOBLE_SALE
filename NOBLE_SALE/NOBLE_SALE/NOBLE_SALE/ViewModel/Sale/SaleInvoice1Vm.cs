@@ -100,15 +100,18 @@ namespace NOBLE_SALE.ViewModel.Sale
 
         private async void AddProductCommand(object obj)
         {
-            if (UserData.Current.InvoiceWoInventory)
-            {
-                await Application.Current.MainPage.Navigation.PushAsync(new AddProduct());
-            }
+            //if (UserData.Current.InvoiceWoInventory)
+            //{
+            //    await Application.Current.MainPage.Navigation.PushAsync(new AddProduct());
+            //}
 
-            else
-            {
-                await App.Current.MainPage.DisplayAlert("Disable", "You Dont Have Permission Contact Support", "ok");
-            }
+            //else
+            //{
+            //    await App.Current.MainPage.DisplayAlert("Disable", "You Dont Have Permission Contact Support", "ok");
+            //}
+
+            var service = new ProductService();
+            var html = await service.GetHTML();
             
         }
 
@@ -139,11 +142,11 @@ namespace NOBLE_SALE.ViewModel.Sale
 
             if (UserData.Current.InvoiceWoInventory)
             {
-                Products = await service.GetProducts(SelectedCategory.Id, null, null, 1);
+                Products = await service.GetProducts(SelectedCategory.Id, null, null);
             }
             else
             {
-                Products = await service.GetProducts(SelectedCategory.Id, null, UserData.Current.WarehouseId, 1);
+                Products = await service.GetProducts(SelectedCategory.Id, null, UserData.Current.WarehouseId);
             }
 
             IsBusy = false;
@@ -160,11 +163,11 @@ namespace NOBLE_SALE.ViewModel.Sale
             var service = new ProductService();
             if (UserData.Current.InvoiceWoInventory)
             {
-                Products = await service.GetProducts(null, null, null, 1);
+                Products = await service.GetProducts(null, null, null);
             }
             else
             {
-                Products = await service.GetProducts(null, null, UserData.Current.WarehouseId, 1);
+                Products = await service.GetProducts(null, null, UserData.Current.WarehouseId);
             }
             
             Categories = await service.GetCategories(true,1,null);

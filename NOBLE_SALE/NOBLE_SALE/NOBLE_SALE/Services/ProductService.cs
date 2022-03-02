@@ -19,11 +19,11 @@ namespace NOBLE_SALE.Services
         public string url;
         public HttpClient client;
 
-        public async Task<PagedResult<ProductListModel>> GetProducts(Guid? CategoryId, string SearchTerm, Guid? WarehouseId, int PageNumber)
+        public async Task<PagedResult<ProductListModel>> GetProducts(Guid? CategoryId, string SearchTerm, Guid? WarehouseId)
         {
             url = new WebAPI().URL;
             client = new WebAPI().client;
-            url+= "Product/GetProductInformation?categoryId=" + CategoryId + "&searchTerm=" + SearchTerm + "&wareHouseId=" + WarehouseId + "&pageNumber=" + PageNumber + "&pageSize=" + 20 + "&isDropdown=" + true;
+            url+= "Product/GetProductInformationForTouch?searchTerm=" + SearchTerm + "&wareHouseId=" + WarehouseId + "&categoryId =" + CategoryId  ;
             var token = UserData.Current.Token;
             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
             try
@@ -31,6 +31,44 @@ namespace NOBLE_SALE.Services
                 var response = await client.GetStringAsync(url);
                 var Products = JsonConvert.DeserializeObject<PagedResult<ProductListModel>>(response);
                 return Products;
+            }
+            catch (Exception E)
+            {
+                await Application.Current.MainPage.DisplayAlert("errorss", E.Message, "ok");
+                return null;
+            }
+        }
+
+        public async Task<string> GetHTML()
+        {
+            url = new WebAPI().URL;
+            client = new WebAPI().client;
+            url += "Account/SendPDF";
+
+            try
+            {
+                var response = await client.GetStringAsync(url);
+                return response;
+            }
+            catch (Exception E)
+            {
+                await Application.Current.MainPage.DisplayAlert("errorss", E.Message, "ok");
+                return null;
+            }
+        }
+
+        public async Task<SaleDetailLookupModel> GetSaleDetail(Guid id)
+        {
+            url = new WebAPI().URL;
+            client = new WebAPI().client;
+            url += "Sale/SaleDetail?id=" + id ;
+            var token = UserData.Current.Token;
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            try
+            {
+                var response = await client.GetStringAsync(url);
+                var SaleDetail = JsonConvert.DeserializeObject<SaleDetailLookupModel>(response);
+                return SaleDetail;
             }
             catch (Exception E)
             {
@@ -187,7 +225,10 @@ namespace NOBLE_SALE.Services
             }
         }
 
-        public async Task<bool> SaveSale(SaleLookupModel model)
+
+
+
+        public async Task<string> SaveSale(SaleLookupModel model)
         {
             url = new WebAPI().URL;
             client = new WebAPI().client;
@@ -199,21 +240,22 @@ namespace NOBLE_SALE.Services
             contents.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
             try
             {
+               
                 var response = await client.PostAsync(url, contents);
 
-                string content = await response.Content.ReadAsStringAsync();
-                var result = Regex.Replace(content, @"\t|\n|\r", "");
+                string content =  await response.Content.ReadAsStringAsync();
+                var result = await Task.Run(() => JsonConvert.DeserializeObject<Root>(content));
                 if (response.ReasonPhrase == "OK")
                     
-                return true;
+                return result.message.id;
 
                 else
-                    return false;
+                    return null;
             }
             catch (Exception ex)
             {
                 await App.Current.MainPage.DisplayAlert("Message", ex.Message, "ok");
-                return false;
+                return null;
             }
         }
     }
