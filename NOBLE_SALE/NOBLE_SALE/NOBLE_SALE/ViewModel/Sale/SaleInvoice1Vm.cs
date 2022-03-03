@@ -1,4 +1,6 @@
-﻿using NOBLE_SALE.Helper;
+﻿using IronPdf;
+using NOBLE_SALE.Helper;
+using NOBLE_SALE.Helper.Utility;
 using NOBLE_SALE.Model;
 using NOBLE_SALE.Model.Product;
 using NOBLE_SALE.Services;
@@ -76,6 +78,8 @@ namespace NOBLE_SALE.ViewModel.Sale
             } 
         }
 
+        private PDFToHtml PDFToHtml { get; set; }
+
         public SaleInvoice1Vm()
         {
             IsBusy = false;
@@ -112,8 +116,13 @@ namespace NOBLE_SALE.ViewModel.Sale
 
             var service = new ProductService();
             var html = await service.GetHTML();
-            
+            PDFToHtml = new PDFToHtml();
+            PDFToHtml.HTMLString = html;
+
+            PDFToHtml.GeneratePDF();
         }
+
+        
 
         private async void NextBtnHandler(object obj)
         {

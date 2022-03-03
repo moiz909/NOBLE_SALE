@@ -1,4 +1,5 @@
-﻿using NOBLE_SALE.Model.Product;
+﻿using NOBLE_SALE.Model;
+using NOBLE_SALE.Model.Product;
 using NOBLE_SALE.Model.Sale;
 using NOBLE_SALE.PDFReports;
 using NOBLE_SALE.Services;
@@ -232,7 +233,7 @@ namespace NOBLE_SALE.ViewModel.Sale
 
 
 
-
+        private PDFToHtml PDFToHtml { get; set; }
 
         public SaleInvoice3Vm(SaleLookupModel sale)
         {
@@ -389,13 +390,88 @@ namespace NOBLE_SALE.ViewModel.Sale
                 SaleDetail = await service.GetSaleDetail(Guid.Parse(response));
                 await App.Current.MainPage.DisplayAlert("Message", "Sale Successfull", "ok");
 
-                var pdfReport = new SalesReport(SaleDetail);
+                //var pdfReport = new SalesReport(SaleDetail);
 
-                await pdfReport.CreateReport();
+
+
+                //await pdfReport.CreateReport();
+
+                StringBuilder sb = new StringBuilder();
+                sb.Append("<header class='clearfix'>");
+                sb.Append("<h1>INVOICE</h1>");
+                sb.Append("<div id='company' class='clearfix'>");
+                sb.Append("<div>Company Name</div>");
+                sb.Append("<div>455 John Tower,<br /> AZ 85004, US</div>");
+                sb.Append("<div>(602) 519-0450</div>");
+                sb.Append("<div><a href='mailto:company@example.com'>company@example.com</a></div>");
+                sb.Append("</div>");
+                sb.Append("<div id='project'>");
+                sb.Append("<div><span>PROJECT</span> Website development</div>");
+                sb.Append("<div><span>CLIENT</span> John Doe</div>");
+                sb.Append("<div><span>ADDRESS</span> 796 Silver Harbour, TX 79273, US</div>");
+                sb.Append("<div><span>EMAIL</span> <a href='mailto:john@example.com'>john@example.com</a></div>");
+                sb.Append("<div><span>DATE</span> April 13, 2016</div>");
+                sb.Append("<div><span>DUE DATE</span> May 13, 2016</div>");
+                sb.Append("</div>");
+                sb.Append("</header>");
+                sb.Append("<main>");
+                sb.Append("<table>");
+                sb.Append("<thead>");
+                sb.Append("<tr>");
+                sb.Append("<th class='service'>Product</th>");
+                sb.Append("<th class='desc'>DESCRIPTION</th>");
+                sb.Append("<th>PRICE</th>");
+                sb.Append("<th>QTY</th>");
+                sb.Append("<th>TOTAL</th>");
+                sb.Append("</tr>");
+                sb.Append("</thead>");
+                sb.Append("<tbody>");
+                sb.Append("<tr>");
+                foreach (var item in SaleDetail.SaleItems)
+                {
+                    sb.Append("<td class='service'>" + item.Code +"</td>");
+                    sb.Append("<td class='desc'>" + item.ProductName + "</td>");
+                    sb.Append("<td class='unit'>SAR " + String.Format("{0, 0:C2}", item.UnitPrice) + "</td>");
+                    sb.Append("<td class='qty'>" +item.Quantity+"</td>");
+                    sb.Append("<td class='total'>"+ item.UnitPrice+"</td>");
+                    sb.Append("</tr>");
+                    sb.Append("<tr>");
+                }
+
+                
+                
+                sb.Append("<td colspan='4'>SUBTOTAL</td>");
+                sb.Append("<td class='total'>$800.00</td>");
+                sb.Append("</tr>");
+                sb.Append("<tr>");
+                sb.Append("<td colspan='4'>TAX 25%</td>");
+                sb.Append("<td class='total'>$200.00</td>");
+                sb.Append("</tr>");
+                sb.Append("<tr>");
+                sb.Append("<td colspan='4' class='grand total'>GRAND TOTAL</td>");
+                sb.Append("<td class='grand total'>$1,000.00</td>");
+                sb.Append("</tr>");
+                sb.Append("</tbody>");
+                sb.Append("</table>");
+                sb.Append("<div id='notices'>");
+                sb.Append("<div>NOTICE:</div>");
+                sb.Append("<div class='notice'>A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>");
+                sb.Append("</div>");
+                sb.Append("</main>");
+                sb.Append("<footer>");
+                sb.Append("Invoice was created on a computer and is valid without the signature and seal.");
+                sb.Append("</footer>");
+
+                PDFToHtml = new PDFToHtml();
+                PDFToHtml.HTMLString = sb.ToString();
+
+                PDFToHtml.GeneratePDF();
                 await Application.Current.MainPage.Navigation.PopAsync();
                 await Application.Current.MainPage.Navigation.PopAsync();
                 isBusy = false;
-             }
+            
+            }
+
             else
             {
                 await App.Current.MainPage.DisplayAlert("Error", "Contact Support", "ok");
