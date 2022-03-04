@@ -4,6 +4,7 @@ using NOBLE_SALE.Model.Product;
 using NOBLE_SALE.Model.Sale;
 using NOBLE_SALE.PDFReports;
 using NOBLE_SALE.Services;
+using NOBLE_SALE.View.Sale;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -429,7 +430,9 @@ namespace NOBLE_SALE.ViewModel.Sale
             if (response!=null)
             {
                 SaleDetail = await service.GetSaleDetail(Guid.Parse(response));
-                await App.Current.MainPage.DisplayAlert("Message", "Sale Successfull", "ok");
+                //await App.Current.MainPage.DisplayAlert("Message", "Sale Successfull", "ok");
+                
+                
                 GetCalculations(SaleDetail);
                 //var pdfReport = new SalesReport(SaleDetail);
 
@@ -509,13 +512,12 @@ namespace NOBLE_SALE.ViewModel.Sale
 
 
 
-                PDFToHtml = new PDFToHtml();
-                PDFToHtml.HTMLString = sb.ToString();
+                
 
-                PDFToHtml.GeneratePDF();
-                await Application.Current.MainPage.Navigation.PopAsync();
-                await Application.Current.MainPage.Navigation.PopAsync();
                 isBusy = false;
+                await Application.Current.MainPage.Navigation.PushAsync(new SaleDetailPopupPage(due, recieved, balance, sb.ToString()));
+                
+                
             
             }
 
