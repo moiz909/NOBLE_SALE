@@ -228,8 +228,29 @@ namespace NOBLE_SALE.ViewModel.Sale
 
         public decimal Total { get; set; }
 
-        public decimal TotalItems { get; set; }
         public decimal TotalVat { get; set; }
+
+        private int _TotalItems;
+        public int TotalItems
+        {
+            get { return _TotalItems; }
+            set
+            {
+                _TotalItems = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private int _TotalQuantity;
+        public int TotalQuantity
+        {
+            get { return _TotalQuantity; }
+            set
+            {
+                _TotalQuantity = value;
+                OnPropertyChanged();
+            }
+        }
 
 
 
@@ -318,6 +339,25 @@ namespace NOBLE_SALE.ViewModel.Sale
             isBusy = false;
         }
 
+
+        private void GetCalculations(SaleDetailLookupModel saleDetail)
+        {
+            foreach (var item in saleDetail.SaleItems)
+            {
+                if (item.TaxMethod == "Inclusive")
+                {
+                    Total = Total + item.UnitPrice;
+                    TotalVat = TotalVat + ((item.UnitPrice * item.Quantity * item.TaxRate) / (100 + item.TaxRate));
+                }
+                else
+                {
+                    var itemvat = ((item.UnitPrice * item.Quantity * item.TaxRate) / 100);
+                    TotalVat = TotalVat + ((item.UnitPrice * item.Quantity * item.TaxRate) / 100);
+                    Total = Total + item.UnitPrice + itemvat;
+                }
+            }
+        }
+
         private async void SaveSaleCommand(object obj)
         {
 
@@ -389,7 +429,7 @@ namespace NOBLE_SALE.ViewModel.Sale
             {
                 SaleDetail = await service.GetSaleDetail(Guid.Parse(response));
                 await App.Current.MainPage.DisplayAlert("Message", "Sale Successfull", "ok");
-
+                GetCalculations(SaleDetail);
                 //var pdfReport = new SalesReport(SaleDetail);
 
 
@@ -429,27 +469,27 @@ namespace NOBLE_SALE.ViewModel.Sale
                 sb.Append("<tr>");
                 foreach (var item in SaleDetail.SaleItems)
                 {
-                    sb.Append("<td class='service'>" + item.Code +"</td>");
+                    sb.Append("<td class='service'>" + item.Code + "</td>");
                     sb.Append("<td class='desc'>" + item.ProductName + "</td>");
-                    sb.Append("<td class='unit'>SAR " + String.Format("{0, 0:C2}", item.UnitPrice) + "</td>");
-                    sb.Append("<td class='qty'>" +item.Quantity+"</td>");
-                    sb.Append("<td class='total'>"+ item.UnitPrice+"</td>");
+                    sb.Append("<td class='unit'>SAR " + String.Format("{0:0.00}", item.UnitPrice) + "</td>");
+                    sb.Append("<td class='qty'>" + item.Quantity + "</td>");
+                    sb.Append("<td class='total'>SAR " + String.Format("{0:0.00}", item.UnitPrice) + "</td>");
                     sb.Append("</tr>");
                     sb.Append("<tr>");
                 }
 
-                
-                
+
+
                 sb.Append("<td colspan='4'>SUBTOTAL</td>");
-                sb.Append("<td class='total'>$800.00</td>");
+                sb.Append("<td class='total'>SAR " + String.Format("{0:0.00}", Total-TotalVat)+"</td>");
                 sb.Append("</tr>");
                 sb.Append("<tr>");
-                sb.Append("<td colspan='4'>TAX 25%</td>");
-                sb.Append("<td class='total'>$200.00</td>");
+                sb.Append("<td colspan='4'>TAX 15%</td>");
+                sb.Append("<td class='total'>SAR "+ String.Format("{0:0.00}", TotalVat) +"</td>");
                 sb.Append("</tr>");
                 sb.Append("<tr>");
                 sb.Append("<td colspan='4' class='grand total'>GRAND TOTAL</td>");
-                sb.Append("<td class='grand total'>$1,000.00</td>");
+                sb.Append("<td class='grand total'>SAR"+ String.Format("{0:0.00}", Total) + "</td>");
                 sb.Append("</tr>");
                 sb.Append("</tbody>");
                 sb.Append("</table>");
@@ -461,6 +501,11 @@ namespace NOBLE_SALE.ViewModel.Sale
                 sb.Append("<footer>");
                 sb.Append("Invoice was created on a computer and is valid without the signature and seal.");
                 sb.Append("</footer>");
+
+                //sb.Append("<div style='width: 100 %; '> < div style = 'text-align: center;' >< span style = 'font-size:30px;font-weight:bold;color:black;' >Company Name</ span >< br />");
+
+
+
 
                 PDFToHtml = new PDFToHtml();
                 PDFToHtml.HTMLString = sb.ToString();

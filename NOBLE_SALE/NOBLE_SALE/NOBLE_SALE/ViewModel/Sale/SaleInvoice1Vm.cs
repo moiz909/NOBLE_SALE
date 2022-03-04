@@ -80,6 +80,33 @@ namespace NOBLE_SALE.ViewModel.Sale
 
         private PDFToHtml PDFToHtml { get; set; }
 
+
+        private decimal _TotalVat;
+
+        public decimal TotalVat
+        {
+            get { return _TotalVat; }
+            set
+            {
+                _TotalVat = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private decimal _Total;
+
+        public decimal Total
+        {
+            get { return _Total; }
+            set
+            {
+                _Total = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+
         public SaleInvoice1Vm()
         {
             IsBusy = false;
