@@ -1,18 +1,12 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
-using Android.Widget;
 using NOBLE_SALE.Droid.Helper.Dependency;
 using NOBLE_SALE.Droid.Helper.Native;
 using NOBLE_SALE.Helper.Enum;
 using NOBLE_SALE.Helper.Interface;
 using NOBLE_SALE.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(PDFConverter))]

@@ -1,4 +1,5 @@
-﻿using NOBLE_SALE.Model;
+﻿using NOBLE_SALE.Helper;
+using NOBLE_SALE.Model;
 using NOBLE_SALE.Model.Product;
 using NOBLE_SALE.Model.Sale;
 using NOBLE_SALE.PDFReports;
@@ -441,9 +442,9 @@ namespace NOBLE_SALE.ViewModel.Sale
                 sb.Append("<h1>INVOICE</h1>");
                 sb.Append("<div id='company' class='clearfix'>");
                 sb.Append("<div>Company Name</div>");
-                sb.Append("<div>455 John Tower,<br /> AZ 85004, US</div>");
-                sb.Append("<div>(602) 519-0450</div>");
-                sb.Append("<div><a href='mailto:company@example.com'>company@example.com</a></div>");
+                sb.Append("<div>Leads Center,<br /> AZ 85004, US</div>");
+                sb.Append("<div>(+92) 310472-4361</div>");
+                sb.Append("<div><a href='mailto:company@techqode.com'>company@example.com</a></div>");
                 sb.Append("</div>");
                 sb.Append("<div id='project'>");
                 sb.Append("<div><span>PROJECT</span> Website development</div>");
@@ -458,22 +459,23 @@ namespace NOBLE_SALE.ViewModel.Sale
                 sb.Append("<table>");
                 sb.Append("<thead>");
                 sb.Append("<tr>");
-                sb.Append("<th class='service'>Product</th>");
-                sb.Append("<th class='desc'>DESCRIPTION</th>");
-                sb.Append("<th>PRICE</th>");
-                sb.Append("<th>QTY</th>");
-                sb.Append("<th>TOTAL</th>");
+                //sb.Append("<th class='service'>Product</th>");
+                sb.Append("<th class='desc' >DESCRIPTION</th>");
+                sb.Append("<th colspan='2'>PRICE</th>");
+                sb.Append("<th colspan='2'>QTY</th>");
+                sb.Append("<th colspan='2'>TOTAL</th>");
                 sb.Append("</tr>");
                 sb.Append("</thead>");
                 sb.Append("<tbody>");
-                sb.Append("<tr>");
+                
                 foreach (var item in SaleDetail.SaleItems)
                 {
-                    sb.Append("<td class='service'>" + item.Code + "</td>");
+                    sb.Append("<tr>");
+                    //sb.Append("<td class='service'>" + item.Code + "</td>");
                     sb.Append("<td class='desc'>" + item.ProductName + "</td>");
-                    sb.Append("<td class='unit'>SAR " + String.Format("{0:0.00}", item.UnitPrice) + "</td>");
-                    sb.Append("<td class='qty'>" + item.Quantity + "</td>");
-                    sb.Append("<td class='total'>SAR " + String.Format("{0:0.00}", item.UnitPrice) + "</td>");
+                    sb.Append("<td class='unit'colspan='2' >SAR " + String.Format("{0:0.00}", item.UnitPrice) + "</td>");
+                    sb.Append("<td class='total' colspan='2' style='margin-left: 2.5em;'> " + String.Format("{0:0.00}", item.Quantity) + "</td>");
+                    sb.Append("<td class='total' colspan='2'>SAR " + String.Format("{0:0.00}", item.UnitPrice) + "</td>");
                     sb.Append("</tr>");
                     sb.Append("<tr>");
                 }
