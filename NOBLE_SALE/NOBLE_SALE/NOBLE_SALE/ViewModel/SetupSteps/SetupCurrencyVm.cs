@@ -99,6 +99,7 @@ namespace NOBLE_SALE.ViewModel.SetupSteps
                 OnPropertyChanged();
             }
         }
+        public string TaxCode { get; set; }
 
         public SetupCurrencyVm()
         {
@@ -108,11 +109,17 @@ namespace NOBLE_SALE.ViewModel.SetupSteps
             ValidCurrencyName = true;
             ValidCurrencySign = true;
             ValidTaxType = true;
-
+            GetTaxCode();
             Tax = new TaxRateVm();
             Currency = new CurrencyVm();
             Steps = new StepsVm();
             SaveCommand = new Command(SaveHandler);
+        }
+
+        private async void GetTaxCode()
+        {
+            var service = new SetupService();
+            TaxCode = await service.GetTaxCode();
         }
 
         private async void SaveHandler(object obj)
@@ -157,9 +164,12 @@ namespace NOBLE_SALE.ViewModel.SetupSteps
                 {
                     ValidTaxType = true;
                     var service = new SetupService();
+                    Tax.Code = TaxCode;
                     Tax.NameArabic = string.Empty;
                     Tax.Id = Guid.Empty;
                     Tax.isActive = true;
+                    Tax.Description = string.Empty;
+                    Tax.NameArabic = Tax.Name;
                     Tax.Setup = true;
                     var response = await service.CreateVat(Tax);
                     if (response)

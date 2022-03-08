@@ -61,6 +61,25 @@ namespace NOBLE_SALE.Services
             }
         }
 
+        public async Task<string> GetTaxCode()
+        {
+            url = new WebAPI().URL;
+            client = new WebAPI().client;
+            url += "Product/TaxRateCode";
+            var token = UserData.Current.Token;
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            try
+            {
+                var response = await client.GetStringAsync(url);
+                return response;
+            }
+            catch (Exception E)
+            {
+                await Application.Current.MainPage.DisplayAlert("errorss", E.Message, "ok");
+                return null;
+            }
+        }
+
         public async Task<bool> CreateCurrency(CurrencyVm currency)
         {
             url = new WebAPI().URL;

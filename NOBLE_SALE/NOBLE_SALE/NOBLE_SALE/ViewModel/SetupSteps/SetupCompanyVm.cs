@@ -126,9 +126,14 @@ namespace NOBLE_SALE.ViewModel.SetupSteps
 
             if(ValidateName && ValidateCategory && ValidateAddress)
             {
-                CompanyInfo.NameInArabic = string.Empty;
+                CompanyInfo.NameInArabic = CompanyInfo.NameInEnglish;
                 CompanyInfo.CategoryInArabic = string.Empty;
                 CompanyInfo.AddressInArabic = string.Empty;
+                CompanyInfo.CompanyNameArabic = CompanyInfo.CompanyNameEnglish;
+                CompanyInfo.CountryInEnglish = string.Empty;
+                CompanyInfo.CountryInArabic = string.Empty;
+                CompanyInfo.LandLine = string.Empty;
+               
                 var service = new SetupService();
                 var response = await service.UpdateCompany(CompanyInfo);
                 if (response)
