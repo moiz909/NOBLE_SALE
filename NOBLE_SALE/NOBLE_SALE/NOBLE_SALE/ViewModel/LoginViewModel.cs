@@ -196,6 +196,12 @@ namespace NOBLE_SALE.ViewModel
                         UserData.CompanySetup = false;
                         UserData.CurrencyandVat = false;
                     }
+                    if (!UserData.Current.TermsCondition)
+                    {
+                        var service2 = new SetupService();
+                        var response = await service2.AcceptTermsAndConditions();
+                    }
+                    
                     await Application.Current.MainPage.Navigation.PushAsync(new SetupPage());
                 }
                 else if (DataSet != null && DataSet.RoleName != null)

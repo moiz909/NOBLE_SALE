@@ -54,6 +54,9 @@ namespace NOBLE_SALE.ViewModel.Sale
 
         public Command SelectionCommand { get; set; }
         public Command NextBtnCommand { get; set; }
+
+        public Command SearchHandler { get; set; }
+
         private bool _IsRefreshing;
 
         public bool IsRefreshing
@@ -105,6 +108,19 @@ namespace NOBLE_SALE.ViewModel.Sale
             }
         }
 
+        private string _SearchTerm;
+
+        public string SearchTerm
+        {
+            get { return _SearchTerm; }
+            set 
+            {
+                _SearchTerm = value;
+                OnPropertyChanged();
+            }
+        }
+
+
 
 
         public SaleInvoice1Vm()
@@ -120,6 +136,12 @@ namespace NOBLE_SALE.ViewModel.Sale
             NextBtnCommand = new Command(NextBtnHandler);
             RefreshCommand = new Command(RefreshCommandExecution);
             AddProductHandler = new Command(AddProductCommand);
+            SearchHandler = new Command(SearchCommand);
+        }
+
+        private void SearchCommand(object obj)
+        {
+            GetProducts();
         }
 
         private void RefreshCommandExecution(object obj)
@@ -131,22 +153,22 @@ namespace NOBLE_SALE.ViewModel.Sale
 
         private async void AddProductCommand(object obj)
         {
-            //if (UserData.Current.InvoiceWoInventory)
-            //{
-            //    await Application.Current.MainPage.Navigation.PushAsync(new AddProduct());
-            //}
+            if (UserData.Current.InvoiceWoInventory)
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new AddProduct());
+            }
 
-            //else
-            //{
-            //    await App.Current.MainPage.DisplayAlert("Disable", "You Dont Have Permission Contact Support", "ok");
-            //}
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Disable", "You Dont Have Permission Contact Support", "ok");
+            }
 
-            var service = new ProductService();
-            var html = await service.GetHTML();
-            PDFToHtml = new PDFToHtml();
-            PDFToHtml.HTMLString = html;
+            //var service = new ProductService();
+            //var html = await service.GetHTML();
+            //PDFToHtml = new PDFToHtml();
+            //PDFToHtml.HTMLString = html;
 
-            PDFToHtml.GeneratePDF();
+            //PDFToHtml.GeneratePDF();
         }
 
         
@@ -196,14 +218,27 @@ namespace NOBLE_SALE.ViewModel.Sale
 
             IsBusy = true;
 
+            if(SearchTerm == string.Empty)
+            {
+                SearchTerm = null;
+            }
+
             var service = new ProductService();
             if (UserData.Current.InvoiceWoInventory)
             {
-                Products = await service.GetProducts(null, null, null);
+                Products = await service.GetProducts(null, SearchTerm, null);
+                if(Products == null)
+                {
+                    Products = new PagedResult<ProductListModel>();
+                }
             }
             else
             {
-                Products = await service.GetProducts(null, null, UserData.Current.WarehouseId);
+                Products = await service.GetProducts(null, SearchTerm, UserData.Current.WarehouseId);
+                if (Products == null)
+                {
+                    Products = new PagedResult<ProductListModel>();
+                }
             }
             
             Categories = await service.GetCategories(true,1,null);

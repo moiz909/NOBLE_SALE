@@ -23,7 +23,7 @@ namespace NOBLE_SALE.Services
         {
             url = new WebAPI().URL;
             client = new WebAPI().client;
-            url+= "Product/GetProductInformationForTouch?searchTerm=" + SearchTerm + "&wareHouseId=" + WarehouseId + "&categoryId =" + CategoryId  ;
+            url+= "Product/GetProductInformationForTouch?searchTerm=" + SearchTerm + "&wareHouseId=" + WarehouseId + "&categoryId=" + CategoryId  ;
             var token = UserData.Current.Token;
             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
             try

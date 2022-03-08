@@ -20,12 +20,12 @@
             ScaleOut="0.8" />
     </pages:PopupPage.Animation>
 
-    <StackLayout BackgroundColor="White" Margin="16,80" HeightRequest="150" WidthRequest="200">
+    <StackLayout BackgroundColor="White" Padding="0" Margin="16,80" HeightRequest="100">
         <Grid HorizontalOptions="Center" VerticalOptions="Center" Margin="45">
             <Label Text="Total:            " FontSize="18" FontFamily="Ubuntu-regular" TextColor="#324A59" Grid.Column="0"/>
             <Label Text="{Binding Due,Mode=TwoWay}" FontSize="18" FontFamily="Ubuntu-regular" TextColor="#324A59" Grid.Column="1"/>
         </Grid>
-        <Grid HorizontalOptions="Center" Margin="51,0,50,38">
+        <Grid HorizontalOptions="Center" Margin="51,0,50,0">
             <Label Text="Paid:                " FontSize="14" FontFamily="Ubuntu-regular" TextColor="#324A59" Grid.Row="0" Grid.Column="0"/>
             <Label Text="{Binding Recieved,Mode=TwoWay}" FontSize="14" FontFamily="Ubuntu-regular" TextColor="#324A59" Grid.Row="0" Grid.Column="1"/>
 
@@ -33,7 +33,7 @@
             <Label Text="{Binding Balance,Mode=TwoWay}" FontSize="14" FontFamily="Ubuntu-regular" TextColor="#324A59" Grid.Row="1" Grid.Column="1"/>
         </Grid>
 
-        <Button Text="Ok" FontSize="16" Margin="16" TextColor="White" VerticalOptions="End"
+        <Button Text="Ok" FontSize="16" Margin="16" TextColor="White" VerticalOptions="EndAndExpand"
                 Command="{Binding OkBtn,Mode=TwoWay}" CornerRadius="5" BackgroundColor="#0280FD"/>
 
     </StackLayout>

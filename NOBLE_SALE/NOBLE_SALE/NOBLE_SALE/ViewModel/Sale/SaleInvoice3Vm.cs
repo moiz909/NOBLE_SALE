@@ -380,7 +380,7 @@ namespace NOBLE_SALE.ViewModel.Sale
                 Sale.SalePayment.PaymentType = SalePaymentType.Bank;
                 if (IsMasterCard)
                 {
-                    Sale.SalePayment.PaymentOptionId = PaymentOption.PaymentOptions[3].Id;
+                    Sale.SalePayment.PaymentOptionId = PaymentOption.PaymentOptions[1].Id;
                     Payment.Amount = recieved;
                     Payment.Id = Guid.Empty;
                     Payment.PaymentType = SalePaymentType.Bank;
@@ -388,7 +388,7 @@ namespace NOBLE_SALE.ViewModel.Sale
                 }
                 if (IsVisa)
                 {
-                    Sale.SalePayment.PaymentOptionId = PaymentOption.PaymentOptions[5].Id;
+                    Sale.SalePayment.PaymentOptionId = PaymentOption.PaymentOptions[2].Id;
                     Payment.Amount = recieved;
                     Payment.Id = Guid.Empty;
                     Payment.PaymentType = SalePaymentType.Bank;
@@ -396,7 +396,7 @@ namespace NOBLE_SALE.ViewModel.Sale
                 }
                 if (IsMada)
                 {
-                    Sale.SalePayment.PaymentOptionId = PaymentOption.PaymentOptions[1].Id;
+                    Sale.SalePayment.PaymentOptionId = PaymentOption.PaymentOptions[0].Id;
                     Payment.Amount = recieved;
                     Payment.Id = Guid.Empty;
                     Payment.PaymentType = SalePaymentType.Bank;
@@ -404,7 +404,7 @@ namespace NOBLE_SALE.ViewModel.Sale
                 }
                 if (IsStcPay)
                 {
-                    Sale.SalePayment.PaymentOptionId = PaymentOption.PaymentOptions[4].Id;
+                    Sale.SalePayment.PaymentOptionId = PaymentOption.PaymentOptions[0].Id;
                     Payment.Amount = recieved;
                     Payment.Id = Guid.Empty;
                     Payment.PaymentType = SalePaymentType.Bank;

@@ -45,7 +45,8 @@
     </NavigationPage.TitleView>
 
     <ContentPage.Content>
-        <RefreshView>
+        <RefreshView IsRefreshing="{Binding IsRefreshing}" RefreshColor="White"    
+             Command="{Binding RefreshCommand}">
             <StackLayout>
                 <ActivityIndicator
                 IsVisible="{Binding IsBusy,Mode=TwoWay}" IsRunning="True" HorizontalOptions="CenterAndExpand"
@@ -61,7 +62,7 @@
                     </Grid.ColumnDefinitions>
 
                     <SearchBar Placeholder="Search" HeightRequest="48" Visual="Default"  CancelButtonColor="{DynamicResource ColorRed}" 
-                       BackgroundColor="WhiteSmoke" PlaceholderColor="{DynamicResource ColorFieldsText}" 
+                       BackgroundColor="WhiteSmoke" PlaceholderColor="{DynamicResource ColorFieldsText}" Text="{Binding SearchTerm,Mode=TwoWay}" SearchCommand="{Binding SearchHandler,Mode=TwoWay}"
                        TextColor="{DynamicResource ColorFieldsText}" Grid.Column="0"/>
 
                     <Frame  BackgroundColor="{DynamicResource ColorRed}" HeightRequest="40" WidthRequest="40" Grid.Column="1" Padding="14">

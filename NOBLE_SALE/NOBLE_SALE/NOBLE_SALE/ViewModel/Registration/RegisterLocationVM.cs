@@ -294,6 +294,9 @@ namespace NOBLE_SALE.ViewModel.Registration
                                         companiesList[i].Arabic = true;
                                         companiesList[i].English = true;
                                         companiesList[i].InvoiceWoInventory = true;
+                                        companiesList[i].SimpleInvoice = true;
+                                        companiesList[i].IsProduction = true;
+                                        companiesList[i].IsSaleOrder = true;
 
                                         if(await service.AddMultiUnit(companiesList[i]))
                                         {
