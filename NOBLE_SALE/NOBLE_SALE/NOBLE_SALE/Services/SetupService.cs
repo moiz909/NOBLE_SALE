@@ -61,6 +61,27 @@ namespace NOBLE_SALE.Services
             }
         }
 
+
+        public async Task<bool> SaveStep()
+        {
+            url = new WebAPI().URL;
+            client = new WebAPI().client;
+            url += "Company/DefaultRolesOnLocation?companyId=" + UserData.Current.CompanyId;
+            var token = UserData.Current.Token;
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            try
+            {
+                var response = await client.GetStringAsync(url);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("errorss", ex.Message, "ok");
+                return false;
+            }
+        }
+
         public async Task<string> GetTaxCode()
         {
             url = new WebAPI().URL;

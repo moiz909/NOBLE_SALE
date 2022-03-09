@@ -47,7 +47,11 @@ namespace NOBLE_SALE.ViewModel.Sale
         public List<Object> SelectedProducts
         {
             get { return _SelectedProducts; }
-            set { _SelectedProducts = value; }
+            set 
+            { 
+                _SelectedProducts = value;
+                OnPropertyChanged();
+            }
         }
 
         public ProductLookUpModel Product { get; set; }
@@ -182,6 +186,8 @@ namespace NOBLE_SALE.ViewModel.Sale
 
             ProductList = new List<ProductLookUpModel>();
             ProductList = SelectedProducts.Cast<ProductLookUpModel>().ToList();
+            SelectedProducts = new List<object>();
+
             await Application.Current.MainPage.Navigation.PushAsync(new SaleInvoice2(ProductList));
 
             IsBusy = false;

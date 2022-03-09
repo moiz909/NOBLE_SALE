@@ -1,4 +1,5 @@
 ﻿using NOBLE_SALE.Helper;
+using NOBLE_SALE.Services;
 using NOBLE_SALE.View;
 using NOBLE_SALE.View.Sale;
 using NOBLE_SALE.View.SetupSteps;
@@ -30,7 +31,18 @@ namespace NOBLE_SALE.ViewModel
         {
             if(!UserData.CurrencyandVat && !UserData.CompanySetup)
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new SaleInvoice1());
+                var service = new SetupService();
+                if(await service.SaveStep())
+                {
+                    await Application.Current.MainPage.Navigation.PushAsync(new SaleInvoice1());
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("", "An error occured", "Ok");
+                }
+
+
+                
             }
             else
             {

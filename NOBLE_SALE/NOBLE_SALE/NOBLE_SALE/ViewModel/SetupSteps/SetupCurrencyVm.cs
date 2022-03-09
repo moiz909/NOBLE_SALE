@@ -162,8 +162,57 @@ namespace NOBLE_SALE.ViewModel.SetupSteps
 
                 else
                 {
-                    ValidTaxType = true;
                     var service = new SetupService();
+                    Currency.Id = Guid.Empty;
+                    Currency.NameArabic = Currency.Name;
+                    Currency.IsActive = true;
+                    Currency.Image = string.Empty;
+                    Currency.ArabicSign = Currency.Sign;
+                    Currency.Setup = true;
+                    var response = await service.CreateCurrency(Currency);
+                    if (response)
+                    {
+                        UserData.CurrencyandVat = false;
+                        Steps = new StepsVm();
+                        Steps.CompanyId = UserData.Current.CompanyId;
+                        Steps.Step3 = true;
+
+                        response = await service.UpdateSteps(Steps);
+                        if (response)
+                        {
+                            response = await service.CreateChartofAccount(TemplateType.Business);
+                            if (response)
+                            {
+                                Steps = new StepsVm();
+                                Steps.CompanyId = UserData.Current.CompanyId;
+                                Steps.Step1 = true;
+                                response = await service.UpdateSteps(Steps);
+                                if (response)
+                                {
+                                    await Application.Current.MainPage.Navigation.PopAsync();
+                                    await Application.Current.MainPage.Navigation.PopAsync();
+                                    await Application.Current.MainPage.Navigation.PopAsync();
+                                    await Application.Current.MainPage.Navigation.PushAsync(new SetupPage());
+                                }
+                                else
+                                {
+                                    await Application.Current.MainPage.DisplayAlert("", "An error occured, please try again later!", "Ok");
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            await Application.Current.MainPage.DisplayAlert("", "An error occured, please try again later!", "Ok");
+                        }
+
+                    }
+
+
+
+
+                    ValidTaxType = true;
+                    
                     Tax.Code = TaxCode;
                     Tax.NameArabic = string.Empty;
                     Tax.Id = Guid.Empty;
@@ -171,70 +220,29 @@ namespace NOBLE_SALE.ViewModel.SetupSteps
                     Tax.Description = string.Empty;
                     Tax.NameArabic = Tax.Name;
                     Tax.Setup = true;
-                    var response = await service.CreateVat(Tax);
-                    
-                    if (response)
-                    {
+                    response = await service.CreateVat(Tax);
+
+                    //Steps = new StepsVm();
+                    //Steps.CompanyId = UserData.Current.CompanyId;
+                    //Steps.Step4 = true;
+                    //response = await service.UpdateSteps(Steps);
+
+
+                    Steps = new StepsVm();
                         Steps.CompanyId = UserData.Current.CompanyId;
+                    Steps.Step3 = true;
                         Steps.Step4 = true;
                         response = await service.UpdateSteps(Steps);
 
-                        if (response)
-                        {
-                            Currency.Id = Guid.Empty;
-                            Currency.NameArabic = Currency.Name;
-                            Currency.IsActive = true;
-                            Currency.Image = string.Empty;
-                            Currency.ArabicSign = Currency.Sign;
-                            Currency.Setup = true;
-                            response = await service.CreateCurrency(Currency);
-                            if (response)
-                            {
-                                UserData.CurrencyandVat = false;
-                                Steps = new StepsVm();
-                                Steps.CompanyId = UserData.Current.CompanyId;
-                                Steps.Step3 = true;
 
-                                response = await service.UpdateSteps(Steps);
-                                if (response)
-                                {
-                                    response = await service.CreateChartofAccount(TemplateType.Business);
-                                    if (response)
-                                    {
-                                        Steps = new StepsVm();
-                                        Steps.CompanyId = UserData.Current.CompanyId;
-                                        Steps.Step1 = true;
-                                        response = await service.UpdateSteps(Steps);
-                                        if (response)
-                                        {
-                                            await Application.Current.MainPage.Navigation.PopAsync();
-                                            await Application.Current.MainPage.Navigation.PopAsync();
-                                            await Application.Current.MainPage.Navigation.PopAsync();
-                                            await Application.Current.MainPage.Navigation.PushAsync(new SetupPage());
-                                        }
-                                        else
-                                        {
-                                            await Application.Current.MainPage.DisplayAlert("", "An error occured, please try again later!", "Ok");
-                                        }
-                                    }
-
-                                }
-                                else
-                                {
-                                    await Application.Current.MainPage.DisplayAlert("", "An error occured, please try again later!", "Ok");
-                                }
-
-                            }
-                        }
-                        else
-                        {
-                            await Application.Current.MainPage.DisplayAlert("", "An error occured, please try again later!", "Ok");
-                        }
-                    }
-                    else
-                    {
-                        await Application.Current.MainPage.DisplayAlert("", "An error occured, please try again later!", "Ok");
-                    }
+                    
+                            
+                        
+                    
+                    //else
+                    //{
+                    //    await Application.Current.MainPage.DisplayAlert("", "An error occured, please try again later!", "Ok");
+                    //}
                 }
             }
 
