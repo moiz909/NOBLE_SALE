@@ -172,49 +172,59 @@ namespace NOBLE_SALE.ViewModel.SetupSteps
                     Tax.NameArabic = Tax.Name;
                     Tax.Setup = true;
                     var response = await service.CreateVat(Tax);
+                    
                     if (response)
                     {
-                        Currency.Id = Guid.Empty;
-                        Currency.NameArabic = string.Empty;
-                        Currency.IsActive = true;
-                        Currency.Image = string.Empty;
-                        Currency.ArabicSign = string.Empty;
-                        Currency.Setup = true;
-                        response = await service.CreateCurrency(Currency);
+                        Steps.CompanyId = UserData.Current.CompanyId;
+                        Steps.Step4 = true;
+                        response = await service.UpdateSteps(Steps);
+
                         if (response)
                         {
-                            UserData.CurrencyandVat = false;
-                            Steps.CompanyId = UserData.Current.CompanyId;
-                            Steps.Step3 = true;
-                            Steps.Step4 = true;
-                            response = await service.UpdateSteps(Steps);
+                            Currency.Id = Guid.Empty;
+                            Currency.NameArabic = Currency.Name;
+                            Currency.IsActive = true;
+                            Currency.Image = string.Empty;
+                            Currency.ArabicSign = Currency.Sign;
+                            Currency.Setup = true;
+                            response = await service.CreateCurrency(Currency);
                             if (response)
                             {
-                                response = await service.CreateChartofAccount(TemplateType.Business);
+                                UserData.CurrencyandVat = false;
+                                Steps = new StepsVm();
+                                Steps.CompanyId = UserData.Current.CompanyId;
+                                Steps.Step3 = true;
+
+                                response = await service.UpdateSteps(Steps);
                                 if (response)
                                 {
-                                    Steps.CompanyId = UserData.Current.CompanyId;
-                                    Steps.Step1 = true;
-                                    response = await service.UpdateSteps(Steps);
+                                    response = await service.CreateChartofAccount(TemplateType.Business);
                                     if (response)
                                     {
-                                        await Application.Current.MainPage.Navigation.PopAsync();
-                                        await Application.Current.MainPage.Navigation.PopAsync();
-                                        await Application.Current.MainPage.Navigation.PopAsync();
-                                        await Application.Current.MainPage.Navigation.PushAsync(new SetupPage());
+                                        Steps = new StepsVm();
+                                        Steps.CompanyId = UserData.Current.CompanyId;
+                                        Steps.Step1 = true;
+                                        response = await service.UpdateSteps(Steps);
+                                        if (response)
+                                        {
+                                            await Application.Current.MainPage.Navigation.PopAsync();
+                                            await Application.Current.MainPage.Navigation.PopAsync();
+                                            await Application.Current.MainPage.Navigation.PopAsync();
+                                            await Application.Current.MainPage.Navigation.PushAsync(new SetupPage());
+                                        }
+                                        else
+                                        {
+                                            await Application.Current.MainPage.DisplayAlert("", "An error occured, please try again later!", "Ok");
+                                        }
                                     }
-                                    else
-                                    {
-                                        await Application.Current.MainPage.DisplayAlert("", "An error occured, please try again later!", "Ok");
-                                    }
+
+                                }
+                                else
+                                {
+                                    await Application.Current.MainPage.DisplayAlert("", "An error occured, please try again later!", "Ok");
                                 }
 
                             }
-                            else
-                            {
-                                await Application.Current.MainPage.DisplayAlert("", "An error occured, please try again later!", "Ok");
-                            }
-
                         }
                         else
                         {

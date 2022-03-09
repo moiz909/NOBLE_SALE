@@ -123,7 +123,6 @@ namespace NOBLE_SALE.ViewModel.SetupSteps
             {
                 ValidateAddress = false;
             }
-
             if(ValidateName && ValidateCategory && ValidateAddress)
             {
                 CompanyInfo.NameInArabic = CompanyInfo.NameInEnglish;
@@ -133,7 +132,6 @@ namespace NOBLE_SALE.ViewModel.SetupSteps
                 CompanyInfo.CountryInEnglish = string.Empty;
                 CompanyInfo.CountryInArabic = string.Empty;
                 CompanyInfo.LandLine = string.Empty;
-               
                 var service = new SetupService();
                 var response = await service.UpdateCompany(CompanyInfo);
                 if (response)
@@ -144,11 +142,10 @@ namespace NOBLE_SALE.ViewModel.SetupSteps
                     response = await service.UpdateSteps(Steps);
                     if (response)
                     {
-
-
                         response = await service.SetFinancialYear();
                         if (response)
                         {
+                            Steps = new StepsVm();
                             Steps.CompanyId = UserData.Current.CompanyId;
                             Steps.Step5 = true;
                             response = await service.UpdateSteps(Steps);
@@ -162,26 +159,22 @@ namespace NOBLE_SALE.ViewModel.SetupSteps
                             {
                                 await Application.Current.MainPage.DisplayAlert("errorss", "Request Failed", "ok");
                             }
-
                         }
                         else
                         {
                             await Application.Current.MainPage.DisplayAlert("errorss", "Request Failed", "ok");
                         }
-
                     }
                     else
                     {
                         await Application.Current.MainPage.DisplayAlert("errorss", "Request Failed", "ok");
                     }
                 }
-
                 else
                 {
                     await Application.Current.MainPage.DisplayAlert("errorss", "Request Failed", "ok");
                 }
-            }
-            
+            } 
         }
 
         private async void GetCompanyDetail()
