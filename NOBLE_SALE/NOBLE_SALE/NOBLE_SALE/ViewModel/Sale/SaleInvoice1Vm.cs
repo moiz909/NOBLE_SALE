@@ -124,6 +124,22 @@ namespace NOBLE_SALE.ViewModel.Sale
             }
         }
 
+        private IList<ProductLookUpModel> _ProductList1;
+
+        public IList<ProductLookUpModel> ProductList1
+        {
+            get { return _ProductList1; }
+            set 
+            {
+                _ProductList1 = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+
+
+
 
 
 
@@ -202,6 +218,7 @@ namespace NOBLE_SALE.ViewModel.Sale
             IsBusy = true;
 
             Products = new PagedResult<ProductListModel>();
+
             var service = new ProductService();
 
             if (UserData.Current.InvoiceWoInventory)
@@ -233,18 +250,67 @@ namespace NOBLE_SALE.ViewModel.Sale
             if (UserData.Current.InvoiceWoInventory)
             {
                 Products = await service.GetProducts(null, SearchTerm, null);
+
+                
+
                 if(Products == null)
                 {
                     Products = new PagedResult<ProductListModel>();
+
+                    
                 }
+
+                else
+                {
+                    foreach (var item in Products.Results.Products)
+                    {
+                        if (item.EnglishName == null || item.EnglishName == string.Empty)
+                        {
+                            item.DisplayName = item.ArabicName;
+                        }
+                        else if (item.ArabicName == null || item.ArabicName == string.Empty)
+                        {
+                            item.DisplayName = item.EnglishName;
+                        }
+                        else if(item.ArabicName!=null || item.ArabicName!=string.Empty || item.EnglishName!=null || item.EnglishName != string.Empty)
+                        {
+                            item.DisplayName = item.EnglishName;
+                        }
+                    }
+
+                    ProductList1 = Products.Results.Products;
+                }
+
+                
             }
             else
             {
                 Products = await service.GetProducts(null, SearchTerm, UserData.Current.WarehouseId);
+
+                
                 if (Products == null)
                 {
                     Products = new PagedResult<ProductListModel>();
+
+                    
                 }
+
+                else
+                {
+                    foreach (var item in Products.Results.Products)
+                    {
+                        if (item.EnglishName == null || item.EnglishName == string.Empty)
+                        {
+                            item.DisplayName = item.ArabicName;
+                        }
+                        if (item.ArabicName == null || item.ArabicName == string.Empty)
+                        {
+                            item.DisplayName = item.EnglishName;
+                        }
+                    }
+                    ProductList1 = Products.Results.Products;
+                }
+                
             }
             
             Categories = await service.GetCategories(true,1,null);

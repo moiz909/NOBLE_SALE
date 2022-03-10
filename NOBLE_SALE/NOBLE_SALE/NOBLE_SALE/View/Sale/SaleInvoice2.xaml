@@ -44,9 +44,9 @@
 
                 <Label Text="Walk-In" FontFamily="Ubuntu-Medium" TextColor="{DynamicResource ColorNobleBlue}" Grid.Row="0" 
                        Grid.Column="0" HorizontalOptions="Start" FontSize="16">
-                    <!--<Label.GestureRecognizers>
+                    <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding WalkinHandler}"/>
-                    </Label.GestureRecognizers>-->
+                    </Label.GestureRecognizers>
                 </Label>
                 <Label Text="{Binding TodayDate,Mode=TwoWay}" TextColor="{DynamicResource ColorFieldsText}" FontSize="12" Grid.Column="1" 
                        Grid.Row="0" FontFamily="Ubuntu-Regular" HorizontalOptions="End"/>

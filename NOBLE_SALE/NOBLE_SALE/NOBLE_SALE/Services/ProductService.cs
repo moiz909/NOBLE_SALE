@@ -77,6 +77,27 @@ namespace NOBLE_SALE.Services
             }
         }
 
+
+        public async Task<CashCustomerLookupModel> GetCustomerSearch(string term)
+        {
+            url = new WebAPI().URL;
+            client = new WebAPI().client;
+            url += "Sale/SearchCashCustomer?search=" + term;
+            var token = UserData.Current.Token;
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            try
+            {
+                var response = await client.GetStringAsync(url);
+                var CashCustomer = JsonConvert.DeserializeObject<CashCustomerLookupModel>(response);
+                return CashCustomer;
+            }
+            catch (Exception E)
+            {
+                await Application.Current.MainPage.DisplayAlert("errorss", E.Message, "ok");
+                return null;
+            }
+        }
+
         public async Task<PagedResult<CategoryListModel>> GetCategories()
         {
             url = new WebAPI().URL;
@@ -89,6 +110,30 @@ namespace NOBLE_SALE.Services
                 var response = await client.GetStringAsync(url);
                 var Categories = JsonConvert.DeserializeObject<PagedResult<CategoryListModel>>(response);
                 return Categories;
+            }
+            catch (Exception E)
+            {
+                await Application.Current.MainPage.DisplayAlert("errorss", E.Message, "ok");
+                return null;
+            }
+        }
+
+        public async Task<PagedResult<List<ContactLookUpModel>>> GetCustomers()
+        {
+            url = new WebAPI().URL;
+            client = new WebAPI().client;
+
+           // "Product/GetCategoryInformation?isActive=" + isActive + "&pageNumber=" + PageNumber + "&searchTerm=" + searchTerm;
+
+
+            url += "Contact/ContactList?isCustomer=" + true +  "&searchTerm=" + null + "&pageNumber=" + null + "&IsDropDown=" +true + "&IsActive=" + true + "&status=" + false + "&paymentTerms=" + null;
+            var token = UserData.Current.Token;
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            try
+            {
+                var response = await client.GetStringAsync(url);
+                var Customers = JsonConvert.DeserializeObject<PagedResult<List<ContactLookUpModel>>>(response);
+                return Customers;
             }
             catch (Exception E)
             {

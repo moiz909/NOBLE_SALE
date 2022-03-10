@@ -10,6 +10,7 @@ namespace NOBLE_SALE.Model.Product
         public string Code { get; set; }
         public string EnglishName { get; set; }
         public string ArabicName { get; set; }
+        public string DisplayName { get; set; }
         public Guid CategoryId { get; set; }
         public Guid? SubCategoryId { get; set; }
         public Guid? BrandId { get; set; }

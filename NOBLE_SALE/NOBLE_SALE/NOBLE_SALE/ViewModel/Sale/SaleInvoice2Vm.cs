@@ -171,8 +171,26 @@ namespace NOBLE_SALE.ViewModel.Sale
         {
             Random rnd = new Random();
             Sale.BarCode = rnd.Next().ToString();
-            Sale.CashCustomer = "Walk-In";
-            Sale.CashCustomerId = string.Empty;
+
+            if(UserData.Sale != null)
+            {
+                Sale.CashCustomer = UserData.Sale.CashCustomer;
+            }
+            else
+            {
+                Sale.CashCustomer = "Walk-In";
+            }
+            
+            if(UserData.Sale != null)
+            {
+                Sale.CashCustomerId = UserData.Sale.CashCustomerId;
+            }
+            else
+            {
+                Sale.CashCustomerId = string.Empty;
+            }
+
+            
             Sale.CounterId = UserData.Current.CounterId.ToString();
             Sale.Date = DateTime.Now;
             Sale.DayStart = UserData.Current.DayStart;
@@ -612,7 +630,7 @@ namespace NOBLE_SALE.ViewModel.Sale
                     Code = item.Code,
                     Id = Guid.Empty,
                     ProductId = item.Id,
-                    ProductName = item.EnglishName,
+                    ProductName = item.DisplayName,
                     SaleId = Guid.Empty,
                     Quantity = 1,
                     SaleReturnDays = "0",

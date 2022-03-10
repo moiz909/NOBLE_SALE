@@ -3,6 +3,7 @@
                  xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
                  xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:vm="clr-namespace:NOBLE_SALE.ViewModel.Sale"
                  x:Class="NOBLE_SALE.View.Sale.CustomerPopupPage">
 
     
@@ -20,6 +21,10 @@
             ScaleOut="0.8" />
     </pages:PopupPage.Animation>
 
+
+    <pages:PopupPage.BindingContext>
+        <vm:CustomerPopupVm/>
+    </pages:PopupPage.BindingContext>
     
 
     <StackLayout WidthRequest="350" Margin="16,80" HeightRequest="380" BackgroundColor="White">
@@ -34,10 +39,10 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-                <Entry  Keyboard="Email"  BackgroundColor="{DynamicResource ColorFields}"
-                   Margin="16,0,16,0" HeightRequest="48"
-                           TextColor="{DynamicResource ColorFieldsText}" FontSize="16" 
-                            FontFamily="Ubuntu-regular"/>
+                <SearchBar BackgroundColor="{DynamicResource ColorFields}"
+                           Margin="16,0,16,0" HeightRequest="48" Text="{Binding SearchString,Mode=TwoWay}"
+                           TextColor="{DynamicResource ColorFieldsText}" FontSize="16" SearchCommand="{Binding SearchHandler,Mode=TwoWay}"
+                           FontFamily="Ubuntu-regular"/>
 
                 <Label FontSize="12" Margin="16,24,16,0" FontFamily="Ubuntu-regular">
                     <Label.FormattedText>
@@ -47,8 +52,8 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-                <Entry  Keyboard="Email"  BackgroundColor="{DynamicResource ColorFields}"
-                   Margin="16,0,16,0" HeightRequest="48"
+                <Entry  Keyboard="Email"  BackgroundColor="{DynamicResource ColorFields}" IsEnabled="{Binding IsEnable,Mode=TwoWay}"
+                   Margin="16,0,16,0" HeightRequest="48" Text="{Binding CustomerType,Mode=TwoWay}"
                            TextColor="{DynamicResource ColorFieldsText}" FontSize="16" 
                             FontFamily="Ubuntu-regular"/>
 
@@ -60,8 +65,8 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-                <Entry  Keyboard="Email" BackgroundColor="{DynamicResource ColorFields}"
-                   Margin="16,0,16,0" HeightRequest="48"
+                <Entry  Keyboard="Email" BackgroundColor="{DynamicResource ColorFields}" IsEnabled="{Binding IsEnable,Mode=TwoWay}"
+                   Margin="16,0,16,0" HeightRequest="48" Text="{Binding CustomerId,Mode=TwoWay}"
                            TextColor="{DynamicResource ColorFieldsText}" FontSize="16" 
                             FontFamily="Ubuntu-regular"/>
 
@@ -73,8 +78,8 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-                <Entry  Keyboard="Email"  BackgroundColor="{DynamicResource ColorFields}"
-                   Margin="16,0,16,0" HeightRequest="48"
+                <Entry  Keyboard="Email"  BackgroundColor="{DynamicResource ColorFields}" IsEnabled="{Binding IsEnable,Mode=TwoWay}"
+                   Margin="16,0,16,0" HeightRequest="48" Text="{Binding Mobile,Mode=TwoWay}"
                            TextColor="{DynamicResource ColorFieldsText}" FontSize="16" 
                             FontFamily="Ubuntu-regular"/>
 
@@ -86,8 +91,8 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-                <Entry  Keyboard="Email"  BackgroundColor="{DynamicResource ColorFields}"
-                           TextColor="{DynamicResource ColorFieldsText}" FontSize="16" Margin="16,0,16,0" HeightRequest="48"
+                <Entry  Keyboard="Email"  BackgroundColor="{DynamicResource ColorFields}" Text="{Binding Email,Mode=TwoWay}"
+                           TextColor="{DynamicResource ColorFieldsText}" FontSize="16" Margin="16,0,16,0" HeightRequest="48" IsEnabled="{Binding IsEnable,Mode=TwoWay}"
                             FontFamily="Ubuntu-regular"/>
 
                 <Label FontSize="12" Margin="16,24,16,0" FontFamily="Ubuntu-regular">
@@ -98,10 +103,16 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-                <Entry  Keyboard="Email"  BackgroundColor="{DynamicResource ColorFields}"
+
+                <Picker Title="Select" Grid.Column="0" Margin="16,0,16,0" HeightRequest="48"
+                        BackgroundColor="{DynamicResource ColorFields}" ItemsSource="{Binding List,Mode=TwoWay}" TitleColor="Black" FontSize="16" 
+                        SelectedIndexChanged="Picker_SelectedIndexChanged" ItemDisplayBinding="{Binding DisplayName,Mode=TwoWay}"  SelectedItem="{Binding SelectedCustomer,Mode=TwoWay}"/>
+
+
+                <!--<Entry  Keyboard="Email"  BackgroundColor="{DynamicResource ColorFields}"
                    Margin="16,0,16,0" HeightRequest="48"
                            TextColor="{DynamicResource ColorFieldsText}" FontSize="16" 
-                            FontFamily="Ubuntu-regular"/>
+                            FontFamily="Ubuntu-regular"/>-->
             </StackLayout>
         </ScrollView>
 
@@ -109,7 +120,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="48"/>
             </Grid.RowDefinitions>
-            <Button Text="Save" Margin="0,0,7,0" BackgroundColor="#0280FD" FontSize="16" FontFamily="Ubuntu-regular" TextColor="White" Grid.Column="0" Grid.Row="0"/>
+            <Button Text="Save" Margin="0,0,7,0" Command="{Binding SaveHandler}" BackgroundColor="#0280FD" FontSize="16" FontFamily="Ubuntu-regular" TextColor="White" Grid.Column="0" Grid.Row="0"/>
             <Button Text="Close" Margin="0,0,7,0" BackgroundColor="#FF3030" FontSize="16" FontFamily="Ubuntu-regular" TextColor="White" Grid.Column="1" Grid.Row="0"/>
         </Grid>
         

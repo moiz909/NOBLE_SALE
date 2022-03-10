@@ -420,6 +420,8 @@ namespace NOBLE_SALE.ViewModel.Sale
             {
                 Sale.Change = balance;
             }
+
+
             Sale.SalePayment.PaymentTypes = new List<PaymentTypeLookupModel>();
             Sale.SalePayment.PaymentTypes.Add(Payment);
 

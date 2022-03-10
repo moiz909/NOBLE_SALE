@@ -100,7 +100,7 @@
 
                 <CollectionView BackgroundColor="White" SelectionMode="Multiple" 
                             IsVisible="{Binding IsBusy, Converter={StaticResource invertBoolConverter}}"
-                            ItemsSource="{Binding Products.Results.Products,Mode=TwoWay}" SelectedItems="{Binding SelectedProducts,Mode=TwoWay}">
+                            ItemsSource="{Binding ProductList1,Mode=TwoWay}" SelectedItems="{Binding SelectedProducts,Mode=TwoWay}">
 
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Vertical" Span="4" />
@@ -116,7 +116,7 @@
                                         <Label x:Name="valueLabel" Text="{x:Static fontawesome:FontAwesomeIcons.ShoppingCart}" HorizontalOptions="Center" VerticalOptions="Center"
                                            FontFamily="{StaticResource FontAwesomeSolid}"  FontSize="23" TextColor="Black" />
                                     </Frame>
-                                    <Label  Text="{Binding EnglishName}"  FontFamily="Ubuntu-Normal" TextColor="{DynamicResource ColorFieldsText}" FontSize="10"/>
+                                    <Label  Text="{Binding DisplayName}"  FontFamily="Ubuntu-Normal" TextColor="{DynamicResource ColorFieldsText}" FontSize="10"/>
                                 </StackLayout>
                             </Grid>
                         </DataTemplate>

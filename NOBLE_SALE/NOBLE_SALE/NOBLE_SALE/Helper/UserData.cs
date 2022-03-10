@@ -1,4 +1,5 @@
 ﻿using NOBLE_SALE.Model;
+using NOBLE_SALE.Model.Sale;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,6 +17,7 @@ namespace NOBLE_SALE.Helper
         public static string SelectedLanguage { get; set; }
         public static bool CurrencyandVat { get; set; }
         public static bool CompanySetup { get; set; }
+        public static SaleLookupModel Sale{get; set;}
         public static List<ModuleRightLookUpModel> Permissions {get; set;}
 
         public static bool CheckConnectivity()
